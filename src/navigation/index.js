@@ -12,7 +12,7 @@ import Home from '../containers/Home/Home'
 
 const HomeStack = createStackNavigator()
  function HomeStackScreen() {
-  return (
+    return (
       <HomeStack.Navigator
         screenOptions={{
           headerShown: false
