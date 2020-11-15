@@ -9,6 +9,7 @@ import GeneralStyles from '../styles/GeneralStyles'
 import Colors from '../styles/Colors'
 
 import Home from '../containers/Home/Home'
+import RoomDetail from '../components/Home/Detail'
 
 const HomeStack = createStackNavigator()
  function HomeStackScreen() {
@@ -18,6 +19,7 @@ const HomeStack = createStackNavigator()
           headerShown: false
         }}>
         <HomeStack.Screen name="home" component={Home}/>
+        <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
       </HomeStack.Navigator>
   )
 }

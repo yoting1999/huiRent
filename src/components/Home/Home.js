@@ -1,8 +1,11 @@
 import React from 'react'
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity  } from 'react-native'
 import { Container, Content, Button, Icon } from 'native-base'
+import { useNavigation } from '@react-navigation/native';
+
 import Header from '../UI/Header'
 
+import routeConfig from '../../constants/route'
 
 const dummyDATA = [
   {
@@ -29,6 +32,7 @@ const dummyDATA = [
 ]
 
 function Home(props) {
+  const navigation = useNavigation()
   return (
     <Container>
       <Header/>
@@ -40,7 +44,7 @@ function Home(props) {
           <Text style={styles.brandTitle}>HUI RENT</Text>
           <Text style={styles.brandTitle}>HUI RENT</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate(routeConfig.roomDetail)}>
             <ImageBackground
               imageStyle={{ borderRadius: 6}}
               style={styles.image}

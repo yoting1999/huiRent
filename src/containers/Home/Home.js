@@ -35,7 +35,7 @@ function Home() {
     getRooms()
   }, [])
 
-  return <Layout/>
+  return <Layout />
 }
 
 export default Home
