@@ -1,4 +1,6 @@
 export default {
   home: 'home',
-  roomDetail: 'roomDetail'
+  roomDetail: 'roomDetail',
+  Login: 'Login',
+  SignUp: 'SignUp'
 }
