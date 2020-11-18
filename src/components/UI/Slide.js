@@ -1,13 +1,17 @@
 import React from 'react'
-import { View, Text, Dimensions, StyleSheet, TouchableOpacity } from 'react-native'
-import {  } from 'react-native-gesture-handler'
-
+import { StatusBar, View, Text, Dimensions, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import Colors from '../../styles/Colors'
+import route from '../../constants/route'
 const { width, height } = Dimensions.get("window")
 
 export const SLIDE_HEIGHT = 0.8 * height
 
+
 function Slide(props) {
-  const { label, right } = props
+
+  const { label, right, bgImg, price } = props
+  const navigation = useNavigation()
 
   const transform = [
     { translateY: (SLIDE_HEIGHT - 100) / 2 },
@@ -16,21 +20,102 @@ function Slide(props) {
   ]
 
   return(
-    <View style={styles.container}>
-      <TouchableOpacity style={[styles.titleContainer, { transform }]} onPRess={()=>console.log('hehe')}>
+    <ImageBackground
+      source={{uri: bgImg}}
+      // imageStyle={{ borderBottomRightRadius: 75 }}
+      style={styles.container}>
+      <View style={styles.filter}/>
+      {/* <TouchableOpacity style={[styles.titleContainer, { transform }]}>
         <Text style={styles.title}>{label}</Text>
+      </TouchableOpacity> */}
+
+      <StatusBar barStyle="light-content" />
+
+      <TouchableOpacity style={styles.moreBtn} onPress={()=>navigation.navigate(route.roomDetail)}>
+        <Text style={styles.more}>
+          MORE
+        </Text>
       </TouchableOpacity>
-    </View>
+        <View style={styles.titleContainer}>
+          <Text style={styles.label}>{ label }</Text>
+          <Text style={styles.price}>$ { price } / h</Text>
+        </View>
+      <View onTouchEnd={()=>console.log('end')} style={styles.reservationBtn}>
+        <Text style={styles.reservation}>預約</Text>
+      </View>
+    </ImageBackground>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    width
+    width,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  textContainer: {
-    height: 100,
-    justifyContent: 'center'
+  filter: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,.8)',
+    // borderBottomRightRadius: 75
+  },
+  label: {
+    fontSize: 38,
+    color: '#fff',
+    // backgroundColor: '#fff',
+    padding: 8,
+    marginBottom: 8,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    // opacity: 0.3,
+  },
+  price: {
+    fontSize: 18,
+    color: '#ccc',
+    textAlign: 'center'
+  },
+  moreBtn: {
+    padding: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc'
+  },
+  more :{
+    fontSize: 26,
+    color: '#fff'
+  },
+  reservationBtn: {
+    position: 'absolute',
+    right: 24,
+    bottom: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: Colors.primary,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    shadowColor: Colors.primary,
+    shadowOpacity: 0.4,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 2,
+      width: 1,
+    },
+  },
+  reservation: {
+    fontSize: 20,
+    color: '#ccc'
+  },
+  // textContainer: {
+  //   height: 100,
+  //   justifyContent: 'center'
+  // },
+  titleContainer: {
+    position: 'absolute',
+    left: 24,
+    bottom: 24
   },
   title: {
     fontSize: 80,

@@ -12,8 +12,8 @@ import Home from '../containers/Home/Home'
 import Gift_index from '../components/Gift/Gift_index'
 import RoomDetail from '../components/Home/Detail'
 
-import SignUp from '../containers/Login/SignUp'
-import Login from '../containers/Login/Login'
+// import SignUp from '../containers/Login/SignUp'
+// import Login from '../containers/Login/Login'
 
 import settings from '../components/settings/settings'
 import all from '../components/settings/all'
@@ -36,15 +36,15 @@ const HomeStack = createStackNavigator()
 }
 
 
-const LoginStack = createStackNavigator()
-function LoginStackScreen(){
-  return (
-    <LoginStack.Navigator screenOptions={{headerShown: false}}>
-    <LoginStack.Screen name="Login" component={Login}/>
-    <LoginStack.Screen name="SignUp" component={SignUp}/>
-    </LoginStack.Navigator>
-  )
-}
+// const LoginStack = createStackNavigator()
+// function LoginStackScreen(){
+//   return (
+//     <LoginStack.Navigator screenOptions={{headerShown: false}}>
+//     <LoginStack.Screen name="Login" component={Login}/>
+//     <LoginStack.Screen name="SignUp" component={SignUp}/>
+//     </LoginStack.Navigator>
+//   )
+// }
 const setStack = createStackNavigator()
 function setStackScreen(){
   return(
@@ -102,4 +102,3 @@ export default function AllRouter() {
     </NavigationContainer>
   )
 }
-
