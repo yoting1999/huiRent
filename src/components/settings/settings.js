@@ -25,7 +25,7 @@ function settings(props) {
                 return <Icon key={`star-${i + 1}`} style={{fontSize: 50, color: 'yellow'}} name="star"/>
               })
             }
-            
+
             </View>
             <View>
           <List style={{paddingVertical:15}}>
@@ -35,14 +35,16 @@ function settings(props) {
                 <Text note>王聖棉</Text>
               </Body>
               <Right>
-                  <Text style={{width:50,height:30,backgroundColor:'#445877',fontSize:20,textAlign:'center',color:'#fff'}}>編輯</Text>
+                <TouchableOpacity>
+                  <Text style={{backgroundColor:'#445877',fontSize:20,color:'#fff', padding: 10}}>編輯</Text>
+                </TouchableOpacity>
               </Right>
-            
+
             </ListItem>
             </List>
             <List>
             <Separator bordered/>
-   
+
           <ListItem onPress={() => navigation.navigate(routeConfig.used)} >
           <Left>
           <Text>可使用點數</Text>
@@ -84,9 +86,9 @@ function settings(props) {
 
     )
   }
-  
+
   const styles = StyleSheet.create({
-    
+
     image: {
       height: 150,
       marginHorizontal: 16,
@@ -111,7 +113,7 @@ function settings(props) {
       backgroundColor: 'rgba(0,0,0,.6)',
       borderRadius: 6
     },
-   
+
     reserve:{
         fontSize: 50,
         fontWeight:'bold',
@@ -119,7 +121,7 @@ function settings(props) {
         position:'absolute',
         alignSelf:'center',
         marginTop:10,
-       
+
     },
     profile:{
         width:50,
@@ -127,5 +129,5 @@ function settings(props) {
         borderRadius:0.8
     }
   })
-  
+
   export default settings

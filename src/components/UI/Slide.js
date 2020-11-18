@@ -4,7 +4,7 @@ import {  } from 'react-native-gesture-handler'
 
 const { width, height } = Dimensions.get("window")
 
-export const SLIDE_HEIGHT = 0.75 * height
+export const SLIDE_HEIGHT = 0.8 * height
 
 function Slide(props) {
   const { label, right } = props

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity,TouchableHighlight,FlatList ,Platform} from 'react-native'
 import {  List, ListItem, Left, Body, Right,Container, Content, Button, Icon,Image,Separator } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
-import Header from '../UI/headerm'
+import Header from '../UI/Header'
 import Swipeout from 'react-native-swipeout';
 import routeConfig from '../../constants/route'
 import Swipeable from 'react-native-swipeable';
@@ -19,16 +19,15 @@ function MyReserve(props) {
         backgroundColor:'red'
       }
     ]
-    
+
 
     return (
       <Container>
-        <Header>
-          </Header>
+        <Header title="我的預約"/>
         <Content >
           <ScrollView>
         <View>
-          <ListItem>
+          <View style={{ padding: 10, borderBottomColor: '#000', borderBottomWidth: 1}}>
           <Swipeout right={swipeoutBtns} style={{height:60,width:350,backgroundColor:'#fff'}}>
              <Text style={{fontSize:20,fontWeight:'bold',marginBottom:5}}>2020/10/30</Text>
                 <Text note>大練團室</Text>
@@ -37,8 +36,17 @@ function MyReserve(props) {
                 <Text note>結束時間：13:00</Text>
                 </Text>
              </Swipeout>
-             </ListItem>
-             <ListItem>
+             </View>
+             <Swipeout right={swipeoutBtns} style={{backgroundColor:'#fff', marginVertical: 50, padding: 10}}>
+             <Text style={{fontSize:20,fontWeight:'bold',marginBottom:5}}>2020/10/30</Text>
+                <Text note>大練團室</Text>
+                <Text>
+                <Text note>租借時間：10:00</Text>
+                <Text note>結束時間：13:00</Text>
+                </Text>
+             </Swipeout>
+
+
              <Swipeout right={swipeoutBtns} style={{height:60,width:350,backgroundColor:'#fff'}}>
              <Text style={{fontSize:20,fontWeight:'bold',marginBottom:5}}>2020/10/30</Text>
                 <Text note>大練團室</Text>
@@ -47,18 +55,7 @@ function MyReserve(props) {
                 <Text note>結束時間：13:00</Text>
                 </Text>
              </Swipeout>
-             </ListItem>
-             
-             <ListItem>
-             <Swipeout right={swipeoutBtns} style={{height:60,width:350,backgroundColor:'#fff'}}>
-             <Text style={{fontSize:20,fontWeight:'bold',marginBottom:5}}>2020/10/30</Text>
-                <Text note>大練團室</Text>
-                <Text>
-                <Text note>租借時間：10:00</Text>
-                <Text note>結束時間：13:00</Text>
-                </Text>
-             </Swipeout>
-             </ListItem>
+
          </View>
          </ScrollView>
 
@@ -67,9 +64,9 @@ function MyReserve(props) {
 
     )
   }
-  
+
   const styles = StyleSheet.create({
-    
+
     image: {
       height: 150,
       marginHorizontal: 16,
@@ -102,9 +99,9 @@ function MyReserve(props) {
         justifyContent: 'center',
         alignItems: 'center',
         marginTop:10,
-        
-       
+
+
     }
   })
-  
+
   export default MyReserve

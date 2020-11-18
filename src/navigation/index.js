@@ -12,10 +12,10 @@ import Home from '../containers/Home/Home'
 import Gift_index from '../components/Gift/Gift_index'
 import RoomDetail from '../components/Home/Detail'
 import settings from '../components/settings/settings'
-import MyReserve from '../components/MyReserve/MyReserve'
 import all from '../components/settings/all'
 import used from '../components/settings/used'
 
+import MyReserve from '../components/MyReserve/MyReserve'
 
 const HomeStack = createStackNavigator()
  function HomeStackScreen() {
