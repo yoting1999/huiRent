@@ -9,7 +9,9 @@ import GeneralStyles from '../styles/GeneralStyles'
 import Colors from '../styles/Colors'
 
 import Home from '../containers/Home/Home'
+import Gift_index from '../components/Gift/Gift_index'
 import RoomDetail from '../components/Home/Detail'
+
 
 const HomeStack = createStackNavigator()
  function HomeStackScreen() {
@@ -47,7 +49,7 @@ export default function AllRouter() {
                 <Icon type="FontAwesome5" name="calendar" style={[GeneralStyles.iconStyle, { color: color }]}/>
               ),
             }}/>
-        <Tab.Screen name="gift" component={HomeStackScreen}
+        <Tab.Screen name="gift" component={Gift_index}
           options={{
               tabBarIcon: ({color}) => (
                 <Icon type="FontAwesome5" name="gift" style={[GeneralStyles.iconStyle, { color: color }]}/>
