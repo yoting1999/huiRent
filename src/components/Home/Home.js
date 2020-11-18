@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity  } from 'react-native'
 import { Container, Content, Button, Icon } from 'native-base'
 import { useNavigation } from '@react-navigation/native';
-
 import Header from '../UI/Header'
 
 import routeConfig from '../../constants/route'

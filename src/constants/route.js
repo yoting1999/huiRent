@@ -1,4 +1,8 @@
 export default {
   home: 'home',
-  roomDetail: 'roomDetail'
+  roomDetail: 'roomDetail',
+  settings:'settings',
+  MyReserve:'MyReserve',
+  used:'used',
+  all:'all'
 }
