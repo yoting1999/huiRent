@@ -1,3 +1,4 @@
-export default routes = {
-  home: 'home'
+export default {
+  home: 'home',
+  roomDetail: 'roomDetail'
 }

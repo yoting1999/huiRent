@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { get } from 'react-native/Libraries/Utilities/PixelRatio'
 import Layout from '../../components/Home/Home'
 
 import agent from '../../lib/agent'
@@ -36,7 +35,7 @@ function Home() {
     getRooms()
   }, [])
 
-  return <Layout/>
+  return <Layout />
 }
 
 export default Home

@@ -9,16 +9,21 @@ import GeneralStyles from '../styles/GeneralStyles'
 import Colors from '../styles/Colors'
 
 import Home from '../containers/Home/Home'
+<<<<<<< HEAD
 import Gift_index from '../components/Gift/Gift_index'
+=======
+import RoomDetail from '../components/Home/Detail'
+>>>>>>> 8f670e92f6952d1d4272bb189fe0e550d15d8556
 
 const HomeStack = createStackNavigator()
  function HomeStackScreen() {
-  return (
+    return (
       <HomeStack.Navigator
         screenOptions={{
           headerShown: false
         }}>
         <HomeStack.Screen name="home" component={Home}/>
+        <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
       </HomeStack.Navigator>
   )
 }
