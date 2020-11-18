@@ -44,6 +44,7 @@ function LoginStackScreen(){
     <LoginStack.Screen name="SignUp" component={SignUp}/>
     </LoginStack.Navigator>
   )
+}
 const setStack = createStackNavigator()
 function setStackScreen(){
   return(
@@ -101,4 +102,4 @@ export default function AllRouter() {
     </NavigationContainer>
   )
 }
-}
+
