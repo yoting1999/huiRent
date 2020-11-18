@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Layout from '../../components/Home/Home'
+import Layout from '../../components/Home/Home1'
 
 import agent from '../../lib/agent'
 

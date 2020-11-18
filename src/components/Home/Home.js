@@ -1,6 +1,6 @@
-import React from 'react'
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity  } from 'react-native'
-import { Container, Content, Button, Icon } from 'native-base'
+import React, { useState, useEffect } from 'react'
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, FlatList  } from 'react-native'
+import { Button, Container, Content } from 'native-base'
 import { useNavigation } from '@react-navigation/native';
 
 import Header from '../UI/Header'
@@ -31,8 +31,13 @@ const dummyDATA = [
 
 ]
 
+
 function Home(props) {
+  const [act, setAct] = useState(0)
+
   const navigation = useNavigation()
+
+
   return (
     <Container>
       <Header/>
@@ -44,15 +49,61 @@ function Home(props) {
           <Text style={styles.brandTitle}>HUI RENT</Text>
           <Text style={styles.brandTitle}>HUI RENT</Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate(routeConfig.roomDetail)}>
+        {/* <FlatList
+          horizontal
+          data={[1,1,1,1,1]}
+          renderItem={()=>{
+            return (
+              <TouchableOpacity onPress={() => navigation.navigate(routeConfig.roomDetail)}>
+                <ImageBackground
+                  imageStyle={{ borderRadius: 6}}
+                  style={styles.image}
+                  source={{uri: 'https://ysolife.com/wp-content/uploads/2017/11/06-%E4%B8%AD%E7%B7%B4-min.jpg'}}
+                >
+                  <View style={styles.filter}/>
+                    <Text style={styles.roomPrice}>480 / h</Text>
+                    <Text style={styles.roomName}>大展演廳</Text>
+                </ImageBackground>
+              </TouchableOpacity>
+            )
+          }}
+        /> */}
+        <Button disabled={act === 4} onPress={()=>{
+          let newAct = act + 1
+          setAct(newAct)
+        }}><Text>NEXT</Text></Button>
+
+        <Button disabled={act === 0} onPress={()=>{
+          let newAct = act -1
+          setAct(newAct)
+        }}><Text>PREV</Text></Button>
+
+        <View style={{flexDirection: 'row'}}>
+          {[...Array(5)].map((data, index)=>{
+            let num = -360
+            let transformNum = num * act
+            return (
+              <TouchableOpacity style={{transform: [{translateX: transformNum}]}} onPress={() => navigation.navigate(routeConfig.roomDetail)}>
+                <ImageBackground
+                  imageStyle={{ borderRadius: 6}}
+                  style={styles.image}
+                  source={{uri: 'https://ysolife.com/wp-content/uploads/2017/11/06-%E4%B8%AD%E7%B7%B4-min.jpg'}}
+                >
+                  <View style={styles.filter}/>
+                    <Text style={styles.roomPrice}>480 / h</Text>
+                    <Text style={styles.roomName}>大展演廳</Text>
+                </ImageBackground>
+          </TouchableOpacity>
+            )
+          })}
+        </View>
+        {/* <TouchableOpacity style={{transform: [{translateX: 0}]}} onPress={() => navigation.navigate(routeConfig.roomDetail)}>
             <ImageBackground
               imageStyle={{ borderRadius: 6}}
               style={styles.image}
               source={{uri: 'https://ysolife.com/wp-content/uploads/2017/11/06-%E4%B8%AD%E7%B7%B4-min.jpg'}}
             >
               <View style={styles.filter}/>
-              {/* <View style={styles.roomInfo}>
-              </View> */}
                 <Text style={styles.roomPrice}>480 / h</Text>
                 <Text style={styles.roomName}>大展演廳</Text>
             </ImageBackground>
@@ -89,7 +140,7 @@ function Home(props) {
               <Text style={styles.roomPrice}>50 / h</Text>
               <Text style={styles.roomName}>練鼓室</Text>
           </ImageBackground>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </Content>
     </Container>
   )
@@ -111,7 +162,8 @@ const styles = StyleSheet.create({
     transform: ([{ rotate: '-15deg' }])
   },
   image: {
-    height: 150,
+    width: 380,
+    height: 300,
     marginHorizontal: 16,
     marginVertical: 8,
     resizeMode: "cover",
