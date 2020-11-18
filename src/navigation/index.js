@@ -11,6 +11,10 @@ import Colors from '../styles/Colors'
 import Home from '../containers/Home/Home'
 import Gift_index from '../components/Gift/Gift_index'
 import RoomDetail from '../components/Home/Detail'
+import settings from '../components/settings/settings'
+import MyReserve from '../components/MyReserve/MyReserve'
+import all from '../components/settings/all'
+import used from '../components/settings/used'
 
 
 const HomeStack = createStackNavigator()
@@ -23,6 +27,20 @@ const HomeStack = createStackNavigator()
         <HomeStack.Screen name="home" component={Home}/>
         <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
       </HomeStack.Navigator>
+  )
+}
+
+const setStack = createStackNavigator()
+function setStackScreen(){
+  return(
+    <setStack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}>
+    <setStack.Screen name="settings" component={settings}/>
+    <setStack.Screen name="all" component={all}/>
+    <setStack.Screen name="used" component={used}/>
+      </setStack.Navigator>
   )
 }
 
@@ -43,7 +61,7 @@ export default function AllRouter() {
                 <Icon type="FontAwesome5" name="home" style={[GeneralStyles.iconStyle, { color: color }]}/>
               ),
             }}/>
-        <Tab.Screen name="calendar" component={HomeStackScreen}
+        <Tab.Screen name="calendar" component={MyReserve}
           options={{
               tabBarIcon: ({color}) => (
                 <Icon type="FontAwesome5" name="calendar" style={[GeneralStyles.iconStyle, { color: color }]}/>
@@ -55,7 +73,7 @@ export default function AllRouter() {
                 <Icon type="FontAwesome5" name="gift" style={[GeneralStyles.iconStyle, { color: color }]}/>
               ),
             }}/>
-        <Tab.Screen name="setting" component={HomeStackScreen}
+        <Tab.Screen name="settings" component={setStackScreen}
           options={{
               tabBarIcon: ({color}) => (
                 <Icon type="FontAwesome5" name="user-cog" style={[GeneralStyles.iconStyle, { color: color }]}/>
