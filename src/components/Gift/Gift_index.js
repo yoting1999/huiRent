@@ -12,6 +12,7 @@ return(
     <Text>testtesttesttesttesttesttesttesttesttest</Text>
     <Text>wow</Text>
     <Text>wow</Text>
+    <Text>wowowowo</Text>
     </View>
 
 
