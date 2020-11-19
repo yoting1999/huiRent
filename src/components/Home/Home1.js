@@ -63,7 +63,7 @@ function Home() {
           onMomentumScrollEnd={handleScroll}
           >
           { dummyDATA && dummyDATA.map((item, index)=> {
-            return <Slide bgImg={item.uri} key={`room-${index+1}`}/>
+            return <Slide bgImg={item.uri} key={`room-${index+1}`} />
           }) }
           {/* <Slide label="展演廳" bgImg={IMG_DATA[0]} price="480"/>
           <Slide label="大練團室" bgImg={IMG_DATA[1]} price="300" right/>
