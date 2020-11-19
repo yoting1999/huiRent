@@ -8,9 +8,15 @@ import Colors from '../../styles/Colors';
 import Header from './Header'
 
 const data = ['sunny','huihui','tien','zoei']
+
 const QuickActions = (index, qaItem) => {
   return (
     <View style={styles.qaContainer}>
+      <View style={[styles.button, { backgroundColor: 'green' }]}>
+        <Pressable onPress={() => console.log('hey')}>
+          <Text style={styles.buttonText}>DETAIL</Text>
+        </Pressable>
+      </View>
       <View style={styles.button}>
         <Pressable onPress={() => console.log('hey')}>
           <Text style={styles.buttonText}>DELETE</Text>
@@ -37,14 +43,14 @@ function SwipeList() {
      <View style={{ flex: 1 }}>
       <Text>LIST</Text>
       <SwipeableFlatList
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item}
         data={data}
         renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-        maxSwipeDistance={80}
+        maxSwipeDistance={160}
         renderQuickActions={({index, item}) => QuickActions(index, item)}
         shouldBounceOnMount={true}
         ItemSeparatorComponent={()=> <View style={styles.itemSeparator}/>}
-        // contentContainerStyle={{ flexGrow: 1,backgroundColor: 'red'}}
+        // contentContainerStyle={{ flexGrow: 1,backgroundColor: 'red'}} // 背景顏色
       />
     </View>
    </Container>
