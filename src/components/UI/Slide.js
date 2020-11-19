@@ -36,13 +36,10 @@ function Slide(props) {
           MORE
         </Text>
       </TouchableOpacity>
-        <View style={styles.titleContainer}>
+        {/* <View style={styles.titleContainer}>
           <Text style={styles.label}>{ label }</Text>
           <Text style={styles.price}>$ { price } / h</Text>
-        </View>
-      <View onTouchEnd={()=>console.log('end')} style={styles.reservationBtn}>
-        <Text style={styles.reservation}>預約</Text>
-      </View>
+        </View> */}
     </ImageBackground>
   )
 }
@@ -85,28 +82,6 @@ const styles = StyleSheet.create({
   more :{
     fontSize: 26,
     color: '#fff'
-  },
-  reservationBtn: {
-    position: 'absolute',
-    right: 24,
-    bottom: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.primary,
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    shadowColor: Colors.primary,
-    shadowOpacity: 0.4,
-    shadowRadius: 1,
-    shadowOffset: {
-      height: 2,
-      width: 1,
-    },
-  },
-  reservation: {
-    fontSize: 20,
-    color: '#ccc'
   },
   // textContainer: {
   //   height: 100,
