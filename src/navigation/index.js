@@ -33,8 +33,7 @@ const HomeStack = createStackNavigator()
         screenOptions={{
           headerShown: false
         }}>
-        <HomeStack.Screen name="SwipeList" component={SwipeList}/>
-        {/* <HomeStack.Screen name="home" component={Home}/> */}
+        <HomeStack.Screen name="home" component={Home}/>
         <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
       </HomeStack.Navigator>
   )
