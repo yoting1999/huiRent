@@ -22,6 +22,10 @@ import used from '../components/settings/used'
 import MyReserve from '../components/MyReserve/MyReserve'
 
 
+
+// Test
+import SwipeList from '../components/UI/SwipeList'
+
 const HomeStack = createStackNavigator()
  function HomeStackScreen() {
     return (
@@ -29,6 +33,7 @@ const HomeStack = createStackNavigator()
         screenOptions={{
           headerShown: false
         }}>
+        {/* <HomeStack.Screen name="SwipeList" component={SwipeList}/> */}
         <HomeStack.Screen name="home" component={Home}/>
         <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
       </HomeStack.Navigator>
