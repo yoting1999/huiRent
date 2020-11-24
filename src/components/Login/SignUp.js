@@ -1,15 +1,26 @@
-import { Button, Container, Content } from 'native-base';
-import React from 'react';
-import { useState } from 'react';
-import {View, Text,TextInput,StyleSheet} from 'react-native';
+import { Button, Container, Content, Header, Body, Title } from 'native-base';
+import React,{useState} from 'react';
+import {View, Text,TextInput,StyleSheet,disableYellowBox, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-datepicker';
+import { Icon } from 'native-base'
 
 function SignUp(props){
-    const [Date,setDate] = useState("2020-01-06")
+    console.disableYellowBox = true;
+    const [Date,setDate] = useState("2020-01-06");
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
     return(
         <Container>
+            <Header>
+                <Body>
+                    <Title style={{fontFamily:'Arial Black',fontSize:30}}>HuiRent  註冊</Title>
+                </Body>
+            </Header>
             <Content>
                 <View style={styles.form}>
+                    <TouchableOpacity style={styles.profile} onPress={()=>console.log('上傳照片')}>
+                        <Icon name="user" type="FontAwesome5" style={{fontSize:60,color:"gray"}} />
+                    </TouchableOpacity>
                     <TextInput placeholder="姓名" style={styles.inputstyle}/>
                     <DatePicker
                         style={{width: 350}}
@@ -38,10 +49,10 @@ function SignUp(props){
                         onDateChange={(date) => {setDate(date)}}
                     />
                     <Text style={{color:"#D0D0D0",marginTop:-5,marginBottom:10}}>––––––––––––––––––––––––––––––––––––––––––––––––––</Text>
-                    <TextInput placeholder="電子信箱" style={styles.inputstyle}/>
-                    <TextInput placeholder="密碼" style={styles.inputstyle} secureTextEntry={true}/>
+                    <TextInput placeholder="電子信箱" style={styles.inputstyle} onChangeText={text=>setEmail(text)}/>
+                    <TextInput placeholder="密碼" style={styles.inputstyle} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                     <TextInput placeholder="再次輸入密碼" style={styles.inputstyle} secureTextEntry={true}/>
-                    <Button block onPress={()=>console.log(Date)}><Text style={{color:"white"}}>送出</Text></Button>
+                    <Button block onPress={()=>console.log(email,password)}><Text style={{color:"white"}}>送出</Text></Button>
                 </View>
             </Content>
         </Container>
@@ -55,7 +66,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 35,
-        marginTop:300
+        marginTop:190
       },
     inputstyle: {
         width: '100%',
@@ -66,6 +77,19 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         fontSize: 20
     },
+    profile: {
+        flex:1,
+        marginBottom:90,
+        marginTop:-130,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "white",
+        width: 150,
+        height: 150,
+        borderRadius: 120,
+        borderWidth:1,
+        borderColor:"gray"
+    }
 })
 
 export default SignUp

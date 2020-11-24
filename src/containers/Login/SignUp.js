@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Layout from '../../components/Login/SignUp'
+import agent from '../../lib/agent'
 
 function SignUp(){
-    return(
-        <Layout/>
-    )
+    return <Layout/>
 }
 
 export default SignUp
