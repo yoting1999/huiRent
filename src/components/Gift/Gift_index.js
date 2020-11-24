@@ -12,13 +12,17 @@ const GiftOption = [
     {name:'小練團室1h使用卷',costpoint:'60'}
 ]
 
-const renderItem = (data) =>(
+const renderPoint = (data) =>(
 <View>
     <Text style={{}}>目前可用點數:{data.item.LeftPoint}</Text>
 </View>
-
-
 );
+
+const renderGift = (data) =>(
+    <View>
+        <Text>需要點數：{data.item.costpoint},商品：{data.item.name}</Text>
+    </View>
+)
 
 
 
@@ -41,13 +45,18 @@ return(
             <View style={{height:'50%',width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'skyblue'}}>
                 <FlatList
                 data={GiftPoint}
-                renderItem={renderItem}
+                renderItem={renderPoint}
                 ></FlatList>
             </View>
             
         </View>
     </View>
-    <View style={{flex : 2,backgroundColor:'skyblue'}}><Text>1</Text></View>
+    <View style={{flex : 2,backgroundColor:'skyblue'}}>
+        <FlatList
+        data = {GiftOption}
+        renderItem = {renderGift}
+        ></FlatList>
+    </View>
   
 
  </View>
