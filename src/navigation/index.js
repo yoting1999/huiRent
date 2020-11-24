@@ -11,11 +11,20 @@ import Colors from '../styles/Colors'
 import Home from '../containers/Home/Home'
 import Gift_index from '../components/Gift/Gift_index'
 import RoomDetail from '../components/Home/Detail'
+
+import SignUp from '../containers/Login/SignUp'
+import Login from '../containers/Login/Login'
+
 import settings from '../components/settings/settings'
-import MyReserve from '../components/MyReserve/MyReserve'
 import all from '../components/settings/all'
 import used from '../components/settings/used'
 
+import MyReserve from '../components/MyReserve/MyReserve'
+
+
+
+// Test
+import SwipeList from '../components/UI/SwipeList'
 
 const HomeStack = createStackNavigator()
  function HomeStackScreen() {
@@ -30,6 +39,17 @@ const HomeStack = createStackNavigator()
   )
 }
 
+
+const LoginStack = createStackNavigator()
+function LoginStackScreen(){
+  return (
+    <LoginStack.Navigator screenOptions={{headerShown: false}}>
+    <LoginStack.Screen name="Login" component={Login}/>
+    <LoginStack.Screen name="SignUp" component={SignUp}/>
+    </LoginStack.Navigator>
+  )
+}
+
 const setStack = createStackNavigator()
 function setStackScreen(){
   return(
@@ -41,6 +61,7 @@ function setStackScreen(){
     <setStack.Screen name="all" component={all}/>
     <setStack.Screen name="used" component={used}/>
       </setStack.Navigator>
+
   )
 }
 
@@ -61,7 +82,10 @@ export default function AllRouter() {
                 <Icon type="FontAwesome5" name="home" style={[GeneralStyles.iconStyle, { color: color }]}/>
               ),
             }}/>
+
+
         <Tab.Screen name="calendar" component={MyReserve}
+
           options={{
               tabBarIcon: ({color}) => (
                 <Icon type="FontAwesome5" name="calendar" style={[GeneralStyles.iconStyle, { color: color }]}/>

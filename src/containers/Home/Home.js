@@ -14,7 +14,13 @@ function Home() {
   //     await Rooms.addRoom({
   //       name: '展演廳',
   //       price: 400,
-  //       equipment: [{type: '吉他音箱', num: 2}, {name: '爵士鼓', num: 1 }]
+  //       equipments: [
+  //       {type: '基本',equipment: ['麥克風','麥克風接線','鼓組','mmixer'] },
+  //       {type: '吉他音箱', equipment: ['Ampeg 115w'] },
+  //       {type: 'KB音箱', equipment: ['Peavey 300w'] },
+  //       {type: '監聽', equipment: ['Lem k6 300w'] },
+
+  //       ]
   //     })
   //   } catch(err) {
   //     console.log('err', err)

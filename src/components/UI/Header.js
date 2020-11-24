@@ -1,15 +1,20 @@
 import React from 'react'
-import { Header, Left, Body, Right, Thumbnail, Button, Icon } from 'native-base'
+import { Header, Left, Body, Right, Thumbnail, Button, Icon, Text } from 'native-base'
 
 import Colors from '../../styles/Colors'
 
 const uri = "https://facebook.github.io/react-native/docs/assets/favicon.png";
 const RATING = 3
 
-export default function HeaderLayout() {
+export default function HeaderLayout(props) {
+  const { title } = props
   return (
     <Header style={{backgroundColor: Colors.primary}} transparent>
-      <Left />
+      <Left>
+        <Text style={{ fontSize: 25, color: '#fff' }}>
+          {title}
+        </Text>
+      </Left>
       <Body />
       <Right>
         <Button transparent onPress={()=>console.log('profile')}>
