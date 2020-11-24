@@ -3,10 +3,6 @@ import {View,Text} from 'react-native'
 import { Container, Content, Thumbnail, Button, Icon } from 'native-base'
 import Header from '../UI/Header'
 
-
-
-import Header from '../'
-
 function Gift_index() {
 
 
