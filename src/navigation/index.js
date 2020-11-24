@@ -84,7 +84,7 @@ export default function AllRouter() {
             }}/>
 
 
-        <Tab.Screen name="calendar" component={LoginStackScreen}
+        <Tab.Screen name="calendar" component={MyReserve}
 
           options={{
               tabBarIcon: ({color}) => (

@@ -17,7 +17,7 @@ function Login(props){
             </Header> */}
         <Content>
             <View style={styles.form}>
-                <Text style={{fontFamily:'Arial Black',fontSize:50,fontWeight:'700',marginBottom:130,marginTop:-130}}>LOGO</Text>
+                <Text style={{fontSize:50,fontWeight:'700',marginBottom:130,marginTop:-130}}>LOGO</Text>
                 <TextInput placeholder="請輸入帳號(電子信箱)" style={styles.inputstyle} onChangeText={text=>setEmail(text)}/>
                 <TextInput placeholder="請輸入密碼" style={styles.inputstyle} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                 <Button block dark style={styles.button}><Text style={{color:"#fff"}}>登入</Text></Button>
