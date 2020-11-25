@@ -1,6 +1,6 @@
 import React from 'react'
 import {View, Text, ImageBackground, StyleSheet, TouchableOpacity,Image } from 'react-native'
-import { List, ListItem, Left, Body, Right, Thumbnail,Separator,Icon,Container, Content,Button} from 'native-base';
+import { List, ListItem, Left, Body, Right, Thumbnail,Separator,Icon,Container, Content} from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
 import Header from '../UI/Header'
@@ -15,9 +15,9 @@ function settings(props) {
         <Header>
           </Header>
         <Content>
-        <View style={{flexDirection:'row',justifyContent:'center',marginTop:60}}>
-        <Image source={{uri:'https://www.facebook.com/images/fb_icon_325x325.png'}} style={{width:110,height:110,borderRadius:50,}}/>
-        </View>
+        <TouchableOpacity onPress={()=>console.log('press')} style={{flexDirection:'row',justifyContent:'center',marginTop:60}}>
+            <Image source={{uri:'https://www.facebook.com/images/fb_icon_325x325.png'}} style={{width:110,height:110,borderRadius:50,}}/>
+        </TouchableOpacity>
             <View style={{flexDirection:'row',justifyContent:'center'}}>
            <Text>星級:</Text>
             {
