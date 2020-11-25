@@ -5,6 +5,9 @@ import {View, Text,TextInput,StyleSheet} from 'react-native';
 import route from '../../constants/route';
 
 function Login(props){
+
+    const { login } = props
+
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigation = useNavigation();
@@ -17,11 +20,35 @@ function Login(props){
             </Header> */}
         <Content>
             <View style={styles.form}>
-                <Text style={{fontSize:50,fontWeight:'700',marginBottom:130,marginTop:-130}}>LOGO</Text>
-                <TextInput placeholder="請輸入帳號(電子信箱)" style={styles.inputstyle} onChangeText={text=>setEmail(text)}/>
-                <TextInput placeholder="請輸入密碼" style={styles.inputstyle} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
-                <Button block dark style={styles.button}><Text style={{color:"#fff"}}>登入</Text></Button>
-                <Button transparent style={{alignSelf:'center'}} onPress={()=>navigation.navigate(route.SignUp)}><Text style={{color:"#86BBD8"}}>註冊</Text></Button>
+                <Text style={{fontSize:50,fontWeight:'700',marginBottom:130,marginTop:-130}}
+                    >LOGO
+                </Text>
+                <TextInput
+                    placeholder="請輸入帳號(電子信箱)"
+                    style={styles.inputstyle}
+                    onChangeText={text=>setEmail(text)}
+                />
+                <TextInput
+                    placeholder="請輸入密碼"
+                    style={styles.inputstyle}
+                    secureTextEntry={true}
+                    onChangeText={text=>setPassword(text)}
+                />
+                <Button
+                    block
+                    dark
+                    style={styles.button}
+                    onPress={login}
+                >
+                    <Text style={{color:"#fff"}}>登入</Text>
+                </Button>
+                <Button
+                    transparent
+                    style={{alignSelf:'center'}}
+                    onPress={()=>navigation.navigate(route.SignUp)}
+                >
+                <Text style={{color:"#86BBD8"}}>註冊</Text>
+            </Button>
             </View>
         </Content>
         </Container>
