@@ -8,16 +8,16 @@ import routeConfig from '../../constants/route'
 const uri1="https://facebook.github.io/react-native/docs/assets/favicon.png"
 const RATING = 3
 
-function settings(props) {
+function Settings(props) {
     const navigation = useNavigation()
     return (
       <Container>
         <Header>
           </Header>
         <Content>
-        <View style={{flexDirection:'row',justifyContent:'center',marginTop:60}}>
+        <TouchableOpacity onPress={{}}><View style={{flexDirection:'row',justifyContent:'center',marginTop:60}}>
         <Image source={{uri:'https://www.facebook.com/images/fb_icon_325x325.png'}} style={{width:110,height:110,borderRadius:50,}}/>
-        </View>
+        </View></TouchableOpacity>
             <View style={{flexDirection:'row',justifyContent:'center'}}>
            <Text>星級:</Text>
             {
@@ -130,4 +130,4 @@ function settings(props) {
     }
   })
 
-  export default settings
+  export default Settings
