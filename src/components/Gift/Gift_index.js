@@ -13,6 +13,8 @@ const GiftOption = [
     {name:'小練團室1h使用卷',costpoint:'60'},
 ]
 
+const NUN_COLUMNS = 2
+
 const renderPoint = (data) => (
     <View>
         <Text style={{}}>目前可用點數:{data.item.LeftPoint}</Text>
@@ -54,9 +56,13 @@ return(
 
         </View>
     </View>
-    <View style={{flex : 2,backgroundColor:'skyblue',flexDirection:'row'}}>
-
+    <View style={{flex : 2, flexDirection:'row'}}>
+    {/* <View style={{flex:10}}>
+        <Text >123</Text>
+        <Text >需要點數</Text>
+    </View> */}
         <FlatList
+            numColumns={NUN_COLUMNS}
             data = {GiftOption}
             renderItem = {renderGift}
         />
@@ -71,32 +77,20 @@ return(
 const styles = StyleSheet.create({
 
     container: {
-  
       //backgroundColor: '#00bfff',
-  
       flex: 1,
-  
-    
+    },  
+    item: { 
+        flex: 1, 
+        height: 200,
+        padding: 8,
+        margin: 4, 
+        borderRadius: 12, 
+        borderColor: '#ccc', 
+        borderWidth: 1, 
     },
-  
-    item: {
-  
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      backgroundColor: '#00ffff',
-      width:100,
-      height:100,
-      padding: 10,
-      marginVertical: 10,
-      marginHorizontal: 16,
-  
-    },
-  
     title: {
-  
       fontSize: 15,
-  
     },
     Content:{
      textAlign:'right',
@@ -104,5 +98,6 @@ const styles = StyleSheet.create({
      textDecorationLine:'underline',
      fontSize:12
     }
+  });
   
-  });export default Gift_index;
+  export default Gift_index;
