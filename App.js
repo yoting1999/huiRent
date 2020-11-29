@@ -1,6 +1,16 @@
 import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import reducers from './src/store/reducers/index'
 import AllRouter from './src/navigation/index'
 
+const store = createStore(reducers)
+
 export default function App() {
-  return <AllRouter />
+  return (
+    <Provider store={store}>
+       <AllRouter/>
+    </Provider>
+  )
 }

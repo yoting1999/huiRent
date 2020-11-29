@@ -31,8 +31,8 @@ function Gift_index() {
 
 return(
 <Container>
-    <Header title="Gift"/>
-    
+    <Header title="點數兌換"/>
+
 <View style={{ flex: 1, justifyContent: 'center'}}>
     <View style={{ flex : 1 ,flexDirection:'row'}}>
         <View style={{flex :1,backgroundColor:'red'}}>
@@ -41,14 +41,15 @@ return(
                 <Text style={{fontSize:20}}>點我開始抽獎</Text>
             </View>
         </View>
-        <View style={{flex:2 ,backgroundColor:'blue'}}>
-            <View style={{height:'50%',width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'skyblue'}}>
+        <View style={{flex:2 ,backgroundColor:'blue', justifyContent: 'center', alignItems: 'center'}}>
+            <Text>可用點數</Text>
+            {/* <View style={{height:'50%',width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'skyblue'}}>
                 <FlatList
                 data={GiftPoint}
                 renderItem={renderPoint}
                 ></FlatList>
-            </View>
-            
+            </View> */}
+
         </View>
     </View>
     <View style={{flex : 2,backgroundColor:'skyblue'}}>
@@ -57,10 +58,10 @@ return(
         renderItem = {renderGift}
         ></FlatList>
     </View>
-  
+
 
  </View>
-       
+
 </Container>
 
 

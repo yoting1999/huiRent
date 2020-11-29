@@ -1,4 +1,5 @@
 import React from 'react'
+import { View } from 'react-native'
 import { Header, Left, Body, Right, Thumbnail, Button, Icon, Text } from 'native-base'
 
 import Colors from '../../styles/Colors'
@@ -10,11 +11,11 @@ export default function HeaderLayout(props) {
   const { title } = props
   return (
     <Header style={{backgroundColor: Colors.primary}} transparent>
-      <Left>
+      <View style={{ justifyContent:'center' }}>
         <Text style={{ fontSize: 25, color: '#fff' }}>
           {title}
         </Text>
-      </Left>
+      </View>
       <Body />
       <Right>
         <Button transparent onPress={()=>console.log('profile')}>
