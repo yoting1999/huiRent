@@ -20,6 +20,7 @@ function Login(props){
             <View style={styles.form}>
                 <Image source={require('../../../pic/music-notes.png')} style={{width:90,height:90,marginTop:-200}}/>
                 <Text style={{fontSize:50,fontWeight:'700',marginBottom:80}}>HUIRENT
+
                 </Text>
                 <TextInput
                     placeholder="請輸入帳號(電子信箱)"

@@ -8,6 +8,8 @@ import { firebase_config } from './firebase_config'
 
 const store = createStore(reducers)
 
+const store = createStore(reducers)
+
 export default function App() {
   return (
     <Provider store={store}>

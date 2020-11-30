@@ -45,9 +45,10 @@ function HomeStackScreen() {
 const LoginStack = createStackNavigator()
 function LoginStackScreen() {
   return (
-    <LoginStack.Navigator screenOptions={{ headerShown: false }}>
-      <LoginStack.Screen name="Login" component={Login} />
-      <LoginStack.Screen name="SignUp" component={SignUp} />
+
+    <LoginStack.Navigator screenOptions={{headerShown: false}}>
+      <LoginStack.Screen name="Login" component={Login}/>
+      <LoginStack.Screen name="SignUp" component={SignUp}/>
     </LoginStack.Navigator>
   )
 }
@@ -59,9 +60,10 @@ function setStackScreen() {
       screenOptions={{
         headerShown: false
       }}>
-      <setStack.Screen name="settings" component={settings} />
-      <setStack.Screen name="all" component={all} />
-      <setStack.Screen name="used" component={used} />
+
+      <setStack.Screen name="settings" component={settings}/>
+      <setStack.Screen name="all" component={all}/>
+      <setStack.Screen name="used" component={used}/>
     </setStack.Navigator>
   )
 }
@@ -71,48 +73,48 @@ const Tab = createBottomTabNavigator()
 function AppTab() {
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: Colors.primary,
-        inactiveTintColor: Colors.secondary,
-      }}
+    tabBarOptions={{
+      activeTintColor: Colors.primary,
+      inactiveTintColor: Colors.secondary,
+    }}
     >
-      <Tab.Screen name="home" component={HomeStackScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon type="FontAwesome5" name="home" style={[GeneralStyles.iconStyle, { color: color }]} />
+    <Tab.Screen name="home" component={HomeStackScreen}
+      options={{
+          tabBarIcon: ({color}) => (
+            <Icon type="FontAwesome5" name="home" style={[GeneralStyles.iconStyle, { color: color }]}/>
           ),
-        }} />
+        }}/>
 
-      <Tab.Screen name="calendar" component={MyReserve}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon type="FontAwesome5" name="calendar" style={[GeneralStyles.iconStyle, { color: color }]} />
+    <Tab.Screen name="calendar" component={MyReserve}
+      options={{
+          tabBarIcon: ({color}) => (
+            <Icon type="FontAwesome5" name="calendar" style={[GeneralStyles.iconStyle, { color: color }]}/>
           ),
-        }} />
-      <Tab.Screen name="gift" component={Gift_index}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon type="FontAwesome5" name="gift" style={[GeneralStyles.iconStyle, { color: color }]} />
+        }}/>
+    <Tab.Screen name="gift" component={Gift_index}
+      options={{
+          tabBarIcon: ({color}) => (
+            <Icon type="FontAwesome5" name="gift" style={[GeneralStyles.iconStyle, { color: color }]}/>
           ),
-        }} />
-      <Tab.Screen name="settings" component={setStackScreen}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon type="FontAwesome5" name="user-cog" style={[GeneralStyles.iconStyle, { color: color }]} />
+        }}/>
+    <Tab.Screen name="settings" component={setStackScreen}
+      options={{
+          tabBarIcon: ({color}) => (
+            <Icon type="FontAwesome5" name="user-cog" style={[GeneralStyles.iconStyle, { color: color }]}/>
           ),
-        }} />
+        }}/>
     </Tab.Navigator>
   )
 }
 
 export default function AllRouter() {
-  const login = useSelector(state => state.authReducer.login)
+  const login = useSelector(state=>state.authReducer.login)
   return (
     <NavigationContainer>
       {login ?
-        <AppTab />
+        <AppTab/>
         :
-        <LoginStackScreen />
+        <LoginStackScreen/>
       }
     </NavigationContainer>
   )
