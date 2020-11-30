@@ -6,7 +6,7 @@ import { authLogin } from '../../store/actions/auth'
 import agent from '../../lib/agent';
 
 
-function Login() {c61d1b084772d8765c0a6965121af080aacca83
+function Login() {
     const dispatch = useDispatch()
 
     const login = () => {
