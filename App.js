@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import reducers from './src/store/reducers/index'
 import AllRouter from './src/navigation/index'
+import { firebase_config } from './firebase_config'
 
 const store = createStore(reducers)
 

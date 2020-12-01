@@ -29,22 +29,23 @@ import MyReserve from '../components/MyReserve/MyReserve'
 import SwipeList from '../components/UI/SwipeList'
 
 const HomeStack = createStackNavigator()
- function HomeStackScreen() {
-    return (
-      <HomeStack.Navigator
-        screenOptions={{
-          headerShown: false
-        }}>
-        <HomeStack.Screen name="home" component={Home}/>
-        <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
-      </HomeStack.Navigator>
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}>
+      <HomeStack.Screen name="home" component={Home} />
+      <HomeStack.Screen name="roomDetail" component={RoomDetail} />
+    </HomeStack.Navigator>
   )
 }
 
 
 const LoginStack = createStackNavigator()
-function LoginStackScreen(){
+function LoginStackScreen() {
   return (
+
     <LoginStack.Navigator screenOptions={{headerShown: false}}>
       <LoginStack.Screen name="Login" component={Login}/>
       <LoginStack.Screen name="SignUp" component={SignUp}/>
@@ -53,12 +54,13 @@ function LoginStackScreen(){
 }
 
 const setStack = createStackNavigator()
-function setStackScreen(){
-  return(
+function setStackScreen() {
+  return (
     <setStack.Navigator
       screenOptions={{
         headerShown: false
       }}>
+
       <setStack.Screen name="settings" component={settings}/>
       <setStack.Screen name="all" component={all}/>
       <setStack.Screen name="used" component={used}/>
