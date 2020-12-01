@@ -1,9 +1,11 @@
 import React,{useEffect,useState} from 'react'
-import {View,Text,FlatList,StyleSheet,Alert,Image,ImageBackground } from 'react-native'
+import {View,Text,FlatList,StyleSheet,Alert,Image,ImageBackground,Button, } from 'react-native'
 import { Container,Right} from 'native-base'
 import Header from '../UI/Header'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import GiftModal from './GiftModal';
+
 const GiftOption = [
     {name:'pick',costpoint:'5'},
     {name:'Elixir 包膜弦',costpoint:'50'},
@@ -14,13 +16,13 @@ const GiftOption = [
 ]
 
 const NUN_COLUMNS = 2
-const uri = 'https://facebook.github.io/react-native/docs/assets/favicon.png'
+
 
 
 const renderGift = (data) =>(
     <View style={styles.flatlistItem}>
 
-    <TouchableOpacity style={styles.itemButton} onPress={() => console.log(data.item.name)}>
+    <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(data.item.name,"先不要點拜託")}}>
     <Image  resizeMode={"stretch"} style={styles.center} source={{ uri: 'http://lorempixel.com/1920/1920/cats' }}/>
 
         <Text style={styles.title}>{data.item.name}</Text>
@@ -59,7 +61,7 @@ const renderGift = (data) =>(
 
 
 function Gift_index() {
-
+const [modalVisible,setModalVisible] = useState(false)
 
 return(
 <Container style={styles.container}>
@@ -68,15 +70,20 @@ return(
 
 <View style={{ flex: 1, justifyContent: 'center'}}>
     <View style={{ flex : 1 ,flexDirection:'row'}}>
-        <TouchableOpacity onPress={()=>Alert.alert('先不要點拜託')} style={styles.topLiftItem} >
+        <TouchableOpacity  style={styles.topLiftItem} onPress={()=>setModalVisible(true)} >
         <Image  resizeMode={"center"} style={[styles.center]} source={{ uri: 'http://lorempixel.com/output/cats-q-c-640-480-9.jpg' }}/>
 
             <TouchableOpacity>
                 <Text style={styles.Content}>點圖進入幸運輪盤頁面</Text>
             </TouchableOpacity>
         </TouchableOpacity>
+       
         <View style={styles.topRightItem}>
+      
             <Text style={styles.Content}>目前可用點數：20</Text>
+            <GiftModal
+            modalVisible={modalVisible} 
+            setModalVisible={setModalVisible}></GiftModal>
         </View>
     </View>
     <View style={{flex : 6, flexDirection:'row'}}>
@@ -160,7 +167,10 @@ const styles = StyleSheet.create({
         height:300,
         backgroundColor:'transparent'
     },
-        
+    modalView: {
+        margin: 0,
+        justifyContent: 'flex-end'
+      },
         
         
 
