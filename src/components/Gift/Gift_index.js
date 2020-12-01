@@ -4,7 +4,6 @@ import { Container,Right} from 'native-base'
 import Header from '../UI/Header'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
 const GiftOption = [
     {name:'pick',costpoint:'5'},
     {name:'Elixir 包膜弦',costpoint:'50'},
@@ -19,24 +18,43 @@ const uri = 'https://facebook.github.io/react-native/docs/assets/favicon.png'
 
 
 const renderGift = (data) =>(
-    <View style={styles.item}>
+    <View style={styles.flatlistItem}>
 
-    <TouchableOpacity style={styles.itemButton}>
-    <ImageBackground  resizeMode={"repeat"} style={styles.center} source={{ uri: 'http://lorempixel.com/1920/1920/cats' }}>
+    <TouchableOpacity style={styles.itemButton} onPress={() => console.log(data.item.name)}>
+    <Image  resizeMode={"stretch"} style={styles.center} source={{ uri: 'http://lorempixel.com/1920/1920/cats' }}/>
 
-        <Text style={styles.title}>商品：{data.item.name}</Text>
+        <Text style={styles.title}>{data.item.name}</Text>
         <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
           
           <View style={styles.myButton_circle}>
             <Text>兌換</Text>
          
     </View>
-    </ImageBackground>
+
     
     </TouchableOpacity>
     
     </View>
 )
+// const renderGift_bak = (data) =>(
+//     <View style={styles.flatlistItem}>
+
+//     <TouchableOpacity style={styles.itemButton} onPress={() => console.log(data.item.name)}>
+//     <ImageBackground  resizeMode={"stretch"} style={styles.center} source={{ uri: 'http://lorempixel.com/1920/1920/cats' }}>
+
+//         <Text style={styles.title}>商品：{data.item.name}</Text>
+//         <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
+          
+//           <View style={styles.myButton_circle}>
+//             <Text>兌換</Text>
+         
+//     </View>
+//     </ImageBackground>
+    
+//     </TouchableOpacity>
+    
+//     </View>
+// )
 
 
 
@@ -44,31 +62,24 @@ function Gift_index() {
 
 
 return(
-<Container>
+<Container style={styles.container}>
     <Header title="點數兌換"/>
     
 
 <View style={{ flex: 1, justifyContent: 'center'}}>
     <View style={{ flex : 1 ,flexDirection:'row'}}>
-        <View style={{flex :3,backgroundColor:'orange'}}>
-        <Image  resizeMode={"repeat"} style={[styles.center]} source={{ uri: 'http://lorempixel.com/output/cats-q-c-640-480-9.jpg' }}/>
+        <TouchableOpacity onPress={()=>Alert.alert('先不要點拜託')} style={styles.topLiftItem} >
+        <Image  resizeMode={"center"} style={[styles.center]} source={{ uri: 'http://lorempixel.com/output/cats-q-c-640-480-9.jpg' }}/>
 
-            <View style={{flex:1,justifyContent:'flex-end'}}>
-                <Text style={{fontSize:20}}>點我開始抽獎</Text>
-            </View>
-        </View>
-        <View style={{flex:2 ,backgroundColor:'darkblue', justifyContent: 'center', alignItems: 'center'}}>
-            <Text>可用點數</Text>
-            {/* <View style={{height:'50%',width:'100%',justifyContent:'center',alignItems:'center',backgroundColor:'skyblue'}}>
-                <FlatList
-                data={GiftPoint}
-                renderItem={renderPoint}
-                ></FlatList>
-            </View> */}
-
+            <TouchableOpacity>
+                <Text style={styles.Content}>點圖進入幸運輪盤頁面</Text>
+            </TouchableOpacity>
+        </TouchableOpacity>
+        <View style={styles.topRightItem}>
+            <Text style={styles.Content}>目前可用點數：20</Text>
         </View>
     </View>
-    <View style={{flex : 4, flexDirection:'row'}}>
+    <View style={{flex : 6, flexDirection:'row'}}>
         <FlatList
             numColumns={NUN_COLUMNS}
             data = {GiftOption}
@@ -85,20 +96,31 @@ return(
 const styles = StyleSheet.create({
 
     container: {
-      //backgroundColor: '#00bfff',
+      backgroundColor:Colors.secondary,
       flex: 1,
     },  
-    item: { 
+    flatlistItem: { 
         flex:1, 
         height: 200,
         padding:0,
         margin:4, 
         borderRadius: 12, 
         borderColor: '#ccc', 
-        borderWidth: 1,
+        borderWidth: 3,
         justifyContent:'flex-end',
         alignItems:'center',
         overflow:'hidden'
+    },
+    topLiftItem:{
+        flex:3,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    topRightItem:{
+        flex:2 ,
+        // backgroundColor:'skyblue',
+         justifyContent: 'center', 
+         alignItems: 'center'
     },
     title: {
       fontSize: 15,
@@ -126,8 +148,8 @@ const styles = StyleSheet.create({
         // borderRadius: 12, 
         borderColor: '#ccc', 
         borderWidth: 0,
-        justifyContent:'flex-end',
-        alignItems:'flex-end', 
+        justifyContent:'center',
+        alignItems:'center', 
         overflow:'hidden'
     },
     center: {
