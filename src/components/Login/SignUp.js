@@ -1,19 +1,18 @@
-import { Button, Container, Content, Header, Body, Title } from 'native-base';
+import { Button, Container, Content, Header, Body, Title, Input, Icon } from 'native-base';
 import React,{useState} from 'react';
-import {View, Text,TextInput,StyleSheet,disableYellowBox, TouchableOpacity} from 'react-native';
+import {View, Text,TextInput,StyleSheet, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-datepicker';
-import { Icon } from 'native-base'
 
 function SignUp(props){
-    console.disableYellowBox = true;
     const [Date,setDate] = useState("2020-01-06");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const {signUp} = props
     return(
         <Container>
             <Header>
                 <Body>
-                    <Title style={{fontFamily:'Arial Black',fontSize:30}}>HuiRent  註冊</Title>
+                    <Title style={{fontSize:30}}>HUIRENT  註冊</Title>
                 </Body>
             </Header>
             <Content>
@@ -52,7 +51,7 @@ function SignUp(props){
                     <TextInput placeholder="電子信箱" style={styles.inputstyle} onChangeText={text=>setEmail(text)}/>
                     <TextInput placeholder="密碼" style={styles.inputstyle} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                     <TextInput placeholder="再次輸入密碼" style={styles.inputstyle} secureTextEntry={true}/>
-                    <Button block onPress={()=>console.log(email,password)}><Text style={{color:"white"}}>送出</Text></Button>
+                    <Button block dark onPress={()=>signUp(email,password)}><Text style={{color:"white"}}>送出並註冊</Text></Button>
                 </View>
             </Content>
         </Container>
@@ -79,8 +78,8 @@ const styles = StyleSheet.create({
     },
     profile: {
         flex:1,
-        marginBottom:90,
-        marginTop:-130,
+        marginBottom:80,
+        marginTop:-170,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "white",

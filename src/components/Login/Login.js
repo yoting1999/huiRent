@@ -1,13 +1,11 @@
 import { Body,Button, Container, Content, Header, Title } from 'native-base';
 import React,{useState,useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
-import {View, Text,TextInput,StyleSheet} from 'react-native';
+import {View, Text,TextInput,StyleSheet,Image} from 'react-native';
 import route from '../../constants/route';
 
 function Login(props){
-
     const { login } = props
-
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigation = useNavigation();
@@ -20,8 +18,9 @@ function Login(props){
             </Header> */}
         <Content>
             <View style={styles.form}>
-                <Text style={{fontSize:50,fontWeight:'700',marginBottom:130,marginTop:-130}}
-                    >LOGO
+                <Image source={require('../../../pic/music-notes.png')} style={{width:90,height:90,marginTop:-200}}/>
+                <Text style={{fontSize:50,fontWeight:'700',marginBottom:80}}>HUIRENT
+
                 </Text>
                 <TextInput
                     placeholder="請輸入帳號(電子信箱)"

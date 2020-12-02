@@ -3,7 +3,7 @@ import { Icon } from 'native-base'
 
 import { useSelector } from 'react-redux'
 
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, StackActions } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
@@ -23,12 +23,16 @@ import used from '../components/settings/UsedPoint'
 
 import MyReserve from '../components/MyReserve/MyReserve'
 
+import Reserve from '../components/Home/Reserve'
+import ReserveDate from '../components/Home/ReserveDate'
+
 
 
 // Test
 import SwipeList from '../components/UI/SwipeList'
 
 const HomeStack = createStackNavigator()
+
  function HomeStackScreen() {
     return (
       <HomeStack.Navigator
@@ -37,14 +41,16 @@ const HomeStack = createStackNavigator()
         }}>
         <HomeStack.Screen name="home" component={Home}/>
         <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
+        <HomeStack.Screen name="Reserve" component={Reserve}/>
+        <HomeStack.Screen name="ReserveDate" component={ReserveDate}/>
       </HomeStack.Navigator>
+
   )
 }
-
-
 const LoginStack = createStackNavigator()
-function LoginStackScreen(){
+function LoginStackScreen() {
   return (
+
     <LoginStack.Navigator screenOptions={{headerShown: false}}>
       <LoginStack.Screen name="Login" component={Login}/>
       <LoginStack.Screen name="SignUp" component={SignUp}/>
@@ -53,12 +59,13 @@ function LoginStackScreen(){
 }
 
 const setStack = createStackNavigator()
-function setStackScreen(){
-  return(
+function setStackScreen() {
+  return (
     <setStack.Navigator
       screenOptions={{
         headerShown: false
       }}>
+
       <setStack.Screen name="settings" component={settings}/>
       <setStack.Screen name="all" component={all}/>
       <setStack.Screen name="used" component={used}/>
@@ -102,6 +109,7 @@ function AppTab() {
           ),
         }}/>
     </Tab.Navigator>
+    
   )
 }
 
@@ -113,7 +121,10 @@ export default function AllRouter() {
         <AppTab/>
         :
         <LoginStackScreen/>
+       
+       
       }
     </NavigationContainer>
+    
   )
 }
