@@ -6,6 +6,44 @@ import {Agenda} from 'react-native-calendars';
 import {Card, Avatar, Button} from 'react-native-paper';
 
 
+const DATA = {
+  BIG : [{
+    '2020-12-22': [{name: '已額滿', height: 80}],
+    '2020-12-23': [{name: '已額滿', height: 80}],
+    '2020-12-24': [{name: '已額滿', height: 80}],
+    '2020-12-25': [{name: '已額滿', height: 80}],
+  },{
+    '2020-12-16': {selected: true, marked: true},
+    '2020-12-17': {marked: true},
+    '2020-12-18': {disabled: true}
+  }
+  ],
+
+  MEDIUM : [{
+    '2020-12-22': [{name: '尚有名額'}],
+    '2020-12-23': [{name: '尚有名額', height: 80}],
+    '2020-12-24': [],
+    '2020-12-25': [{name: '尚有名額'}, {name: '尚有名額'}]
+  },{
+    '2020-12-16': {selected: true, marked: true},
+    '2020-12-17': {marked: true},
+    '2020-12-18': {disabled: true}
+  }
+  ],
+  LITTLE : [{
+    '2020-12-22': [{name: 'item 1 - any js object'}],
+    '2020-12-23': [{name: 'item 2 - any js object', height: 80}],
+    '2020-12-24': [],
+    '2020-12-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+  },{
+    '2020-12-16': {selected: true, marked: true},
+    '2020-12-17': {marked: true},
+    '2020-12-18': {disabled: true}
+  }
+  ]
+}
+
+
 // type Item ={
 //   name:string;
 //   reserve:boolean;
@@ -16,6 +54,7 @@ const timeToString=(time)=> {
   }
   function ReserveDate(props) {
     const [items, setItems] = useState({});
+    const { selectedValue } = props.route.params
       // const[items,setItems] =useState ({key: string} : Item})({
       //   '2020-12-16' :[
       //     {name :'A1',reserve: true},
@@ -35,6 +74,10 @@ const timeToString=(time)=> {
       //   }
 
       // })
+
+      useEffect(()=>{
+        setItems(DATA[selectedValue][0])
+      }, [])
 
       
       const loadItems=(day)=> {
@@ -57,9 +100,12 @@ const timeToString=(time)=> {
           Object.keys(items).forEach(key => {
             newItems[key] = items[key];
           });
-          setItems(newItems);
+
+
+          setItems(DATA[selectedValue][0]);
         }, 1000);
       }
+
       const renderItem = (item)=>{
         return(
           <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
@@ -81,7 +127,7 @@ const timeToString=(time)=> {
         <Header/>
         <Agenda
           items={items}
-          loadItemsForMonth={loadItems}
+          // loadItemsForMonth={loadItems}
           selected={'2020-12-16'}
           renderItem={renderItem}
           

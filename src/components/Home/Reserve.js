@@ -26,15 +26,15 @@ function Reserve(props) {
         style={{ height: 50, width: 150 }}
         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
       >
-        <Picker.Item label="大練團室" value="0" />
-        <Picker.Item label="中練團室" value="1" />
-        <Picker.Item label="小練團室" value="2" />
+        <Picker.Item label="大練團室" value="BIG" />
+        <Picker.Item label="中練團室" value="MEDIUM" />
+        <Picker.Item label="小練團室" value="LITTLE" />
         <Picker.Item label="鼓室" value="3" />
 
       </Picker>
       
       </View>
-      <Button style={styles.botton} onPress={()=> navigation.navigate(routeConfig.ReserveDate)}>
+      <Button style={styles.botton} onPress={()=> navigation.navigate(routeConfig.ReserveDate,{selectedValue: selectedValue})}>
         <Text>NEXT</Text>
         </Button>
       
