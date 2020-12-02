@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, Pressable } from 'react-native'
+import { View, StyleSheet, Text, Pressable,FlatList } from 'react-native'
 import { Container, Content } from 'native-base'
 
 import SwipeableFlatList from 'react-native-swipeable-list';
@@ -7,19 +7,42 @@ import Colors from '../../styles/Colors';
 
 import Header from './Header'
 
-const data = ['sunny','huihui','tien','zoei']
+const DATA = [
+  {
+    id: '1',
+    title: '2020/10/30',
+    time1:'13:30',
+    time2:'15:30',
+    room:'大練團室'
+
+  },
+  {
+    id: '2',
+    title: '2020/10/30',
+    time1:'13:30',
+    time2:'15:30',
+    room:'大練團室'
+  },
+  {
+    id: '3',
+    title: '2020/10/30',
+    time1:'13:30',
+    time2:'15:30',
+    room:'大練團室'
+  },
+];
 
 const QuickActions = (index, qaItem) => {
   return (
     <View style={styles.qaContainer}>
       <View style={[styles.button, { backgroundColor: 'green' }]}>
         <Pressable onPress={() => console.log('hey')}>
-          <Text style={styles.buttonText}>DETAIL</Text>
+          <Text style={styles.buttonText}>修改</Text>
         </Pressable>
       </View>
       <View style={styles.button}>
         <Pressable onPress={() => console.log('hey')}>
-          <Text style={styles.buttonText}>DELETE</Text>
+          <Text style={styles.buttonText}>刪除</Text>
         </Pressable>
       </View>
       {/* <View style={[styles.button, styles.button2]}>
@@ -35,17 +58,23 @@ const QuickActions = (index, qaItem) => {
     </View>
   );
 };
+const renderItem = ({ item }) => (
+  <View style={styles.item}>
+    <Text>{item.title}</Text>
+  <Text>{item.time1}~{item.time2}</Text>
+  <Text>{item.room}</Text>
+  </View>
+    
+  );
 
 function SwipeList() {
   return (
    <Container>
-     <Header/>
      <View style={{ flex: 1 }}>
-      <Text>LIST</Text>
       <SwipeableFlatList
-        keyExtractor={(item) => item}
-        data={data}
-        renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+        keyExtractor={(item) => item.id}
+        data={DATA}
+        renderItem={renderItem}
         maxSwipeDistance={160}
         renderQuickActions={({index, item}) => QuickActions(index, item)}
         shouldBounceOnMount={true}

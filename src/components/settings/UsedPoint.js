@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity  } from 'react-native'
-import { Container, Content, Button, Icon } from 'native-base'
+import { Container, Content, Button, Icon,Separator } from 'native-base'
 import Header from '../UI/Header'
 
 
@@ -8,9 +8,10 @@ function used(props) {
     return (
       <Container>
         <Header/>
-        <Content>
-          <Text>可使用點數</Text>
-        </Content>
+        <View style={{flex:1}}>
+            <Text>可使用點數</Text>
+            </View>
+          <View style={{flex:2}}><Text>使用紀錄</Text></View>
       </Container>
     )
   }

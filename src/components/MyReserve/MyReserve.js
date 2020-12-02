@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import Header from '../UI/Header'
 import Swipeout from 'react-native-swipeout';
 import routeConfig from '../../constants/route'
-import Swipeable from 'react-native-swipeable';
+import Swiptlist from '../UI/SwipeList';
 import { color } from 'react-native-reanimated'
 import { ScrollView } from 'react-native-gesture-handler'
 
@@ -13,50 +13,14 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 function MyReserve(props) {
     const navigation = useNavigation()
-    var swipeoutBtns = [
-      {
-        text: '取消預約',
-        backgroundColor:'red'
-      }
-    ]
-
+   
 
     return (
       <Container>
         <Header title="我的預約"/>
         <Content >
           <ScrollView>
-        <View>
-          <View style={{ padding: 10, borderBottomColor: '#000', borderBottomWidth: 1}}>
-          <Swipeout right={swipeoutBtns} style={{height:60,width:350,backgroundColor:'#fff'}}>
-             <Text style={{fontSize:20,fontWeight:'bold',marginBottom:5}}>2020/10/30</Text>
-                <Text note>大練團室</Text>
-                <Text>
-                <Text note>租借時間：10:00</Text>
-                <Text note>結束時間：13:00</Text>
-                </Text>
-             </Swipeout>
-             </View>
-             <Swipeout right={swipeoutBtns} style={{backgroundColor:'#fff', marginVertical: 50, padding: 10}}>
-             <Text style={{fontSize:20,fontWeight:'bold',marginBottom:5}}>2020/10/30</Text>
-                <Text note>大練團室</Text>
-                <Text>
-                <Text note>租借時間：10:00</Text>
-                <Text note>結束時間：13:00</Text>
-                </Text>
-             </Swipeout>
-
-
-             <Swipeout right={swipeoutBtns} style={{height:60,width:350,backgroundColor:'#fff'}}>
-             <Text style={{fontSize:20,fontWeight:'bold',marginBottom:5}}>2020/10/30</Text>
-                <Text note>大練團室</Text>
-                <Text>
-                <Text note>租借時間：10:00</Text>
-                <Text note>結束時間：13:00</Text>
-                </Text>
-             </Swipeout>
-
-         </View>
+          <Swiptlist/>
          </ScrollView>
 
       </Content>
