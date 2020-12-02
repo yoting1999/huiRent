@@ -1,11 +1,12 @@
+import { Form } from 'native-base'
 import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions,Text, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import routeConfig from '../../constants/route'
 import Colors from '../../styles/Colors'
 // import Header from '../UI/Header'
 import Slide, { SLIDE_HEIGHT } from '../UI/Slide'
-
+import {useNavigation} from '@react-navigation/native'
 const { width } = Dimensions.get("window")
 
 
@@ -66,7 +67,7 @@ const IMG_DATA = [
 ]
 
 function Home() {
-
+  const navigation = useNavigation();
   const [ currentIndex, setCurrentIndex ] = useState(0)
 
   const handleScroll = (e) => {
@@ -97,7 +98,7 @@ function Home() {
           <Text style={styles.label}>{ dummyDATA[currentIndex].name }</Text>
           <Text style={styles.price}>$ { dummyDATA[currentIndex].price } / h</Text>
         </View>
-        <TouchableOpacity onPress={()=>console.log('進預約page')} style={styles.reservationBtn}>
+        <TouchableOpacity onPress={()=> navigation.navigate(routeConfig.Reserve)} style={styles.reservationBtn}>
           <Text style={styles.reservation}>預約</Text>
         </TouchableOpacity>
       </View>

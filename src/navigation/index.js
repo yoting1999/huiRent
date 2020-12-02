@@ -3,7 +3,7 @@ import { Icon } from 'native-base'
 
 import { useSelector } from 'react-redux'
 
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, StackActions } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
@@ -23,12 +23,16 @@ import used from '../components/settings/UsedPoint'
 
 import MyReserve from '../components/MyReserve/MyReserve'
 
+import Reserve from '../components/Home/Reserve'
+import ReserveDate from '../components/Home/ReserveDate'
+
 
 
 // Test
 import SwipeList from '../components/UI/SwipeList'
 
 const HomeStack = createStackNavigator()
+<<<<<<< Updated upstream
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator
@@ -38,10 +42,21 @@ function HomeStackScreen() {
       <HomeStack.Screen name="home" component={Home} />
       <HomeStack.Screen name="roomDetail" component={RoomDetail} />
     </HomeStack.Navigator>
+=======
+ function HomeStackScreen() {
+    return (
+      <HomeStack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}>
+        <HomeStack.Screen name="home" component={Home}/>
+        <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
+        <HomeStack.Screen name="Reserve" component={Reserve}/>
+        <HomeStack.Screen name="ReserveDate" component={ReserveDate}/>
+      </HomeStack.Navigator>
+>>>>>>> Stashed changes
   )
 }
-
-
 const LoginStack = createStackNavigator()
 function LoginStackScreen() {
   return (
@@ -104,6 +119,7 @@ function AppTab() {
           ),
         }}/>
     </Tab.Navigator>
+    
   )
 }
 
@@ -115,7 +131,10 @@ export default function AllRouter() {
         <AppTab/>
         :
         <LoginStackScreen/>
+       
+       
       }
     </NavigationContainer>
+    
   )
 }
