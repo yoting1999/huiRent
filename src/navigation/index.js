@@ -32,17 +32,7 @@ import ReserveDate from '../components/Home/ReserveDate'
 import SwipeList from '../components/UI/SwipeList'
 
 const HomeStack = createStackNavigator()
-<<<<<<< Updated upstream
-function HomeStackScreen() {
-  return (
-    <HomeStack.Navigator
-      screenOptions={{
-        headerShown: false
-      }}>
-      <HomeStack.Screen name="home" component={Home} />
-      <HomeStack.Screen name="roomDetail" component={RoomDetail} />
-    </HomeStack.Navigator>
-=======
+
  function HomeStackScreen() {
     return (
       <HomeStack.Navigator
@@ -54,7 +44,7 @@ function HomeStackScreen() {
         <HomeStack.Screen name="Reserve" component={Reserve}/>
         <HomeStack.Screen name="ReserveDate" component={ReserveDate}/>
       </HomeStack.Navigator>
->>>>>>> Stashed changes
+
   )
 }
 const LoginStack = createStackNavigator()
