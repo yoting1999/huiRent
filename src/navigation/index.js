@@ -17,7 +17,7 @@ import RoomDetail from '../components/Home/Detail'
 import SignUp from '../containers/Login/SignUp'
 import Login from '../containers/Login/Login'
 
-import settings from '../components/settings/settings'
+import settings from '../containers/settings/settings'
 import all from '../components/settings/AllPoints'
 import used from '../components/settings/UsedPoint'
 

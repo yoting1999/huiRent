@@ -1,5 +1,5 @@
 import React from 'react'
-import { AUTH_LOGIN } from '../../actions/auth'
+import { AUTH_LOGIN, AUTH_LOGOUT } from '../../actions/auth'
 
 const initState = {
   login: false,
@@ -11,6 +11,11 @@ const reducer = (state = initState, action) => {
       return {
         login: action.payload
       };
+    }
+    case AUTH_LOGOUT: {
+      return {
+        login: action.payload
+      }
     }
     default:
       return state;

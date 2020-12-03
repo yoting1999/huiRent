@@ -1,5 +1,7 @@
 import { Button, Container, Content, Header, Body, Title, Input, Icon } from 'native-base';
 import React,{useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 import {View, Text,TextInput,StyleSheet, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
@@ -8,6 +10,15 @@ function SignUp(props){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const {signUp} = props
+    const navigation = useNavigation();
+
+    const press = async()=>{
+        return(
+            await signUp(email,password),
+            navigation.navigate('Login')
+        )
+    }
+
     return(
         <Container>
             <Header>
@@ -51,7 +62,7 @@ function SignUp(props){
                     <TextInput placeholder="電子信箱" style={styles.inputstyle} onChangeText={text=>setEmail(text)}/>
                     <TextInput placeholder="密碼" style={styles.inputstyle} secureTextEntry={true} onChangeText={text=>setPassword(text)}/>
                     <TextInput placeholder="再次輸入密碼" style={styles.inputstyle} secureTextEntry={true}/>
-                    <Button block dark onPress={()=>signUp(email,password)}><Text style={{color:"white"}}>送出並註冊</Text></Button>
+                    <Button block dark onPress={()=>press()}><Text style={{color:"white"}}>送出並註冊</Text></Button>
                 </View>
             </Content>
         </Container>

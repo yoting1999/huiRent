@@ -10,6 +10,7 @@ const RATING = 3
 
 function Settings(props) {
     const navigation = useNavigation()
+    const {logout} = props
     return (
       <Container>
         <Header>
@@ -71,7 +72,7 @@ function Settings(props) {
              <Icon name="arrow-forward" />
            </Right>
           </ListItem>
-          <ListItem last >
+          <ListItem last  onPress={logout}>
           <Left>
           <Text>登出</Text>
            </Left>

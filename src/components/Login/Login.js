@@ -37,7 +37,7 @@ function Login(props){
                     block
                     dark
                     style={styles.button}
-                    onPress={login}
+                    onPress={()=>login(email, password)}
                 >
                     <Text style={{color:"#fff"}}>登入</Text>
                 </Button>
