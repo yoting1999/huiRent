@@ -10,6 +10,7 @@ import {
   Image
 } from "react-native";
 
+import Lottery from './Lottery'
 let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height;
 
@@ -30,7 +31,7 @@ function GiftModal(props) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>開發中請見諒！</Text>
-
+              <Lottery></Lottery>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
@@ -41,7 +42,7 @@ function GiftModal(props) {
               
             </TouchableHighlight>
             <Image  resizeMode={"center"} style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', width:300, height:100, backgroundColor:'transparent'}} source={{ uri: 'http://lorempixel.com/1920/1920/cats' }}/>
-
+      
             
           </View>
         </View>
