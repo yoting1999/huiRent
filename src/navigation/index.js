@@ -25,6 +25,7 @@ import MyReserve from '../components/MyReserve/MyReserve'
 
 import Reserve from '../components/Home/Reserve'
 import ReserveDate from '../components/Home/ReserveDate'
+import Coupon from '../components/settings/Coupon'
 
 
 
@@ -69,6 +70,7 @@ function setStackScreen() {
       <setStack.Screen name="settings" component={settings}/>
       <setStack.Screen name="all" component={all}/>
       <setStack.Screen name="used" component={used}/>
+      <setStack.Screen name="Coupon" component={Coupon}/>
     </setStack.Navigator>
   )
 }

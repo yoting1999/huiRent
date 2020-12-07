@@ -19,7 +19,7 @@ function all(props) {
       },}}>
         
               <Text style={styles.title}>已累積點數</Text>
-              <Text style={styles.in}>350</Text>
+              <Text style={styles.in}>400</Text>
             </View>
         
             

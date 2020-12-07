@@ -64,7 +64,7 @@ function Settings(props) {
              <Icon name="arrow-forward" />
            </Right>
           </ListItem>
-          <ListItem last onPress={()=>{}}>
+          <ListItem last onPress={()=>navigation.navigate(routeConfig.Coupon)}>
           <Left>
           <Text>My Coupon</Text>
            </Left>

@@ -17,18 +17,13 @@ const DATA = [
   },
   {
     id: '3',
-    title: '中練團室累積點數',
-    point:'+100',
+    title: '兌換優惠券',
+    point:'-100',
     date:'2020/10/31'
   },
 ];
 
-const Item = ({ title,point }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-    <Text style={styles.title}>{point}</Text>
-  </View>
-);
+
 
 
 
@@ -37,8 +32,8 @@ const App = () => {
   <View style={styles.item}>
     <Text style={styles.title}>{item.title}</Text>
   <Text style={styles.inside}>{item.point}</Text>
-  <Text style={styles.date}>{item.date}</Text>
-  </View>
+  <Text  style={styles.date}>{item.date}</Text>
+  </View> 
     
   );
 
@@ -70,13 +65,13 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    fontSize: 20,
+    fontSize:20,
   },
   date:{
-    fontSize:15,
-    color:'#6b6b6b'
-
-  },
+      fontSize:15,
+      color:'#6b6b6b'
+  }
+  ,
   inside:{
     textAlign:'right',
     fontSize:20
