@@ -8,6 +8,7 @@ import agent from '../../lib/agent';
 
 
 function Login() {
+    const [message,setMessage] = useState("");
     const dispatch = useDispatch()
 
     const login = async(email, password) => {
@@ -19,12 +20,13 @@ function Login() {
             }
         }
         catch(err){
-         console.log('err', err)   
+            setMessage(err)
+            console.log('err', err)   
         }
     }
 
 
-    return <Layout login={login}/>
+    return <Layout login={login} message={message}/>
 }
 
 export default Login;

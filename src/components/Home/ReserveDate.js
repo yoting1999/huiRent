@@ -40,7 +40,8 @@ const DATA = {
     '2020-12-17': {marked: true},
     '2020-12-18': {disabled: true}
   }
-  ]
+  ],
+  
 }
 
 
