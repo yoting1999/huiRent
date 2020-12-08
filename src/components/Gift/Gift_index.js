@@ -4,13 +4,14 @@ import { Container, Right } from 'native-base'
 import Header from '../UI/Header'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import LotteryModal from './LotteryModal';
 import GiftModal from './GiftModal';
 
 const GiftOption = [
     { name: 'pick', costpoint: '5' },
     { name: 'Elixir 包膜弦', costpoint: '50' },
     { name: '全館商品9折卷一張', costpoint: '20' },
-    { name: '小練團室1h使用卷11111', costpoint: '60' },
+    { name: '小練團室1h使用卷1111111', costpoint: '60' },
     { name: '小練團室1h使用卷', costpoint: '60' },
     { name: '小練團室1h使用卷', costpoint: '60' },
 ]
@@ -39,13 +40,16 @@ const NUN_COLUMNS = 2
 //     </View>
 // )
 const renderGift = (data) => (
+    
+
     <View style={styles.flatlistItem}>
+           
         <TouchableOpacity style={styles.itemButton} onPress={() => console.log(data.item.name)}>
         <View style={{flex:4}}>
-            <ImageBackground resizeMode={'cover'} style={styles.center} source={{ uri: 'http://lorempixel.com/1920/1920/cats' }}>
+            <ImageBackground resizeMode={'cover'} style={styles.center} source={require('../../../assets/pick.jpg') }>
             </ImageBackground>
         </View>
-        <View style={{flex:1,backgroundColor: 'blue'}}>
+        <View style={styles.flatlistBox}>
             <Text style={styles.title}>商品：{data.item.name}</Text>
             <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
         </View>
@@ -58,11 +62,15 @@ const renderGift = (data) => (
 
 function Gift_index() {
     const [modalVisible, setModalVisible] = useState(false)
+    const [GiftModalVisible, setGiftModalVisible] = useState(false)
 
     return (
+        
         <Container style={styles.container}>
             <Header title="點數兌換" />
-
+            <GiftModal
+    GiftModalVisible={GiftModalVisible}
+    setGiftModalVisible={setGiftModalVisible}></GiftModal>
 
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -75,9 +83,9 @@ function Gift_index() {
 
                     <View style={styles.topRightItem}>
                         <Text style={styles.Content}>目前可用點數：20</Text>
-                        <GiftModal
+                        <LotteryModal
                             modalVisible={modalVisible}
-                            setModalVisible={setModalVisible}></GiftModal>
+                            setModalVisible={setModalVisible}></LotteryModal>
                     </View>
                 </View>
                 <View style={{ flex: 6, flexDirection: 'row' }}>
@@ -111,7 +119,14 @@ const styles = StyleSheet.create({
         // borderWidth: 3,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        overflow: 'hidden'
+        overflow: 'visible',
+        },
+    flatlistBox:{
+        flex:1,
+        overflow:'hidden',
+        alignItems:'center',
+        padding:20  ,
+        // backgroundColor:'red'
     },
     topLiftItem: {
         flex: 3,

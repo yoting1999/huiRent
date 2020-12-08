@@ -6,12 +6,12 @@ function Lottery(props) {
 
     const spinValue = new Animated.Value(0);
 
-    const circle = () => {
+    const circle_start = () => {
     Animated.loop( Animated.timing(
             spinValue,
             {
                 toValue: 1,
-                duration: 100,
+                duration:1000,
                 easing: Easing.linear, // Easing is an additional import from react-native
                 useNativeDriver: true  // To make use of native driver for performance
             }
@@ -23,21 +23,7 @@ function Lottery(props) {
         inputRange: [0, 1],
         outputRange: ['0deg', '360deg']
     })
-    const fadeIn = () => {
-        // Will change fadeAnim value to 1 in 5 seconds
-        Animated.timing(fadeAnim, {
-            toValue: 1,
-            duration: 1000,
-        }).start();
-    };
-
-    const fadeOut = () => {
-        // Will change fadeAnim value to 0 in 5 seconds
-        Animated.timing(fadeAnim, {
-            toValue: 0,
-            duration: 1000,
-        }).start();
-    };
+  
 
     return (
         <View style={styles.container}>
@@ -45,20 +31,10 @@ function Lottery(props) {
              style={{transform: [{rotate:spin}] }}
              source={require('./imgs/circle_bg.png')} />
 <View style={styles.buttonRow}>
-                <Button title='circle' onPress={circle}></Button>
-                <Button title="Fade In" onPress={fadeIn} />
-                <Button title="Fade Out" onPress={fadeOut} />
+                <Button title='點我開始抽獎' onPress={circle_start}></Button>
+    
             </View>
-        <Animated.View
-                style={[
-                    styles.fadingContainer,
-                    {
-                        opacity: fadeAnim, // Bind opacity to animated value
-                    },
-                ]}>
-                <Text style={styles.fadingText}>Fading View!</Text>
-            </Animated.View>
-            
+
         </View>
     );
 }
