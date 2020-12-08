@@ -17,11 +17,12 @@ const DATA = [
   },
   {
     id: '3',
-    title: '中練團室累積點數',
-    point:'+100',
+    title: '兌換優惠券',
+    point:'-100',
     date:'2020/10/31'
   },
 ];
+
 
 
 
@@ -34,9 +35,10 @@ const App = () => {
   <Text style={styles.inside}>{item.point}</Text>
   </View>
   <View style={styles.item2}>
-  <Text style={styles.date}>{item.date}</Text>
-  </View>
-    </React.Fragment>
+  <Text  style={styles.date}>{item.date}</Text>
+  </View> 
+  </React.Fragment>
+    
   );
 
   return (
@@ -73,13 +75,13 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    fontSize: 20,
+    fontSize:20,
   },
   date:{
-    fontSize:15,
-    color:'#6b6b6b'
-
-  },
+      fontSize:15,
+      color:'#6b6b6b',
+  }
+  ,
   inside:{
     textAlign:'right',
     fontSize:20

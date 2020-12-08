@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text, Pressable,FlatList } from 'react-native'
 import { Container, Content } from 'native-base'
-
+import Dash from 'react-native-dash'
 import SwipeableFlatList from 'react-native-swipeable-list';
 import Colors from '../../styles/Colors';
 
@@ -13,34 +13,37 @@ const DATA = [
     title: '2020/10/30',
     time1:'13:30',
     time2:'15:30',
-    room:'大練團室'
+    room:'中練團室',
+    uri:'https://static.wixstatic.com/media/eccb17_676bf61b62ce44de82155a6d23207f42.jpg/v1/fill/w_363,h_288,al_c,q_80,usm_0.66_1.00_0.01/eccb17_676bf61b62ce44de82155a6d23207f42.webp'
 
   },
   {
     id: '2',
-    title: '2020/10/30',
-    time1:'13:30',
-    time2:'15:30',
-    room:'大練團室'
+    title: '2020/10/31',
+    time1:'14:30',
+    time2:'16:30',
+    room:'小練團室',
+    uri:'https://static.wixstatic.com/media/eccb17_676bf61b62ce44de82155a6d23207f42.jpg/v1/fill/w_363,h_288,al_c,q_80,usm_0.66_1.00_0.01/eccb17_676bf61b62ce44de82155a6d23207f42.webp'
   },
   {
     id: '3',
-    title: '2020/10/30',
-    time1:'13:30',
-    time2:'15:30',
-    room:'大練團室'
+    title: '2020/11/30',
+    time1:'12:00',
+    time2:'15:00',
+    room:'鼓室',
+    uri:'https://static.wixstatic.com/media/eccb17_676bf61b62ce44de82155a6d23207f42.jpg/v1/fill/w_363,h_288,al_c,q_80,usm_0.66_1.00_0.01/eccb17_676bf61b62ce44de82155a6d23207f42.webp'
   },
 ];
 
 const QuickActions = (index, qaItem) => {
   return (
     <View style={styles.qaContainer}>
-      <View style={[styles.button, { backgroundColor: 'green' }]}>
+      <View style={[styles.button, { backgroundColor: '#445877' }]}>
         <Pressable onPress={() => console.log('hey')}>
           <Text style={styles.buttonText}>修改</Text>
         </Pressable>
       </View>
-      <View style={styles.button}>
+      <View style={[styles.button,{backgroundColor:'red'}]}>
         <Pressable onPress={() => console.log('hey')}>
           <Text style={styles.buttonText}>刪除</Text>
         </Pressable>
@@ -60,9 +63,11 @@ const QuickActions = (index, qaItem) => {
 };
 const renderItem = ({ item }) => (
   <View style={styles.item}>
-    <Text>{item.title}</Text>
-  <Text>{item.time1}~{item.time2}</Text>
-  <Text>{item.room}</Text>
+    <Text style={styles.date}>{item.title}      {item.time1}~{item.time2}</Text>
+    <Dash dashColor='rgb(215, 195, 217)'></Dash>
+  <Text style={styles.rooms}>{item.room}</Text>
+  
+  
   </View>
     
   );
@@ -94,7 +99,9 @@ const styles = StyleSheet.create({
     height: 80,
     padding: 10,
     borderBottomColor: '#eee',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    
+    
   },
 
   //item和item之間
@@ -119,7 +126,21 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: 'bold',
     color: '#fff',
+  },
+  date:{
+    fontSize:18,
+    color:'#6b6b6b',
+  },
+  rooms:{
+    fontSize:25,
+    textAlign:'center',
+    marginTop:10
+   },
+  times:{
+    fontSize:15,
+    color:'#6b6b6b'
   }
+
 })
 
 export default SwipeList

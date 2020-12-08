@@ -9,6 +9,8 @@ export default {
   MyReserve:'MyReserve',
   used:'used',
   all:'all',
-  ReserveDate:'ReserveDate'
+  ReserveDate:'ReserveDate',
+  Coupon:'Coupon',
+  Email:'Email'
 
 }

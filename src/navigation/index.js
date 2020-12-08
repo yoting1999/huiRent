@@ -25,11 +25,14 @@ import MyReserve from '../components/MyReserve/MyReserve'
 
 import Reserve from '../components/Home/Reserve'
 import ReserveDate from '../components/Home/ReserveDate'
+import Coupon from '../components/settings/Coupon'
+import Email from '../components/settings/Email'
 
 
 
 // Test
 import SwipeList from '../components/UI/SwipeList'
+
 
 const HomeStack = createStackNavigator()
 
@@ -69,6 +72,8 @@ function setStackScreen() {
       <setStack.Screen name="settings" component={settings}/>
       <setStack.Screen name="all" component={all}/>
       <setStack.Screen name="used" component={used}/>
+      <setStack.Screen name="Coupon" component={Coupon}/>
+      <setStack.Screen name="Email" component={Email}/>
     </setStack.Navigator>
   )
 }
