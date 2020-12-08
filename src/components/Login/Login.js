@@ -6,7 +6,7 @@ import route from '../../constants/route';
 
 
 function Login(props){
-    const { login } = props
+    const { login,message } = props
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigation = useNavigation();
@@ -34,6 +34,7 @@ function Login(props){
                     secureTextEntry={true}
                     onChangeText={text=>setPassword(text)}
                 />
+                {(message)?<Text style={styles.text}>未輸入帳號、密碼或輸入錯誤！</Text>:<Text> </Text>}
                 <Button
                     block
                     dark
@@ -47,7 +48,7 @@ function Login(props){
                     style={{alignSelf:'center'}}
                     onPress={()=>navigation.navigate(route.SignUp)}
                 >
-                <Text style={{color:"#86BBD8"}}>註冊</Text>
+                    <Text style={{color:"#5ca4cc"}}>註冊</Text>
             </Button>
             </View>
         </Content>
@@ -75,6 +76,10 @@ const styles = StyleSheet.create({
     },
     button:{
         padding:10,
+    },
+    text: {
+        color:"#eb4034",
+        marginBottom:12
     }
 })
 
