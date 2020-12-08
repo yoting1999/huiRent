@@ -10,9 +10,10 @@ const RATING = 3
 
 function Settings(props) {
     const navigation = useNavigation()
+    const {logout} = props
     return (
       <Container>
-        <Header>
+        <Header title='設定'>
           </Header>
         <Content>
 
@@ -38,7 +39,7 @@ function Settings(props) {
               </Body>
               <Right>
                 <TouchableOpacity>
-                  <Text style={{backgroundColor:'#445877',fontSize:20,color:'#fff', padding: 10}}>編輯</Text>
+                  <Text style={{backgroundColor:'rgb(215, 195, 217)',fontSize:20,color:'#fff', padding: 10}}>編輯</Text>
                 </TouchableOpacity>
               </Right>
 
@@ -63,7 +64,7 @@ function Settings(props) {
              <Icon name="arrow-forward" />
            </Right>
           </ListItem>
-          <ListItem last onPress={()=>{}}>
+          <ListItem last onPress={()=>navigation.navigate(routeConfig.Coupon)}>
           <Left>
           <Text>My Coupon</Text>
            </Left>
@@ -71,7 +72,15 @@ function Settings(props) {
              <Icon name="arrow-forward" />
            </Right>
           </ListItem>
-          <ListItem last >
+          <ListItem last onPress={()=>navigation.navigate(routeConfig.Email)}>
+          <Left>
+          <Text>編輯信箱</Text>
+           </Left>
+            <Right>
+             <Icon name="arrow-forward" />
+           </Right>
+          </ListItem>
+          <ListItem last  onPress={logout}>
           <Left>
           <Text>登出</Text>
            </Left>
