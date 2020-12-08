@@ -10,6 +10,7 @@ export default {
   used:'used',
   all:'all',
   ReserveDate:'ReserveDate',
-  Coupon:'Coupon'
+  Coupon:'Coupon',
+  Email:'Email'
 
 }

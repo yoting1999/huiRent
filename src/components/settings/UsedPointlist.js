@@ -29,11 +29,15 @@ const DATA = [
 
 const App = () => {
   const renderItem = ({ item }) => (
+    <React.Fragment>
   <View style={styles.item}>
     <Text style={styles.title}>{item.title}</Text>
   <Text style={styles.inside}>{item.point}</Text>
+  </View>
+  <View style={styles.item2}>
   <Text  style={styles.date}>{item.date}</Text>
   </View> 
+  </React.Fragment>
     
   );
 
@@ -56,12 +60,18 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: '#fff',
-    marginBottom:20,
     marginLeft:5,
-    padding:30,
+    padding:10,
     flexDirection:'row',
     justifyContent: 'space-between',
     alignItems:'center'
+    
+
+  },
+  item2:{
+    marginBottom:10,
+    marginLeft:5,
+    padding:10,
 
   },
   title: {
@@ -69,7 +79,7 @@ const styles = StyleSheet.create({
   },
   date:{
       fontSize:15,
-      color:'#6b6b6b'
+      color:'#6b6b6b',
   }
   ,
   inside:{
