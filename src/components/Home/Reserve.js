@@ -57,11 +57,9 @@ function Reserve(props) {
                 
       </View>
 
-      <View style={{paddingTop:25}}>
+      <View style={styles.calendar}>
       <Text style={styles.fontdate} >*請選擇日期</Text>
-      </View>
-      
-      <Calendar
+      <Calendar 
   // Initially visible month. Default = Date()
   current={date}
   markedDates={{
@@ -85,12 +83,14 @@ function Reserve(props) {
   renderHeader={(date) => <Text>{date.getMonth()+1} / {date.getFullYear()}</Text>}
   enableSwipeMonths={true}
 />
+</View>
 <Text style={{borderWidth: 2,
     borderColor: '#eee',
     alignContent: "center",
     fontSize:16,
-    fontWeight:'bold',}}>可預約時段</Text>
-<Text>*灰色表示該時段已被預訂，可點選檢視其他可預約日期</Text>
+    fontWeight:'bold',
+    padding:30}}>*可預約時段</Text>
+<Text style={{padding:20}}>*灰色表示該時段已被預訂，可點選檢視其他可預約日期</Text>
 {/* <Text>{date}</Text> */}
    <View style={styles.button}>
    <Button light ><Text style={styles.buttontext}>9:00~10:00</Text></Button>
@@ -139,25 +139,25 @@ function Reserve(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 5,
+    padding:10,
     alignItems: "center",
     flexDirection:'row',
     borderWidth: 2,
     borderColor: '#eee',
-    
+     
   },
   font:{
     fontSize:16,
     fontWeight:'bold',
     marginBottom:6,
-    
+    padding:30
     
   },
   fontdate:{
     fontSize:16,
     fontWeight:'bold',
     marginBottom:20,
-    
+    padding:10
     
   },
   button:{
@@ -166,7 +166,6 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-around',
     alignItems: 'center',
-   
     
   },
   buttontext:{
@@ -179,6 +178,10 @@ const styles = StyleSheet.create({
     borderColor: '#eee',
     justifyContent:'center',
     alignContent: "center",
+  },
+  calendar:{
+    padding:35,
+
   }
   
 });
