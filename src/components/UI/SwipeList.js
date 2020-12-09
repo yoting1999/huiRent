@@ -10,7 +10,9 @@ import Header from './Header'
 const DATA = [
   {
     id: '1',
-    title: '2020/10/30',
+    title: '10',
+    title2:'30',
+    title3:'2020',
     time1:'13:30',
     time2:'15:30',
     room:'中練團室',
@@ -19,7 +21,9 @@ const DATA = [
   },
   {
     id: '2',
-    title: '2020/10/31',
+    title: '10',
+    title2:'30',
+    title3:'2020',
     time1:'14:30',
     time2:'16:30',
     room:'小練團室',
@@ -27,7 +31,9 @@ const DATA = [
   },
   {
     id: '3',
-    title: '2020/11/30',
+    title: '10',
+    title2:'30',
+    title3:'2020',
     time1:'12:00',
     time2:'15:00',
     room:'鼓室',
@@ -45,7 +51,7 @@ const QuickActions = (index, qaItem) => {
       </View>
       <View style={[styles.button,{backgroundColor:'red'}]}>
         <Pressable onPress={() => console.log('hey')}>
-          <Text style={styles.buttonText}>刪除</Text>
+          <Text style={styles.buttonText}>取消</Text>
         </Pressable>
       </View>
       {/* <View style={[styles.button, styles.button2]}>
@@ -63,10 +69,16 @@ const QuickActions = (index, qaItem) => {
 };
 const renderItem = ({ item }) => (
   <View style={styles.item}>
-    <Text style={styles.date}>{item.title}      {item.time1}~{item.time2}</Text>
-    <Dash dashColor='rgb(215, 195, 217)'></Dash>
+    <View style={{flexDirection:'column',flex:1}}>
+    <Text style={styles.date}>{item.title}月</Text>
+    <Text style={styles.date2}>{item.title2}</Text>
+    <Text style={styles.date}>{item.title3}</Text>
+    
+    </View>
+    <View style={styles.item2}>
+    <Text style={styles.times}>{item.time1}~{item.time2}</Text>
   <Text style={styles.rooms}>{item.room}</Text>
-  
+  </View>
   
   </View>
     
@@ -96,10 +108,23 @@ const styles = StyleSheet.create({
   // list每一個item
   item: {
     backgroundColor:'#fff',
-    height: 80,
+    height: 100,
     padding: 10,
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
+    flexDirection:'row',
+    flex:1
+    
+    
+  },
+  item2: {
+   
+    height: 80,
+    padding: 10,
+    borderBottomColor: '#eee',
+    flexDirection:'column',
+    flex:2,
+    alignItems:'center'
     
     
   },
@@ -107,7 +132,7 @@ const styles = StyleSheet.create({
   //item和item之間
   itemSeparator: {
     height: StyleSheet.hairlineWidth,
-    backgroundColor: '#ccc'
+    backgroundColor: '#ccc',
   },
 
   // 左滑(底下)的container
@@ -130,10 +155,17 @@ const styles = StyleSheet.create({
   date:{
     fontSize:18,
     color:'#6b6b6b',
+    textAlign:'center'
+  },
+  date2:{
+    fontSize:30,
+    color:'#6b6b6b',
+    textAlign:'center',
+    fontWeight:'bold'
+
   },
   rooms:{
     fontSize:25,
-    textAlign:'center',
     marginTop:10
    },
   times:{
