@@ -10,19 +10,20 @@ import {
   Image
 } from "react-native";
 
+import Lottery from './Lottery'
 let width=Dimensions.get("window").width;
-let height=Dimensions.get("window").height*0.3;
+let height=Dimensions.get("window").height;
 
 function GiftModal(props) {
-    const { GiftModalVisible, setGiftModalVisible} = props
+    const { modalVisible, setModalVisible} = props
 
   return (
       <Modal
         animationType="slide"
         transparent={true}
-        visible={GiftModalVisible}
+        visible={modalVisible}
         onRequestClose={() => {
-          setGiftModalVisible(false)
+          setModalVisible(false)
         }
         
     }
@@ -33,11 +34,15 @@ function GiftModal(props) {
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
-                setGiftModalVisible(!GiftModalVisible);
+                setModalVisible(!modalVisible);
               }}
             >
               <Text style={styles.textStyle}>隱藏</Text>
-            </TouchableHighlight>   
+              
+            </TouchableHighlight>    
+              <Lottery></Lottery>
+              
+            
           </View>
         </View>
       </Modal>
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: "skyblue",
     borderRadius: 20,
     width:width,
     height:height,
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   openButton: {
-    backgroundColor: "black",
+    backgroundColor: "#F194FF",
     borderRadius: 20,
     padding: 10,
     elevation: 2
