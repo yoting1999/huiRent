@@ -29,7 +29,9 @@ import Coupon from '../components/settings/Coupon'
 import Email from '../components/settings/Email'
 
 
-
+// QrCode
+import QrCode from '../components/QRcode/QrCode'
+import Scanner from '../components/QRcode/Scanner'
 // Test
 import SwipeList from '../components/UI/SwipeList'
 
@@ -114,7 +116,7 @@ function AppTab() {
           ),
         }}/>
     </Tab.Navigator>
-    
+
   )
 }
 
@@ -122,14 +124,14 @@ export default function AllRouter() {
   const login = useSelector(state=>state.authReducer.login)
   return (
     <NavigationContainer>
-      {login ?
+      {!login ?
         <AppTab/>
         :
         <LoginStackScreen/>
-       
-       
+
+
       }
     </NavigationContainer>
-    
+
   )
 }
