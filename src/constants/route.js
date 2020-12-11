@@ -8,6 +8,8 @@ export default {
   ReserveConfirm: 'ReserveConfirm',
   settings:'settings',
   MyReserve:'MyReserve',
+  qrcode: 'qrcode',
+  scanner: 'scanner',
   used:'used',
   all:'all',
   ReserveDate:'ReserveDate',

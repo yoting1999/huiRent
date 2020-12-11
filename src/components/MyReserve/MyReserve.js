@@ -8,22 +8,22 @@ import routeConfig from '../../constants/route'
 import Swiptlist from '../UI/SwipeList';
 import { color } from 'react-native-reanimated'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import Spinner from 'react-native-loading-spinner-overlay'
 
 
 function MyReserve(props) {
     const navigation = useNavigation()
-   
+    const { reserveData, isLoading } = props
 
     return (
       <Container>
         <Header title="我的預約"/>
         <Content >
           <ScrollView>
-          <Swiptlist/>
-         </ScrollView>
-
-      </Content>
+            <Swiptlist reserveData={reserveData}/>
+          </ScrollView>
+        </Content>
+      <Spinner visible={isLoading}/>
       </Container>
 
     )

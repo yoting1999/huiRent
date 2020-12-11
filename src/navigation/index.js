@@ -21,7 +21,7 @@ import settings from '../containers/settings/settings'
 import all from '../components/settings/AllPoints'
 import used from '../components/settings/UsedPoint'
 
-import MyReserve from '../components/MyReserve/MyReserve'
+import MyReserve from '../containers/MyReserve/MyReserve'
 
 import Reserve from '../containers/Home/Reserve'
 import ReserveConfirm from '../containers/Home/ReserveConfirm'
@@ -83,6 +83,21 @@ function setStackScreen() {
   )
 }
 
+const ReserveStack = createStackNavigator()
+function ReserveStackScreen() {
+  return (
+    <ReserveStack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}>
+
+      <ReserveStack.Screen name="MyReserve" component={MyReserve}/>
+      <ReserveStack.Screen name="qrcode" component={QrCode}/>
+      <ReserveStack.Screen name="scanner" component={Scanner}/>
+    </ReserveStack.Navigator>
+  )
+}
+
 const Tab = createBottomTabNavigator()
 
 function AppTab() {
@@ -100,7 +115,7 @@ function AppTab() {
           ),
         }}/>
 
-    <Tab.Screen name="calendar" component={MyReserve}
+    <Tab.Screen name="calendar" component={ReserveStackScreen}
       options={{
           tabBarIcon: ({color}) => (
             <Icon type="FontAwesome5" name="calendar" style={[GeneralStyles.iconStyle, { color: color }]}/>
