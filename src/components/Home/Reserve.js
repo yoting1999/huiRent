@@ -16,9 +16,9 @@ function Reserve(props) {
   //const [selectedValue, setSelectedValue] = useState("BIG");
   const[items,setItems] =useState({});
   const [date, setDate] = useState('2020-12-02')
-      
+
   const [room, setRoom] = useState('BIG');
-  
+
 
   return (
     <Container>
@@ -26,7 +26,7 @@ function Reserve(props) {
       <Content>
       <View style={styles.container}>
       <Text style={styles.font} >*請選擇團室</Text>
-      
+
       {/* <Picker
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
@@ -47,19 +47,19 @@ function Reserve(props) {
         selectedValue={room}
         style={{height: 60, width: 150, borderColor: 'black'}}
         onValueChange={itemValue => setRoom(itemValue)}>
-       <Picker.Item label="大練團室" value="BIG" />
+        <Picker.Item label="大練團室" value="BIG" />
         <Picker.Item label="中練團室" value="MEDIUM" />
         <Picker.Item label="小練團室" value="LITTLE" />
         <Picker.Item label="鼓室" value="3" />
-      
+
       </Picker>
-      
-                
+
+
       </View>
 
       <View style={styles.calendar}>
       <Text style={styles.fontdate} >*請選擇日期</Text>
-      <Calendar 
+      <Calendar
   // Initially visible month. Default = Date()
   current={date}
   markedDates={{
@@ -97,41 +97,41 @@ function Reserve(props) {
      <Button light><Text style={styles.buttontext}>10:00~11:00</Text></Button>
      <Button light><Text style={styles.buttontext}>11:00~12:00</Text></Button>
      <Button light><Text style={styles.buttontext}>12:00~13:00</Text></Button>
-    
-     </View> 
+
+     </View>
      <View style={styles.button}>
      <Button light><Text style={styles.buttontext}>13:00~14:00</Text></Button >
      <Button light><Text style={styles.buttontext}>14:00~15:00</Text></Button>
      <Button light><Text style={styles.buttontext}>15:00~16:00</Text></Button>
      <Button light><Text style={styles.buttontext}>16:00~17:00</Text></Button>
-     </View> 
+     </View>
      <View style={styles.button}>
      <Button light><Text style={styles.buttontext}>17:00~18:00</Text></Button>
      <Button light><Text style={styles.buttontext}>18:00~19:00</Text></Button>
      <Button light><Text style={styles.buttontext}>19:00~20:00</Text></Button>
      <Button light><Text style={styles.buttontext}>20:00~21:00</Text></Button>
-     </View> 
-    
-      
-      {/* <View 
-          style={{  
+     </View>
+
+
+      {/* <View
+          style={{
           margin: 12,
           alignSelf: 'flex-end',
           backgroundColor: Colors.primary,
-          width: 80, 
-          height: 80, 
+          width: 80,
+          height: 80,
           borderRadius: 40,
-          alignItems: 'center', 
+          alignItems: 'center',
           justifyContent: 'center'
           }}>
-        <Icon style={styles.botton} 
-        onPress={()=> navigation.navigate(routeConfig.ReserveDate,{selectedValue: selectedValue})} 
+        <Icon style={styles.botton}
+        onPress={()=> navigation.navigate(routeConfig.ReserveDate,{selectedValue: selectedValue})}
         type="FontAwesome5" name="arrow-right" />
       </View> */}
       </Content>
     </Container>
   );
-  
+
 };
 
 
@@ -144,21 +144,21 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     borderWidth: 2,
     borderColor: '#eee',
-     
+
   },
   font:{
     fontSize:16,
     fontWeight:'bold',
     marginBottom:6,
     padding:30
-    
+
   },
   fontdate:{
     fontSize:16,
     fontWeight:'bold',
     marginBottom:20,
     padding:10
-    
+
   },
   button:{
     margin: 20,
@@ -166,12 +166,12 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-around',
     alignItems: 'center',
-    
+
   },
   buttontext:{
     color: '#fff',
     justifyContent:'space-around'
-    
+
   },
   border:{
     borderWidth: 2,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     padding:35,
 
   }
-  
+
 });
 
 

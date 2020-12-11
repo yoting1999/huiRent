@@ -9,7 +9,7 @@ import * as FirebaseCore from 'expo-firebase-core';
 function SignUp(){
     const { People } = agent
     const database = async(name,date,email) =>{
-        await People.addPeople({
+        await People.addPeople(firebase.auth().currentUser.uid,{
             name:name,
             date:date,
             email:email,
@@ -27,7 +27,7 @@ function SignUp(){
         catch(error){
             console.log('err', error)
         }
-      }   
+      }
     return <Layout signUp={signUp} database={database}/>
 }
 

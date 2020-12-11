@@ -24,7 +24,7 @@ export default function Scanner() {
     return <Text>取得相機權限</Text>;
   }
   if (hasPermission === false) {
-    return <Text>沒有連結至香雞</Text>;
+    return <Text>沒有連結至相機</Text>;
   }
 
   return (

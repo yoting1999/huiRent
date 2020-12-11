@@ -23,7 +23,7 @@ import used from '../components/settings/UsedPoint'
 
 import MyReserve from '../components/MyReserve/MyReserve'
 
-import Reserve from '../components/Home/Reserve'
+import Reserve from '../containers/Home/Reserve'
 import ReserveDate from '../components/Home/ReserveDate'
 import Coupon from '../components/settings/Coupon'
 import Email from '../components/settings/Email'
@@ -124,7 +124,7 @@ export default function AllRouter() {
   const login = useSelector(state=>state.authReducer.login)
   return (
     <NavigationContainer>
-      {!login ?
+      {login ?
         <AppTab/>
         :
         <LoginStackScreen/>

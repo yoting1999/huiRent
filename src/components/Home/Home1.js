@@ -1,24 +1,33 @@
-import { Form } from 'native-base'
 import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions,Text, TouchableOpacity } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
-import routeConfig from '../../constants/route'
-import Colors from '../../styles/Colors'
-// import Header from '../UI/Header'
-import Slide, { SLIDE_HEIGHT } from '../UI/Slide'
 import {useNavigation} from '@react-navigation/native'
+import { ScrollView } from 'react-native-gesture-handler'
+
+import Slide, { SLIDE_HEIGHT } from '../UI/Slide'
+import routeConfig from '../../constants/route'
+import ROOMS from '../../constants/rooms'
+import Colors from '../../styles/Colors'
+
 const { width } = Dimensions.get("window")
 
-import ROOMS from '../../constants/rooms'
 
-
-function Home() {
+function Home(props) {
   const navigation = useNavigation();
+  const { isLoading, userInfo } = props
   const [ currentIndex, setCurrentIndex ] = useState(0)
 
   const handleScroll = (e) => {
     const index = Math.round(e.nativeEvent.contentOffset.x / width);
     setCurrentIndex(index)
+  }
+
+  // loading bar (install the lib)
+  if (isLoading) {
+    return (
+      <Text>
+        isLoading
+      </Text>
+    )
   }
 
   return (
@@ -52,6 +61,7 @@ function Home() {
         <View style={styles.footer}>
           <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0, .9)'}} />
           <View style={{ flex: 1,backgroundColor: '#fff', borderTopLeftRadius: 75}}>
+          <Text style={{ fontSize: 50, padding: 10 }}>TEST : {userInfo && userInfo.name}</Text>
           <Text style={styles.brand}>©2020 HUIRENT</Text>
         </View>
       </View>
