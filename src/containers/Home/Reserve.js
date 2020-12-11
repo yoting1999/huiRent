@@ -1,19 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+
 import Layout from '../../components/Home/Reserve'
-import * as firebase from 'firebase';
+import agent from '../../lib/agent'
+import dayjs from 'dayjs'
+const TODAY = dayjs().format('YYYY-MM-DD')
 
 function Reserve() {
-  const users = firebase.auth().currentUser
-  console.log('users', users)
-  const addReserve = () => {
-    try {
+  const { Reserve } = agent
 
-    }catch(err) {
+  const userInfo = useSelector(state=>state.authReducer.userInfo)
+  const [reserveData, setReserveDate] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const getReserves = async(dateTime = TODAY, room = 'BIG') => {
+    setIsLoading(true)
+    try {
+      const res = await Reserve.getReserve()
+      console.log('res', res)
+      const data = Object.values(res.data).filter((item)=>item.date === dateTime && item.room === room)
+      console.log('data', data)
+      setReserveDate(data)
+      setIsLoading(false)
+    } catch(err){
       console.log('err', err)
     }
   }
 
-  return <Layout addReserve={addReserve}/>
+  useEffect(()=>{
+    getReserves()
+  }, [])
+
+  return <Layout userInfo={userInfo} getReserves={getReserves} reserveData={reserveData} isLoading={isLoading}/>
 }
 
 export default Reserve

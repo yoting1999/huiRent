@@ -10,7 +10,13 @@ const People = {
   getPeople: (uid) => axios.get(`https://huirent-72fd3.firebaseio.com/people/${uid}.json`),
 }
 
+const Reserve = {
+  addReserve: (body) => axios.post('https://huirent-72fd3.firebaseio.com/reserves.json', body),
+  getReserve: () => axios.get('https://huirent-72fd3.firebaseio.com/reserves.json')
+}
+
 export default agent = {
   Rooms,
-  People
+  People,
+  Reserve
 }

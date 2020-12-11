@@ -1,4 +1,4 @@
-export default ROOMS = [
+export const ROOMS = [
   {
     name: '大練團室',
     price: 400,
@@ -45,4 +45,26 @@ export default ROOMS = [
       {type: '監聽', equipment: ['Lem k6 300w'] },
     ]
   }
+]
+
+export const ALIANS = {
+  'BIG': '大練團室',
+  'MEDIUM': '中練團室',
+  'SMALL': '小練團室',
+  'DRUM': '鼓室',
+}
+
+export const TIME = [
+  {tag: 'A', time: '9:00-10:00'},
+  {tag: 'B', time: '10:00-11:00'},
+  {tag: 'C', time: '12:00-13:00'},
+  {tag: 'D', time: '13:00-14:00'},
+  {tag: 'E', time: '14:00-15:00'},
+  {tag: 'F', time: '15:00-16:00'},
+  {tag: 'G', time: '16:00-17:00'},
+  {tag: 'H', time: '17:00-18:00'},
+  {tag: 'I', time: '18:00-19:00'},
+  {tag: 'J', time: '19:00-20:00'},
+  {tag: 'K', time: '20:00-21:00'},
+  {tag: 'L', time: '21:00-22:00'},
 ]

@@ -24,6 +24,8 @@ import used from '../components/settings/UsedPoint'
 import MyReserve from '../components/MyReserve/MyReserve'
 
 import Reserve from '../containers/Home/Reserve'
+import ReserveConfirm from '../containers/Home/ReserveConfirm'
+
 import ReserveDate from '../components/Home/ReserveDate'
 import Coupon from '../components/settings/Coupon'
 import Email from '../components/settings/Email'
@@ -47,6 +49,7 @@ const HomeStack = createStackNavigator()
         <HomeStack.Screen name="home" component={Home}/>
         <HomeStack.Screen name="roomDetail" component={RoomDetail}/>
         <HomeStack.Screen name="Reserve" component={Reserve}/>
+        <HomeStack.Screen name="ReserveConfirm" component={ReserveConfirm}/>
         <HomeStack.Screen name="ReserveDate" component={ReserveDate}/>
       </HomeStack.Navigator>
 

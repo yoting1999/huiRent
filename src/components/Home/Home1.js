@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions,Text, TouchableOpacity } from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import { ScrollView } from 'react-native-gesture-handler'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import Slide, { SLIDE_HEIGHT } from '../UI/Slide'
 import routeConfig from '../../constants/route'
-import ROOMS from '../../constants/rooms'
+import { ROOMS } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
 
 const { width } = Dimensions.get("window")
@@ -19,15 +20,6 @@ function Home(props) {
   const handleScroll = (e) => {
     const index = Math.round(e.nativeEvent.contentOffset.x / width);
     setCurrentIndex(index)
-  }
-
-  // loading bar (install the lib)
-  if (isLoading) {
-    return (
-      <Text>
-        isLoading
-      </Text>
-    )
   }
 
   return (
@@ -65,6 +57,7 @@ function Home(props) {
           <Text style={styles.brand}>©2020 HUIRENT</Text>
         </View>
       </View>
+      <Spinner visible={isLoading}/>
     </View>
   )
 }
