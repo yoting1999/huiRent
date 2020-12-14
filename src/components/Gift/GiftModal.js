@@ -14,7 +14,7 @@ let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height*0.3;
 
 function GiftModal(props) {
-    const { GiftModalVisible, setGiftModalVisible} = props
+    const { GiftModalVisible, setGiftModalVisible,data} = props
 
   return (
       <Modal
@@ -29,7 +29,7 @@ function GiftModal(props) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>開發中請見諒！</Text>
+            <Text style={styles.modalText}>{data}</Text>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {

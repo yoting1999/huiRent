@@ -39,12 +39,21 @@ const NUN_COLUMNS = 2
 
 //     </View>
 // )
-const renderGift = (data) => (
-    
 
+
+
+
+function Gift_index() {
+    const [modalVisible, setModalVisible] = useState(false)
+    const [GiftModalVisible, setGiftModalVisible] = useState(false)
+
+    const renderGift = (data) => (  
+
+    
+       
     <View style={styles.flatlistItem}>
-           
-        <TouchableOpacity style={styles.itemButton} onPress={() => console.log(data.item.name)}>
+            
+        <TouchableOpacity style={styles.itemButton} onPress={() => setGiftModalVisible(true)}>
         <View style={{flex:4}}>
             <ImageBackground resizeMode={'cover'} style={styles.center} source={require('../../../assets/pick.jpg') }>
             </ImageBackground>
@@ -54,23 +63,19 @@ const renderGift = (data) => (
             <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
         </View>
         </TouchableOpacity>
+        <GiftModal
+        GiftModalVisible={GiftModalVisible}
+        setGiftModalVisible={setGiftModalVisible}
+        data={data.item.name}></GiftModal>
     </View>
     
 )
-
-
-
-function Gift_index() {
-    const [modalVisible, setModalVisible] = useState(false)
-    const [GiftModalVisible, setGiftModalVisible] = useState(false)
 
     return (
         
         <Container style={styles.container}>
             <Header title="點數兌換" />
-            <GiftModal
-    GiftModalVisible={GiftModalVisible}
-    setGiftModalVisible={setGiftModalVisible}></GiftModal>
+           
 
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -102,6 +107,7 @@ function Gift_index() {
     )
 
 }
+
 const styles = StyleSheet.create({
 
     container: {
