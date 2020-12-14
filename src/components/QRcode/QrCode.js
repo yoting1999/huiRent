@@ -17,6 +17,7 @@ function QrCode(props) {
     <Container>
       <Header/>
       <Content contentContainerStyle={{flex: 1, justifyContent:'center', alignItems: 'center'}}>
+        <Text style={{fontSize:30,marginBottom:25,color:'#c2c2c2'}}>請出示此畫面掃描</Text>
         <QRCode
           size={300}
           value={value}
@@ -24,15 +25,23 @@ function QrCode(props) {
           logoSize={30}
           logoBackgroundColor='#fff'
         />
-      <Button bordered onPress={()=>navigation.navigate(route.scanner)}>
+        <View style={{justifyContent:'center',paddingTop:50}}>
+      <Button style={styles.QRcode} onPress={()=>navigation.navigate(route.scanner)}>
         <Text>SCANNER</Text>
       </Button>
+      </View>
       </Content>
     </Container>
   )
 }
 
 const styles = StyleSheet.create({
+  QRcode:{
+    width:100,
+    height:50,
+    justifyContent:'center',
+    backgroundColor:'rgb(215, 195, 217)',
+  }
 
 })
 

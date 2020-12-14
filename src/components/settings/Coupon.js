@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {View,Text,FlatList,StyleSheet,Alert,Image,ImageBackground,Button, } from 'react-native'
-import { Container,Right} from 'native-base'
+import { Container,Right, Icon} from 'native-base'
 import Header from '../UI/Header'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -22,7 +22,6 @@ const renderGift = (data) =>(
     <Image  resizeMode={"stretch"} style={styles.center} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj-MO4DLBBz-qCWVf2A0k-QPzKCcHvBwmoUzampZf6hOjQwq0rEsC3cfK8w8cvXJffTDAz1KM&usqp=CAc' }}/>
 
         <Text style={styles.title}>{data.item.name}</Text>
-        <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
           
           <View style={styles.myButton_circle}>
             <Text>使用</Text>
@@ -38,7 +37,9 @@ const renderGift = (data) =>(
 function Coupon (props){
     return(
         <Container>
-        <Header/>
+        <Header>
+        <Icon name="arrow-forward" />
+        </Header>
         <View style={{flex : 6, flexDirection:'row'}}>
         <FlatList
             numColumns={NUN_COLUMNS}
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
         margin:8, 
         borderRadius: 20, 
         borderColor: '#ccc', 
-        borderWidth: 3,
+        borderWidth: 1,
         justifyContent:'flex-end',
         alignItems:'center',
         overflow:'hidden'
@@ -92,9 +93,9 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         padding: 1,
-        height: 50,
+        height: 30,
         width: 50,  //The Width must be the same as the height
-        borderRadius:100, //Then Make the Border Radius twice the size of width or Height   
+        borderRadius:10, //Then Make the Border Radius twice the size of width or Height   
         backgroundColor:'rgb(215, 195, 217)',
         marginBottom:2
      

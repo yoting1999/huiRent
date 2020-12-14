@@ -86,16 +86,18 @@ function SwipeList(props) {
     <View style={styles.item}>
       <View style={{flexDirection:'column',flex:1}}>
         <Text style={styles.date}>{dayjs(item.date).month()+1}月</Text>
-        <Text style={styles.date2}>{dayjs(item.date).date()+1}</Text>
+        <Text style={styles.date2}>{dayjs(item.date).date()}</Text>
         <Text style={styles.date}>{dayjs(item.date).year()}</Text>
       </View>
       <View style={styles.item2}>
         {item.time.map(t=><Text style={styles.times}>{tagToTime(t)}</Text>)}
         <Text style={styles.rooms}>{ALIANS[item.room]}</Text>
       </View>
-      <Button bordered onPress={()=>navigation.navigate(route.qrcode, { value: item.qrCodeKey })}>
-        <Text>QRCODE</Text>
+      <View style={{justifyContent:'center'}}>
+      <Button style={styles.QRcode} onPress={()=>navigation.navigate(route.qrcode, { value: item.qrCodeKey })}>
+        <Text styles={{}}>租借</Text>
       </Button>
+      </View>
     </View>
 
     );
@@ -107,7 +109,7 @@ function SwipeList(props) {
         keyExtractor={(item) => item.id}
         data={reserveData}
         renderItem={renderItem}
-        maxSwipeDistance={160}
+        maxSwipeDistance={240}
         renderQuickActions={({index, item}) => QuickActions(index, item)}
         shouldBounceOnMount={true}
         ItemSeparatorComponent={()=> <View style={styles.itemSeparator}/>}
@@ -176,7 +178,8 @@ const styles = StyleSheet.create({
     fontSize:30,
     color:'#6b6b6b',
     textAlign:'center',
-    fontWeight:'bold'
+    fontWeight:'bold',
+
 
   },
   rooms:{
@@ -186,6 +189,12 @@ const styles = StyleSheet.create({
   times:{
     fontSize:15,
     color:'#6b6b6b'
+  },
+  QRcode:{
+    width:50,
+    height:50,
+    justifyContent:'center',
+    backgroundColor:'rgb(215, 195, 217)',
   }
 
 })

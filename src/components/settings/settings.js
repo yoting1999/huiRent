@@ -11,6 +11,7 @@ const RATING = 3
 function Settings(props) {
     const navigation = useNavigation()
     const {logout} = props
+    const { isLoading, userInfo } = props
     return (
       <Container>
         <Header title='設定'>
@@ -35,7 +36,7 @@ function Settings(props) {
             <ListItem avatar>
               <Body>
                 <Text style={{fontSize:25,fontWeight:'bold',marginBottom:5}}>Hi,</Text>
-                <Text note>王聖棉</Text>
+                <Text note>{userInfo && userInfo.name}</Text>
               </Body>
               <Right>
                 <TouchableOpacity>
