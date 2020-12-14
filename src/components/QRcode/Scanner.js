@@ -4,10 +4,15 @@ import { Button } from 'native-base'
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Colors from '../../styles/Colors';
 
-export default function Scanner() {
+import Modal from './Modal'
+
+export default function Scanner(props) {
+  const { getReserve, getOrderer, isLoading } = props
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-
+  const [isVisible, setIsVisible] = useState(false)
+  const [reserveData, setReserveData] = useState(null)
+  const [ordererData, setOrdererData] = useState(null)
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -15,9 +20,19 @@ export default function Scanner() {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  // useEffect(()=>{
+  //   if(!reserveData) return
+  // }, [reserveData])
+
+  const handleBarCodeScanned = async({ type, data }) => {
     setScanned(true);
-    alert(`預約資料的key ${data}`);
+    const reserveRes = await getReserve(data)
+    if(reserveRes) {
+      const ordererRes = await getOrderer(reserveRes.userId)
+      setOrdererData(ordererRes)
+    }
+    setReserveData(reserveRes)
+    setIsVisible(true)
   };
 
   if (hasPermission === null) {
@@ -40,9 +55,17 @@ export default function Scanner() {
           </Button>
         )}
       </View>
+      <Modal
+        isLoading={isLoading}
+        data={reserveData}
+        ordererData={ordererData}
+        isVisible={isVisible}
+        setIsVisible={setIsVisible}
+      />
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

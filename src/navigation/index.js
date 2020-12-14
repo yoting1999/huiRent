@@ -33,7 +33,7 @@ import Email from '../components/settings/Email'
 
 // QrCode
 import QrCode from '../components/QRcode/QrCode'
-import Scanner from '../components/QRcode/Scanner'
+import Scanner from '../containers/QrCode/Scanner'
 // Test
 import SwipeList from '../components/UI/SwipeList'
 

@@ -86,7 +86,7 @@ function SwipeList(props) {
     <View style={styles.item}>
       <View style={{flexDirection:'column',flex:1}}>
         <Text style={styles.date}>{dayjs(item.date).month()+1}月</Text>
-        <Text style={styles.date2}>{dayjs(item.date).date()+1}</Text>
+        <Text style={styles.date2}>{dayjs(item.date).date()}</Text>
         <Text style={styles.date}>{dayjs(item.date).year()}</Text>
       </View>
       <View style={styles.item2}>

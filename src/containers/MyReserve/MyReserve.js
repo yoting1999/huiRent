@@ -12,7 +12,7 @@ function MyReserve() {
   const getReserves = async() => {
     setIsLoading(true)
     try {
-      const res = await Reserve.getReserve()
+      const res = await Reserve.getReserves()
       const tempData = []
       for (const [key, value] of Object.entries(res.data)) {
         tempData.push({
