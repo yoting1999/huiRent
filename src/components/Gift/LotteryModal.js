@@ -11,6 +11,8 @@ import {
 } from "react-native";
 
 import Lottery from './Lottery'
+import Circle from './circle'
+
 let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height;
 
@@ -40,7 +42,7 @@ function GiftModal(props) {
               <Text style={styles.textStyle}>隱藏</Text>
               
             </TouchableHighlight>    
-              <Lottery></Lottery>
+            <Circle></Circle>
               
             
           </View>
