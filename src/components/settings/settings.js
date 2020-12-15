@@ -73,14 +73,6 @@ function Settings(props) {
              <Icon name="arrow-forward" />
            </Right>
           </ListItem>
-          <ListItem last onPress={()=>navigation.navigate(routeConfig.Email)}>
-          <Left>
-          <Text>編輯信箱</Text>
-           </Left>
-            <Right>
-             <Icon name="arrow-forward" />
-           </Right>
-          </ListItem>
           <ListItem last  onPress={logout}>
           <Left>
           <Text>登出</Text>

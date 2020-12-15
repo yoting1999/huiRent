@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 const config = {
-    apiKey: "AIzaSyBW9KF6V5CasWCAuwVxNVrSVfceUjjujtM",
+    apiKey: "AIzaSyB8QP06eAdnE5D9mqxuTVdoDEdZKXuwsDA",
     authDomain: "huirent-72fd3.firebaseapp.com",
     databaseURL: "https://huirent-72fd3.firebaseio.com",
     projectId: "huirent-72fd3",

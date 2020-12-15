@@ -28,7 +28,6 @@ import ReserveConfirm from '../containers/Home/ReserveConfirm'
 
 import ReserveDate from '../components/Home/ReserveDate'
 import Coupon from '../components/settings/Coupon'
-import Email from '../components/settings/Email'
 
 
 // QrCode
@@ -78,7 +77,6 @@ function setStackScreen() {
       <setStack.Screen name="all" component={all}/>
       <setStack.Screen name="used" component={used}/>
       <setStack.Screen name="Coupon" component={Coupon}/>
-      <setStack.Screen name="Email" component={Email}/>
     </setStack.Navigator>
   )
 }
