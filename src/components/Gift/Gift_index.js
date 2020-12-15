@@ -8,12 +8,12 @@ import LotteryModal from './LotteryModal';
 import GiftModal from './GiftModal';
 
 const GiftOption = [
-    { name: 'pick', costpoint: '5' },
-    { name: 'Elixir 包膜弦', costpoint: '50' },
-    { name: '全館商品9折卷一張', costpoint: '20' },
-    { name: '小練團室1h使用卷1111111', costpoint: '60' },
-    { name: '小練團室1h使用卷', costpoint: '60' },
-    { name: '小練團室1h使用卷', costpoint: '60' },
+    { name: 'pick', costpoint: '5',uri:require('../../../assets/Gift_pick.jpg') },
+    { name: 'Elixir 包膜弦', costpoint: '50',uri:require('../../../assets/Gift_elixir.jpg' )},
+    { name: '全館商品9折卷一張', costpoint: '20' ,uri:require('../../../assets/Gift_coupon1.jpg')},
+    { name: '小練團室1h使用卷1111111', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
+    { name: '小練團室1h使用卷', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
+    { name: '小練團室1h使用卷', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
 ]
 
 const NUN_COLUMNS = 2
@@ -55,7 +55,7 @@ function Gift_index() {
             
         <TouchableOpacity style={styles.itemButton} onPress={() => setGiftModalVisible(true)}>
         <View style={{flex:4}}>
-            <ImageBackground resizeMode={'cover'} style={styles.center} source={require('../../../assets/pick.jpg') }>
+            <ImageBackground resizeMode={'stretch'} style={styles.center} source={data.item.uri }>
             </ImageBackground>
         </View>
         <View style={styles.flatlistBox}>

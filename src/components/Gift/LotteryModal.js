@@ -13,43 +13,49 @@ import {
 import Lottery from './Lottery'
 import Circle from './circle'
 
-let width=Dimensions.get("window").width;
-let height=Dimensions.get("window").height;
+let width = Dimensions.get("window").width;
+let height = Dimensions.get("window").height;
 
 function GiftModal(props) {
-    const { modalVisible, setModalVisible} = props
+  const { modalVisible, setModalVisible } = props
 
   return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false)
-        }
-        
-    }
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>開發中請見諒！</Text>
-            <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <Text style={styles.textStyle}>隱藏</Text>
-              
-            </TouchableHighlight>    
-            <Circle></Circle>
-              
-            
-          </View>
-        </View>
-      </Modal>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        setModalVisible(false)
+      }}
+      onBackdropPress={() => {
+        setModalVisible(false)
+      }}
+      onSwipeComplete={() => {
+        setModalVisible(false)
+      }}
 
-      
+
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>開發中請見諒！</Text>
+          <TouchableHighlight
+            style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+            onPress={() => {
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <Text style={styles.textStyle}>隱藏</Text>
+
+          </TouchableHighlight>
+          <Circle></Circle>
+
+
+        </View>
+      </View>
+    </Modal>
+
+
   );
 };
 
@@ -64,8 +70,8 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "skyblue",
     borderRadius: 20,
-    width:width,
-    height:height,
+    width: width,
+    height: height*0.8,
     // padding: 100,
     alignItems: "center",
     shadowColor: "#000",
