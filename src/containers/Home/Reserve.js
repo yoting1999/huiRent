@@ -16,7 +16,7 @@ function Reserve() {
   const getReserves = async(dateTime = TODAY, room = 'BIG') => {
     setIsLoading(true)
     try {
-      const res = await Reserve.getReserve()
+      const res = await Reserve.getReserves()
       const data = Object.values(res.data).filter((item)=>item.date === dateTime && item.room === room)
       setReserveDate(data)
       setIsLoading(false)
