@@ -15,9 +15,9 @@ function SignUp(){
             email:email,
             number:number,
             uid:firebase.auth().currentUser.uid,
-            position:"user",
-            UsedPoint:'0',
-            GotPoint:'0',
+            position:"user",//身分
+            UsedPoint:'0',//已使用點數
+            GotPoint:'0',//獲得點數
             cupon:'0',
         })
     }
