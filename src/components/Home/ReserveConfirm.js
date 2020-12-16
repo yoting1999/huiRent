@@ -1,15 +1,29 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet,Alert } from 'react-native'
 import { Container, Content, Button,Icon } from 'native-base'
 import Header from '../UI/Header'
 import { ALIANS, TIME } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import {useNavigation} from '@react-navigation/native'
 
 function ReserveConfirm(props) {
+  const navigation = useNavigation();
   const { addReserve, reserveData } = props
   const { isLoading, userInfo } = props
-  console.log('reserveData', reserveData)
+  const onpresstohome = async ()=>{
+    await addReserve()
+    Alert.alert(
+      '預約成功！',
+      '請至calendar查看預約',
+      [
+          { text: '確認', onPress: () => navigation.navigate('home') }
+      ],
+      
+  )
+    
+  }
+ 
   const tagToTime = (tag) => {
     const time = TIME.find((item)=>item.tag === tag).time
     return time
@@ -42,7 +56,7 @@ function ReserveConfirm(props) {
             type="FontAwesome5" name="clock" />   {tagToTime(t)}</Text>)}
        
        </View>
-       <TouchableOpacity onPress={addReserve} style={styles.submitBtn}>
+       <TouchableOpacity onPress={()=> onpresstohome()} style={styles.submitBtn}>
        <Text>確認</Text>
        </TouchableOpacity>
         
@@ -72,9 +86,9 @@ const styles = StyleSheet.create({
   submitBtn: {
     margin: 12,
     alignSelf: 'center',
-    width: 60,
+    width: 100,
     height: 60,
-   
+    borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.primary,
