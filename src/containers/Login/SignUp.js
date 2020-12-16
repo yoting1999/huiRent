@@ -8,18 +8,22 @@ import * as FirebaseCore from 'expo-firebase-core';
 
 function SignUp(){
     const { People } = agent
-    const database = async(name,date,email) =>{
+    const database = async(name,date,email,number) =>{
         await People.addPeople(firebase.auth().currentUser.uid,{
             name:name,
             date:date,
             email:email,
-            uid:firebase.auth().currentUser.uid
+            number:number,
+            uid:firebase.auth().currentUser.uid,
+            position:"user",
+            UsedPoint:'0',
+            GotPoint:'0',
+            cupon:'0',
         })
     }
     async function signUp(email,password){
         try {
             const res = await firebase.auth().createUserWithEmailAndPassword(email, password)
-            database(name,email,date)
             if(res){
                 console.log('User registered successfully!');
             }
