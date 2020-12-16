@@ -10,7 +10,7 @@ import Header from '../UI/Header'
 import routeConfig from '../../constants/route'
 import Colors from '../../styles/Colors';
 
-import { TIME } from '../../constants/rooms'
+import { ROOMS, TIME } from '../../constants/rooms'
 
 const TODAY = dayjs().format('YYYY-MM-DD')
 
@@ -27,7 +27,9 @@ function Reserve(props) {
   const handleSubmit = () => {
     // console.log('date', date, 'time', time, 'room', room)
     // console.log('userInfo', userInfo)
-    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room }, userInfo })
+    const price = ROOMS.find((r)=>r.alians === room).price
+    console.log('price', price* time.length)
+     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price }, userInfo })
   }
 
   const handleOnSetTimes = (tagTime) => {
@@ -121,7 +123,7 @@ function Reserve(props) {
             disabled={isReserved}
             bordered
             light
-            style={{ margin: 6, padding: 4, backgroundColor: isReserved ? Colors.secondary : isChoosed ? Colors.primary : '#fff'}}
+            style={{ margin: 6, padding: 4, backgroundColor: isReserved ? '#dcdcdc' : isChoosed ? Colors.primary : '#fff'}}
             onPress={()=>handleOnSetTimes(item.tag)}>
             <Text style={styles.buttontext}>{item.time}</Text>
           </Button>
