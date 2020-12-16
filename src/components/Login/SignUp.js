@@ -11,6 +11,7 @@ function SignUp(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState(null);
     const [password2, setPassword2] = useState(null)
+    const [number, setNumber] = useState(null)
     const { signUp, database } = props
     const navigation = useNavigation();
 
@@ -18,6 +19,7 @@ function SignUp(props) {
     const [emailError, setEmailError] = useState(false)
     const [passError ,setPassError] = useState(false)
     const [passError2 ,setPassError2] = useState(false)
+    const [numberError, setNumberError] = useState(false)
     const [disable, setDisable] = useState(false)
     const press = async () => {
         if (((password != null && password.length >= 6) && (password2 != null && password2.length >= 6) && name != null) && password == password2) {
@@ -49,7 +51,7 @@ function SignUp(props) {
         var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
         if(email.search(emailRule)!= -1){
             await signUp(email, password),
-                await database(name, Date, email),
+                await database(name, Date, email,number),
                 Alert.alert(
                     '註冊成功！',
                     '請到登入頁登入',
@@ -83,6 +85,9 @@ function SignUp(props) {
         if (!password2) {
             setPassError2(true)
         }
+        if (!number) {
+            setNumberError(true)
+        }
     }
 
     useEffect(() => {
@@ -102,8 +107,12 @@ function SignUp(props) {
             setDisable(true)
             return
         }
+        if(!number){
+            setDisable(true)
+            return
+        }
         setDisable(false)
-    }, [name, email,password,password2])
+    }, [name, email,password,password2,number])
 
     return (
         <Container>
@@ -154,6 +163,11 @@ function SignUp(props) {
                         setEmailError(false)
                     }} />
                     {emailError && <Text style={{ color: "#eb4034", marginLeft: -240, marginBottom: 10 }}>請輸入電子信箱</Text>}
+                    <TextInput onBlur={handleBlurInput} keyboardType='numeric' maxLength={10} placeholder="電話號碼" style={styles.inputstyle} onChangeText={text =>{
+                        setNumber(text)
+                        setNumberError(false)
+                    }}/>
+                    {numberError && <Text style={{ color: "#eb4034", marginLeft: -240,marginBottom: 10 }}>請輸入電話號碼</Text>}
                     <TextInput onBlur={handleBlurInput} placeholder="密碼(需至少六位)" style={styles.inputstyle} onChangeText={text => {
                         setPassword(text)
                         setPassError(false)
@@ -178,7 +192,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 35,
-        marginTop: 190
+        marginTop: 170
     },
     inputstyle: {
         width: '100%',
@@ -191,7 +205,7 @@ const styles = StyleSheet.create({
     },
     profile: {
         flex: 1,
-        marginBottom: 80,
+        marginBottom: 60,
         marginTop: -170,
         justifyContent: 'center',
         alignItems: 'center',

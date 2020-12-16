@@ -29,8 +29,7 @@ function Reserve(props) {
   const handleSubmit = () => {
     // console.log('date', date, 'time', time, 'room', room)
     // console.log('userInfo', userInfo)
-    navigation.navigate(
-      routeConfig.ReserveConfirm, { reserveData: { date, time, room, status: UNDONE }, userInfo })
+    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room, status: UNDONE }, userInfo })
   }
 
   const handleOnSetTimes = (tagTime) => {
