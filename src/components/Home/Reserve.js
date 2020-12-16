@@ -25,8 +25,8 @@ function Reserve(props) {
 
 
   const handleSubmit = () => {
-    console.log('date', date, 'time', time, 'room', room)
-    console.log('userInfo', userInfo)
+    // console.log('date', date, 'time', time, 'room', room)
+    // console.log('userInfo', userInfo)
     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room }, userInfo })
   }
 
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     marginBottom:20,
     padding:10,
-    
+
   },
   button:{
     margin: 10,
