@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity,TouchableHighlight,FlatList ,Platform} from 'react-native'
-import {  List, ListItem, Left, Body, Right,Container, Content, Button, Icon,Image,Separator } from 'native-base'
+import {  List, ListItem, Left, Button, Right,Container, Content, Icon,Image,Separator } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import Header from '../UI/Header'
 import Swipeout from 'react-native-swipeout';
@@ -13,17 +13,28 @@ import Spinner from 'react-native-loading-spinner-overlay'
 
 function MyReserve(props) {
     const navigation = useNavigation()
-    const { reserveData, isLoading } = props
+    const { reserveData, isLoading, getReserves } = props
 
     return (
       <Container>
         <Header title="我的預約"/>
         <Content >
-          <ScrollView>
-            <Swiptlist reserveData={reserveData}/>
-          </ScrollView>
+        <Button onPress={getReserves}>
+          <Text>刷新</Text>
+        </Button>
+          {
+            reserveData && reserveData.length === 0 ?
+            <Text>無預約資料</Text>
+            :(
+            <ScrollView>
+              <Swiptlist reserveData={ reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} />
+            </ScrollView>
+
+            )
+          }
+
         </Content>
-      <Spinner visible={isLoading}/>
+        <Spinner visible={isLoading}/>
       </Container>
 
     )

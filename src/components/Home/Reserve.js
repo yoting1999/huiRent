@@ -13,6 +13,8 @@ import Colors from '../../styles/Colors';
 import { TIME } from '../../constants/rooms'
 
 const TODAY = dayjs().format('YYYY-MM-DD')
+const UNDONE = 'UNDONE'
+
 
 function Reserve(props) {
   const navigation = useNavigation();
@@ -25,9 +27,10 @@ function Reserve(props) {
 
 
   const handleSubmit = () => {
-    console.log('date', date, 'time', time, 'room', room)
-    console.log('userInfo', userInfo)
-    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room }, userInfo })
+    // console.log('date', date, 'time', time, 'room', room)
+    // console.log('userInfo', userInfo)
+    navigation.navigate(
+      routeConfig.ReserveConfirm, { reserveData: { date, time, room, status: UNDONE }, userInfo })
   }
 
   const handleOnSetTimes = (tagTime) => {

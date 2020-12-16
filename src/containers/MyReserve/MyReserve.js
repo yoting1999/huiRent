@@ -32,7 +32,7 @@ function MyReserve() {
     getReserves()
   }, [])
 
-  return <Layout reserveData={reserveData} isLoading={isLoading}/>
+  return <Layout reserveData={reserveData} isLoading={isLoading} getReserves={getReserves}/>
 }
 
 export default MyReserve

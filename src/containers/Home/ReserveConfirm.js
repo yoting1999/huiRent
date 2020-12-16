@@ -9,10 +9,12 @@ function ReserveConfirm(props) {
   const { Reserve } = agent
   const addReserve = async() => {
     try {
+      const timeStamp = new Date().toISOString()
       const userId = userInfo.uid
       await Reserve.addReserve({
        ...reserveData,
-        userId
+        userId,
+        timeStamp
       })
     }catch(err) {
       console.log('err', err)
