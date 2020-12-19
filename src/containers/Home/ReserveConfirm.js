@@ -7,7 +7,7 @@ function ReserveConfirm(props) {
   // const userInfo = useSelector(state=>state.authReducer.userInfo)
 
   const { reserveData, userInfo } = props.route.params
-  // console.log(reserveData, userInfo)
+   console.log(reserveData)
   const { Reserve } = agent
   const addReserve = async() => {
     try {
