@@ -1,54 +1,26 @@
-import React from 'react'
-import { View, StyleSheet, Text, Pressable,FlatList } from 'react-native'
-import { Container, Content, Button } from 'native-base'
-import Dash from 'react-native-dash'
+import React, { useState, useEffect } from 'react'
+import { View, StyleSheet, Text, Pressable,Platform } from 'react-native'
+import { Container, Button, Content } from 'native-base'
 import SwipeableFlatList from 'react-native-swipeable-list';
 import Colors from '../../styles/Colors';
 import dayjs from 'dayjs'
 import { ALIANS, TIME } from '../../constants/rooms'
 import { useNavigation } from '@react-navigation/native';
 import route from '../../constants/route';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-const DATA = [
-  {
-    id: '1',
-    title: '10',
-    title2:'30',
-    title3:'2020',
-    time1:'13:30',
-    time2:'15:30',
-    room:'中練團室',
-    uri:'https://static.wixstatic.com/media/eccb17_676bf61b62ce44de82155a6d23207f42.jpg/v1/fill/w_363,h_288,al_c,q_80,usm_0.66_1.00_0.01/eccb17_676bf61b62ce44de82155a6d23207f42.webp'
-
-  },
-  {
-    id: '2',
-    title: '10',
-    title2:'30',
-    title3:'2020',
-    time1:'14:30',
-    time2:'16:30',
-    room:'小練團室',
-    uri:'https://static.wixstatic.com/media/eccb17_676bf61b62ce44de82155a6d23207f42.jpg/v1/fill/w_363,h_288,al_c,q_80,usm_0.66_1.00_0.01/eccb17_676bf61b62ce44de82155a6d23207f42.webp'
-  },
-  {
-    id: '3',
-    title: '10',
-    title2:'30',
-    title3:'2020',
-    time1:'12:00',
-    time2:'15:00',
-    room:'鼓室',
-    uri:'https://static.wixstatic.com/media/eccb17_676bf61b62ce44de82155a6d23207f42.jpg/v1/fill/w_363,h_288,al_c,q_80,usm_0.66_1.00_0.01/eccb17_676bf61b62ce44de82155a6d23207f42.webp'
-  },
-];
-
-
-
+const TODAY = new Date()
 function SwipeList(props) {
-  const { reserveData } = props
+  const { reserveData, getReservesWithDate } = props
 
   const navigation = useNavigation()
+
+  const [date, setDate] = useState(TODAY)
+
+  useEffect(()=> {
+    const dateFormate = dayjs(date).format('YYYY-MM-DD')
+    getReservesWithDate(dateFormate)
+  }, [date])
 
   const QuickActions = (index, qaItem) => {
     return (
@@ -63,16 +35,6 @@ function SwipeList(props) {
             <Text style={styles.buttonText}>取消</Text>
           </Pressable>
         </View>
-        {/* <View style={[styles.button, styles.button2]}>
-          <Pressable onPress={() => snoozeItem(qaItem.id)}>
-            <Text style={[styles.buttonText, styles.button2Text]}>Snooze</Text>
-          </Pressable>
-        </View>
-        <View style={[styles.button, styles.button3]}>
-          <Pressable onPress={() => deleteItem(qaItem.id)}>
-            <Text style={[styles.buttonText, styles.button3Text]}>Delete</Text>
-          </Pressable>
-        </View> */}
       </View>
     );
   };
@@ -103,20 +65,36 @@ function SwipeList(props) {
     );
 
   return (
-   <Container>
-     <View style={{ flex: 1 }}>
-      <SwipeableFlatList
-        keyExtractor={(item) => item.id}
-        data={reserveData}
-        renderItem={renderItem}
-        maxSwipeDistance={240}
-        renderQuickActions={({index, item}) => QuickActions(index, item)}
-        shouldBounceOnMount={true}
-        ItemSeparatorComponent={()=> <View style={styles.itemSeparator}/>}
-        // contentContainerStyle={{ flexGrow: 1,backgroundColor: 'red'}} // 背景顏色
-      />
+     <View>
+      <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={'date'}
+          display={Platform.OS === 'ios' ? 'inline' : 'default'}
+          onChange={(e, date)=>setDate(date)}
+          style={{ marginHorizontal: 50 }}
+        />
+      {
+        reserveData && reserveData.length === 0 ?
+        <View>
+          <Text style={{ textAlign: 'center' }}>無預約資料</Text>
+        </View>
+        :(
+        <>
+          <View style={styles.split}/>
+          <SwipeableFlatList
+            keyExtractor={(item) => item.id}
+            data={reserveData}
+            renderItem={renderItem}
+            maxSwipeDistance={240}
+            renderQuickActions={({index, item}) => QuickActions(index, item)}
+            shouldBounceOnMount={true}
+            ItemSeparatorComponent={()=> <View style={styles.itemSeparator}/>}
+          />
+        </>
+        )
+      }
     </View>
-   </Container>
   )
 }
 
@@ -195,6 +173,10 @@ const styles = StyleSheet.create({
     height:50,
     justifyContent:'center',
     backgroundColor:'rgb(215, 195, 217)',
+  },
+  split: {
+    height: 16,
+    backgroundColor: '#eee'
   }
 
 })

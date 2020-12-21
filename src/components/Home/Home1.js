@@ -11,12 +11,9 @@ import { ROOMS } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
 import route from '../../constants/route'
 
+import { isManager } from '../../lib/auth'
+
 const { width } = Dimensions.get("window")
-
-
-function isManager(userInfo) {
-  return userInfo.position === 'manager'
-}
 
 function Home(props) {
   const navigation = useNavigation();
