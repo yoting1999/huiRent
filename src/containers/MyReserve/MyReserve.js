@@ -29,11 +29,19 @@ function MyReserve() {
     }
   }
 
+  const deleteReserve = async() => {
+    try {
+      const res = await Reserve.deleteReserve({})
+    }catch(err){
+      console.log('error delete',err)
+    }
+  }
+
   useEffect(()=>{
     getReserves()
   }, [])
 
-  return <Layout reserveData={reserveData} isLoading={isLoading}/>
+  return <Layout reserveData={reserveData} isLoading={isLoading} deleteReserve={deleteReserve}/>
 }
 
 export default MyReserve

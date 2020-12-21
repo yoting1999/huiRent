@@ -18,11 +18,9 @@ function MyReserve(props) {
     return (
       <Container>
         <Header title="我的預約"/>
-        <Title style={{backgroundColor:"#D0D0D0"}}>UNDONE</Title>
         <Content>
             <Swiptlist reserveData={reserveData}/>
         </Content>
-        <Title style={{backgroundColor:"#D0D0D0"}}>DONE</Title>
       <Spinner visible={isLoading}/>
       </Container>
 
