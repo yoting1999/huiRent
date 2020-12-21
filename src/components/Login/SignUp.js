@@ -72,19 +72,31 @@ function SignUp(props) {
         }
     }
 
-    const handleBlurInput = () => {
+    const handleBlurInputName = () => {
         if (!name) {
             setNameError(true)
         }
+    }
+
+    const handleBlurInputEmail = () =>{
         if (!email) {
             setEmailError(true)
         }
+    }
+
+    const handleBlurInputPass1 = () =>{
         if (!password) {
             setPassError(true)
         }
+    }
+
+    const handleBlurInputPass2 = () =>{
         if (!password2) {
             setPassError2(true)
         }
+    }
+
+    const handleBlurInputNum = () =>{
         if (!number) {
             setNumberError(true)
         }
@@ -126,13 +138,13 @@ function SignUp(props) {
                     <TouchableOpacity style={styles.profile} onPress={() => console.log('上傳照片')}>
                         <Icon name="user" type="FontAwesome5" style={{ fontSize: 60, color: "gray" }} />
                     </TouchableOpacity>
-                    <TextInput onBlur={handleBlurInput} placeholder="姓名" style={styles.inputstyle} onChangeText={text => {
+                    <TextInput onBlur={handleBlurInputName} placeholder="姓名" style={styles.inputstyle} onChangeText={text => {
                         setName(text)
                         setNameError(false)
                     }} />
                     {nameError && <Text style={{ color: "#eb4034", marginLeft: -270 }}>請輸入姓名</Text>}
                     <DatePicker
-                        style={{ width: 350 }}
+                        style={{ width: 345 ,borderBottomWidth:1,borderColor:"#D0D0D0",marginBottom:15}}
                         mode="date"
                         placeholder={Date}
                         format="YYYY-MM-DD"
@@ -157,23 +169,22 @@ function SignUp(props) {
                         }}
                         onDateChange={(date) => { setDate(date) }}
                     />
-                    <Text style={{ color: "#D0D0D0", marginTop: -5, marginBottom: 10 }}>––––––––––––––––––––––––––––––––––––––––––––––––––</Text>
-                    <TextInput onBlur={handleBlurInput} placeholder="電子信箱" style={styles.inputstyle} onChangeText={text => {
+                    <TextInput onBlur={handleBlurInputEmail} placeholder="電子信箱" style={styles.inputstyle} onChangeText={text => {
                         setEmail(text)
                         setEmailError(false)
                     }} />
                     {emailError && <Text style={{ color: "#eb4034", marginLeft: -240, marginBottom: 10 }}>請輸入電子信箱</Text>}
-                    <TextInput onBlur={handleBlurInput} keyboardType='numeric' maxLength={10} placeholder="電話號碼" style={styles.inputstyle} onChangeText={text =>{
+                    <TextInput onBlur={handleBlurInputNum} keyboardType='numeric' maxLength={10} placeholder="電話號碼" style={styles.inputstyle} onChangeText={text =>{
                         setNumber(text)
                         setNumberError(false)
                     }}/>
                     {numberError && <Text style={{ color: "#eb4034", marginLeft: -240,marginBottom: 10 }}>請輸入電話號碼</Text>}
-                    <TextInput onBlur={handleBlurInput} placeholder="密碼(需至少六位)" style={styles.inputstyle} onChangeText={text => {
+                    <TextInput textContentType={'newPassword'} secureTextEntry={true} onBlur={handleBlurInputPass1} placeholder="密碼(需至少六位)" style={styles.inputstyle} onChangeText={text => {
                         setPassword(text)
                         setPassError(false)
                         }} />
                     {passError && <Text style={{ color: "#eb4034", marginLeft: -270, marginBottom: 10  }}>請輸入密碼</Text>}
-                    <TextInput onBlur={handleBlurInput} placeholder="再次輸入密碼" style={styles.inputstyle} onChangeText={text =>{
+                    <TextInput textContentType={'newPassword'} secureTextEntry={true} onBlur={handleBlurInputPass2} placeholder="再次輸入密碼" style={styles.inputstyle} onChangeText={text =>{
                          setPassword2(text)
                          setPassError2(false)
                          }} />
