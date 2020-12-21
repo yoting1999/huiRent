@@ -6,14 +6,13 @@ import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LotteryModal from './LotteryModal';
 import GiftModal from './GiftModal';
+// import console = require('console');
 
 const GiftOption = [
     { name: 'pick', costpoint: '5',uri:require('../../../assets/Gift_pick.jpg') },
     { name: 'Elixir 包膜弦', costpoint: '50',uri:require('../../../assets/Gift_elixir.jpg' )},
     { name: '全館商品9折卷一張', costpoint: '20' ,uri:require('../../../assets/Gift_coupon1.jpg')},
-    { name: '小練團室1h使用卷1111111', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
-    { name: '小練團室1h使用卷', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
-    { name: '小練團室1h使用卷', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
+    { name: '小練團室1h使用卷', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') }
 ]
 
 const NUN_COLUMNS = 2
@@ -40,13 +39,19 @@ const NUN_COLUMNS = 2
 //     </View>
 // )
 
+function GiftModalchange(data){
+    setGiftModalVisible(true)
+    
+
+}
 
 
-
-function Gift_index() {
+function Gift_index(props) {
+    const { isLoading, userInfo } = props
     const [modalVisible, setModalVisible] = useState(false)
     const [GiftModalVisible, setGiftModalVisible] = useState(false)
-
+    console.log('使用點數',userInfo.UsedPoint)
+    console.log('總共點數',userInfo.GotPoint)
     const renderGift = (data) => (  
 
     
@@ -66,10 +71,7 @@ function Gift_index() {
         <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
         </View>
         </TouchableOpacity>
-        <GiftModal
-        GiftModalVisible={GiftModalVisible}
-        setGiftModalVisible={setGiftModalVisible}
-        data={data.item.name}></GiftModal>
+
     </View>
     
 )
@@ -90,10 +92,14 @@ function Gift_index() {
                     </TouchableOpacity>
 
                     <View style={styles.topRightItem}>
-                        <Text style={styles.Content}>目前可用點數：20</Text>
+                        <Text style={styles.Content}>目前可用點數：{userInfo.GotPoint-userInfo.UsedPoint}</Text>
                         <LotteryModal
                             modalVisible={modalVisible}
                             setModalVisible={setModalVisible}></LotteryModal>
+                                    <GiftModal
+        GiftModalVisible={GiftModalVisible}
+        setGiftModalVisible={setGiftModalVisible}
+        ></GiftModal>
                     </View>
                 </View>
                 <View style={{ flex: 6, flexDirection: 'row' }}>
@@ -149,12 +155,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontSize: 15,
+        fontSize: 18,
     },
     Content: {
         // backgroundColor: 'red',
         textDecorationLine: 'underline',
-        fontSize: 12
+        fontSize: 15,
+        fontWeight:'bold'
     },
     myButton_circle: {
         justifyContent: 'center',

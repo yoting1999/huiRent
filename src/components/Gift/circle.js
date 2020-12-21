@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Animated, Easing, View, TouchableOpacity, Image, StyleSheet, Dimensions, Text } from "react-native"
+import { Animated, Easing, View, TouchableOpacity, Image, StyleSheet, Dimensions, Text ,Alert} from "react-native"
 
 function circle(props) {
     const [drawData, setdrawData] = useState([
@@ -14,7 +14,18 @@ function circle(props) {
     ])
     const [offOn, setoffOn] = useState(true)
     const [rotateDeg, setrotateDeg] = useState(new Animated.Value(0))
+    const confirm = () => {
+        if(offOn){
+        Alert.alert('花費點數抽獎','你確定要花費30點數抽獎嗎？',[
+            {text:'取消'},
+            {text:'確認',onPress:rotateImg},
+        
+        
+        ])}else{Alert.alert('不要亂點啦拜託了')}
+
+    }
     const rotateImg = () => {
+
         if (offOn) {
             rotateImg1();
         }
@@ -22,6 +33,7 @@ function circle(props) {
 
     const rotateImg1 = () => {
         //获取抽奖位置
+        setoffOn(!offOn)
         let number = Math.floor(Math.random() * 8);
         if ((number / 8) == 0.875) {
             number = 1;
@@ -32,7 +44,7 @@ function circle(props) {
             duration: 5000,
             easing: Easing.out(Easing.quad)
         }).start(() => {
-            setoffOn(!offOn)
+            // setoffOn(!offOn)
             //动画结束时，会把toValue值，回调给callback
             rotateDeg.stopAnimation(() => {
                 changeValue(number);
@@ -99,14 +111,14 @@ function circle(props) {
                         }
                         return (
                             <View key={one.id} style={{ justifyContent: "center", alignItems: "center", position: "absolute", zIndex: 99, height: 70, width: 60, top: 145, transform: [{ translateX: translateX }, { translateY: translateY }, { rotateZ: `${rotateTemp}deg` }] }}>
-                                <Text style={{fontSize:12, color:"#74340A", fontFamily:"STYuanti-SC-Regular",marginBottom:10}}>{one.title}</Text>
+                                <Text style={{fontSize:12, color:"#74340A",marginBottom:10}}>{one.title}</Text>
                                 <Image style={{width: 50, height: 50, resizeMode: "contain" }} source={one.icon} />
                             </View>
                         )
                     })}
                 </View >
             </Animated.View>
-            <TouchableOpacity activeOpacity={0.9} onPress={() => { rotateImg() }} style={styles.centerPoint}>
+            <TouchableOpacity activeOpacity={0.9} onPress={() => { confirm() }} style={styles.centerPoint}>
                 <Image source={require('./imgs/point_new.png')} style={{ height: 134, width: 107, resizeMode: "stretch", position: "absolute" }} />
                 <Text style={{ color: "#ffffff", textAlign: "center", fontSize: 17, fontWeight: 'bold', width: 45, marginTop: 20 }}>{"開始抽獎" || "start game"}</Text>
             </TouchableOpacity>
