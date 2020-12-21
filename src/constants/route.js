@@ -7,7 +7,7 @@ export default {
   Reserve:'Reserve',
   ReserveConfirm: 'ReserveConfirm',
   settings:'settings',
-  MyReserve:'MyReserve',
+  myReserve:'myReserve',
   qrcode: 'qrcode',
   scanner: 'scanner',
   used:'used',

@@ -26,17 +26,15 @@ function Reserve(props) {
   const [isReservedTime, setIsReservedTime] = useState(null)
   const [status,setStatus] = useState('UNDONE')
 
+  const [canChoose, setCanChoose] = useState([])
+  const [tempArr, setTempArr] = useState([])
 
   const handleSubmit = () => {
     // console.log('date', date, 'time', time, 'room', room)
     // console.log('userInfo', userInfo)
-<<<<<<< HEAD
-    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room, status: UNDONE }, userInfo })
-=======
     const price = ROOMS.find((r)=>r.alians === room).price
     console.log('price', price* time.length)
      navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo })
->>>>>>> 4607e630facfc4122c3d8708f1d5f3a7fd666d75
   }
 
   const handleOnSetTimes = (tagTime) => {
@@ -49,6 +47,48 @@ function Reserve(props) {
     }
     setTime(temp)
   }
+
+  const sequence = (idx) => {
+    let time = TIME.map(t=>t.tag)
+    const firstIndex = 0
+    const lastIndex = time.length - 1
+    const num = 3 - tempArr.length
+
+    const findIndex = tempArr.indexOf(idx)
+    const isExisted = findIndex > -1
+
+    const tempChoose = [...canChoose]
+    const tempArr1 = [...tempArr]
+    if(isExisted) {
+      tempArr1.splice(findIndex, 1)
+    }else {
+      tempArr1.push(idx)
+    }
+    setTempArr(tempArr1)
+
+
+    if(tempArr.length === 1) {
+      const first = tempArr[0]
+      let left = first -  num
+      let right = first +  num
+
+      if(left < firstIndex) left = firstIndex
+      if(right > lastIndex) right = lastIndex
+
+      for(let i = left ; i <= right ; i++) {
+        tempChoose.push(i)
+      }
+      setCanChoose(tempChoose)
+    }
+
+    if(tempArr.length === 2) {
+
+    }
+  }
+
+  useEffect(()=>{
+    console.log(canChoose, tempArr)
+  }, [canChoose, tempArr])
 
   useEffect(()=>{
     getReserves(date, room)
@@ -131,7 +171,11 @@ function Reserve(props) {
             bordered
             light
             style={{ margin: 6, padding: 4, backgroundColor: isReserved ? '#dcdcdc' : isChoosed ? Colors.primary : '#fff'}}
-            onPress={()=>handleOnSetTimes(item.tag)}>
+            onPress={()=>{
+              handleOnSetTimes(item.tag)
+              // console.log('index', index)
+              sequence(index)
+            }}>
             <Text style={styles.buttontext}>{item.time}</Text>
           </Button>
         )

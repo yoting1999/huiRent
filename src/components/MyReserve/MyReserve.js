@@ -27,7 +27,7 @@ function MyReserve(props) {
             <Text>無預約資料</Text>
             :(
             <ScrollView>
-              <Swiptlist reserveData={ reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} />
+              <Swiptlist reserveData={ reserveData && reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} />
             </ScrollView>
 
             )

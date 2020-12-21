@@ -89,7 +89,7 @@ function ReserveStackScreen() {
         headerShown: false
       }}>
 
-      <ReserveStack.Screen name="MyReserve" component={MyReserve}/>
+      <ReserveStack.Screen name="myReserve" component={MyReserve}/>
       <ReserveStack.Screen name="qrcode" component={QrCode}/>
       <ReserveStack.Screen name="scanner" component={Scanner}/>
     </ReserveStack.Navigator>
