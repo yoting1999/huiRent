@@ -14,20 +14,15 @@ import Spinner from 'react-native-loading-spinner-overlay'
 function MyReserve(props) {
     const navigation = useNavigation()
     const { reserveData, isLoading } = props
-    const undoneData = Object.values(reserveData).filter((item)=>item.status==='UNDONE')
-    const doneData = Object.values(reserveData).filter((item)=>item.status==='DONE')
 
     return (
       <Container>
         <Header title="我的預約"/>
         <Title style={{backgroundColor:"#D0D0D0"}}>UNDONE</Title>
         <Content>
-            <Swiptlist reserveData={undoneData}/>
+            <Swiptlist reserveData={reserveData}/>
         </Content>
         <Title style={{backgroundColor:"#D0D0D0"}}>DONE</Title>
-        <Content>
-        <Swiptlist reserveData={doneData}/>
-        </Content>
       <Spinner visible={isLoading}/>
       </Container>
 
