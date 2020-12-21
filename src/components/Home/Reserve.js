@@ -13,8 +13,8 @@ import Colors from '../../styles/Colors';
 import { ROOMS, TIME } from '../../constants/rooms'
 
 const TODAY = dayjs().format('YYYY-MM-DD')
+const ONE_MONTH_LATER = dayjs(TODAY).add(1, 'month').format('YYYY-MM-DD')
 const UNDONE = 'UNDONE'
-
 
 function Reserve(props) {
   const navigation = useNavigation();
@@ -128,8 +128,8 @@ function Reserve(props) {
         markedDates={{
           [date]: {selected: true, selectedColor: Colors.primary},
         }}
-        minDate={'2012-05-10'}
-        maxDate={'2021-05-30'}
+        minDate={TODAY}
+        maxDate={ONE_MONTH_LATER}
         onDayPress={(day) => setDate(day.dateString)}
         onDayLongPress={(day) => setDate(day.dateString)}
         monthFormat={'yyyy MM'}
