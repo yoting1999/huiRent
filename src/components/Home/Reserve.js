@@ -135,7 +135,7 @@ function Reserve(props) {
         monthFormat={'yyyy MM'}
         onMonthChange={(month) => {console.log('month changed', month)}}
         hideArrows={false}
-        renderArrow={(direction) => <Text>{direction}</Text>}
+        renderArrow={(direction) => <Text>{direction === 'left' ? '<' : '>'}</Text>}
         hideExtraDays={false}
         disableMonthChange={false}
         firstDay={1}
@@ -170,7 +170,6 @@ function Reserve(props) {
             style={{ margin: 6, padding: 4, backgroundColor: isReserved ? '#dcdcdc' : isChoosed ? Colors.primary : '#fff'}}
             onPress={()=>{
               handleOnSetTimes(item.tag)
-              // console.log('index', index)
               sequence(index)
             }}>
             <Text style={styles.buttontext}>{item.time}</Text>
