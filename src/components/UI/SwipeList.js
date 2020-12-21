@@ -111,6 +111,7 @@ function SwipeList(props) {
         renderItem={renderItem}
         maxSwipeDistance={240}
         renderQuickActions={({index, item}) => QuickActions(index, item)}
+        shouldBounceOnMount={true}
         ItemSeparatorComponent={()=> <View style={styles.itemSeparator}/>}
         // contentContainerStyle={{ flexGrow: 1,backgroundColor: 'red'}} // 背景顏色
       />
