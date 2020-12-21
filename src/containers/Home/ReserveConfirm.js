@@ -4,6 +4,7 @@ import Layout from '../../components/Home/ReserveConfirm'
 import agent from '../../lib/agent'
 
 function ReserveConfirm(props) {
+  const { navigation } = props
   const { reserveData, userInfo } = props.route.params
   const { Reserve } = agent
   const addReserve = async() => {
@@ -20,7 +21,7 @@ function ReserveConfirm(props) {
 
 
 
-  return <Layout addReserve={addReserve} reserveData={reserveData}/>
+  return <Layout addReserve={addReserve} reserveData={reserveData} navigation={navigation } userInfo={userInfo}/>
 }
 
 export default ReserveConfirm

@@ -50,6 +50,7 @@ const HomeStack = createStackNavigator()
         <HomeStack.Screen name="Reserve" component={Reserve}/>
         <HomeStack.Screen name="ReserveConfirm" component={ReserveConfirm}/>
         <HomeStack.Screen name="ReserveDate" component={ReserveDate}/>
+        <HomeStack.Screen name="myReserve" component={MyReserve}/>
       </HomeStack.Navigator>
 
   )

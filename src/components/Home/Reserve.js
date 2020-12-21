@@ -24,17 +24,14 @@ function Reserve(props) {
   const [time, setTime] = useState([])
   const [room, setRoom] = useState('BIG');
   const [isReservedTime, setIsReservedTime] = useState(null)
-  const [status,setStatus] = useState('UNDONE')
+  const [status,setStatus] = useState(UNDONE)
 
   const [canChoose, setCanChoose] = useState([])
   const [tempArr, setTempArr] = useState([])
 
   const handleSubmit = () => {
-    // console.log('date', date, 'time', time, 'room', room)
-    // console.log('userInfo', userInfo)
     const price = ROOMS.find((r)=>r.alians === room).price
-    console.log('price', price* time.length)
-     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo })
+    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo })
   }
 
   const handleOnSetTimes = (tagTime) => {

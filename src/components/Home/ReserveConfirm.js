@@ -6,11 +6,12 @@ import { ALIANS, TIME, } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {useNavigation} from '@react-navigation/native'
+import route from '../../constants/route'
 
 
 function ReserveConfirm(props) {
-  const navigation = useNavigation();
-  const { addReserve, reserveData } = props
+  // const navigation = useNavigation();
+  const { addReserve, reserveData, navigation } = props
   const { isLoading, userInfo } = props
 
 
@@ -20,7 +21,8 @@ function ReserveConfirm(props) {
       '預約成功！',
       '請至calendar查看預約',
       [
-          { text: '確認', onPress: () => navigation.navigate('home') }
+        // push 可以重新刷新， but useNavigation 沒有 push 這個function
+          { text: '確認', onPress: () => navigation.push(route.myReserve) }
       ],
 
   )
