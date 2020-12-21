@@ -3,13 +3,13 @@ import { Animated, Easing, View, TouchableOpacity, Image, StyleSheet, Dimensions
 
 function circle(props) {
     const [drawData, setdrawData] = useState([
-        { id: 1, title: "谢谢参与", icon: require('./imgs/cry_coin.png') },
+        { id: 1, title: "", icon: require('./imgs/cry_coin.png') },
         { id: 2, title: "手机1", icon: require('./imgs/phone1_coin.png') },
         { id: 3, title: "+20金币", icon: require('./imgs/gold_coin.png') },
         { id: 4, title: "手机2", icon: require('./imgs/phone2_coin.png') },
         { id: 5, title: "手机50", icon: require('./imgs/gold_coin.png') },
         { id: 6, title: "+100金币", icon: require('./imgs/gold_coin.png') },
-        { id: 7, title: "谢谢参与", icon: require('./imgs/cry_coin.png') },
+        { id: 7, title: "", icon: require('./imgs/cry_coin.png') },
         { id: 8, title: "手机3", icon: require('./imgs/phone3_coin.png') }
     ])
     const [offOn, setoffOn] = useState(true)
