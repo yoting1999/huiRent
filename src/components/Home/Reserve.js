@@ -10,7 +10,7 @@ import Header from '../UI/Header'
 import routeConfig from '../../constants/route'
 import Colors from '../../styles/Colors';
 
-import { TIME } from '../../constants/rooms'
+import { ROOMS, TIME } from '../../constants/rooms'
 
 const TODAY = dayjs().format('YYYY-MM-DD')
 const UNDONE = 'UNDONE'
@@ -24,12 +24,19 @@ function Reserve(props) {
   const [time, setTime] = useState([])
   const [room, setRoom] = useState('BIG');
   const [isReservedTime, setIsReservedTime] = useState(null)
+  const [status,setStatus] = useState('UNDONE')
 
 
   const handleSubmit = () => {
     // console.log('date', date, 'time', time, 'room', room)
     // console.log('userInfo', userInfo)
+<<<<<<< HEAD
     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room, status: UNDONE }, userInfo })
+=======
+    const price = ROOMS.find((r)=>r.alians === room).price
+    console.log('price', price* time.length)
+     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo })
+>>>>>>> 4607e630facfc4122c3d8708f1d5f3a7fd666d75
   }
 
   const handleOnSetTimes = (tagTime) => {
@@ -123,7 +130,7 @@ function Reserve(props) {
             disabled={isReserved}
             bordered
             light
-            style={{ margin: 6, padding: 4, backgroundColor: isReserved ? Colors.secondary : isChoosed ? Colors.primary : '#fff'}}
+            style={{ margin: 6, padding: 4, backgroundColor: isReserved ? '#dcdcdc' : isChoosed ? Colors.primary : '#fff'}}
             onPress={()=>handleOnSetTimes(item.tag)}>
             <Text style={styles.buttontext}>{item.time}</Text>
           </Button>

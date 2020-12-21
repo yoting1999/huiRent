@@ -2,15 +2,18 @@ import React from 'react'
 import { View, Text, StyleSheet,Alert } from 'react-native'
 import { Container, Content, Button,Icon } from 'native-base'
 import Header from '../UI/Header'
-import { ALIANS, TIME } from '../../constants/rooms'
+import { ALIANS, TIME, } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {useNavigation} from '@react-navigation/native'
+
 
 function ReserveConfirm(props) {
   const navigation = useNavigation();
   const { addReserve, reserveData } = props
   const { isLoading, userInfo } = props
+  
+
   const onpresstohome = async ()=>{
     await addReserve()
     Alert.alert(
@@ -39,21 +42,26 @@ function ReserveConfirm(props) {
      
         <View style={{borderWidth:30,
     borderColor:'#ffe4e1',paddingTop:10}}>
-      <Text style={styles.room}> <Icon
+      <Text style={styles.rooms}> <Icon
             style={{ fontSize: 18 }}
             type="FontAwesome5" name="user" />   {userInfo && userInfo.name}</Text>
-        <Text style={styles.room}>
+        <Text style={styles.rooms}>
           <Icon
             style={{ fontSize: 18 }}
             type="FontAwesome5" name="home" />   {ALIANS[reserveData.room]}</Text>
         
-        <Text style={styles.room}><Icon
+        <Text style={styles.rooms}><Icon
             style={{ fontSize: 18 }}
             type="FontAwesome5" name="calendar-check" />   {reserveData.date}</Text>
 
-        {reserveData.time.map(t=><Text style={styles.room}><Icon
+        {reserveData.time.map(t=><Text style={styles.rooms}><Icon
             style={{ fontSize: 18 }}
             type="FontAwesome5" name="clock" />   {tagToTime(t)}</Text>)}
+
+        <Text style={styles.rooms}>
+          <Icon
+            style={{ fontSize: 18 }}
+            type="FontAwesome5" name="dollar-sign" />   {reserveData.price* reserveData.time.length}   元</Text>
        
        </View>
        <TouchableOpacity onPress={()=> onpresstohome()} style={styles.submitBtn}>
@@ -75,7 +83,7 @@ const styles = StyleSheet.create({
     paddingTop:30,
     
   },
-  room:{
+  rooms:{
     fontSize:20,
     alignItems:"center",
     paddingLeft:100,

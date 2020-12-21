@@ -23,6 +23,7 @@ function MyReserve() {
       const data = tempData.filter(item=>item.userId === userInfo.uid)
       setReserveDate(data)
       setIsLoading(false)
+      console.log('reserve',reserveData)
     } catch(err){
       console.log('err', err)
     }
