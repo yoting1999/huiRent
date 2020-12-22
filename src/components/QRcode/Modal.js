@@ -3,11 +3,21 @@ import { View, Text, StyleSheet, Alert } from 'react-native'
 import { Button } from 'native-base';
 import Spinner from 'react-native-loading-spinner-overlay'
 import Modal from 'react-native-modal';
-import { ALIANS, TIME } from '../../constants/rooms';
+import { ALIANS, ROOMS, TIME } from '../../constants/rooms';
 import Colors from '../../styles/Colors'
 
 function ReserveModal(props) {
-  const { isVisible, setIsVisible, data, ordererData, isLoading } = props
+  const {
+    isVisible,
+    setIsVisible,
+    data,
+    ordererData,
+    ordererId,
+    isLoading,
+    finishTheReserve,
+    scannedValue,
+    addPoint
+  } = props
 
   const closeModal = () => {
     setIsVisible(false)
@@ -30,7 +40,19 @@ function ReserveModal(props) {
         },
         // 改變訂單狀態
         // 給租借者點數
-        { text: "完成", onPress: () => console.log("OK Pressed") }
+        { text: "完成", onPress: async () => {
+          await finishTheReserve(scannedValue)
+          const findTheRoom = ROOMS.find(room=>room.alians === data.room)
+          const ordererPrevPoints = ordererData.GotPoint
+          const gotPointData = {
+            type: data.room,
+            points: findTheRoom.points* data.time.length,
+            time: new Date()
+          }
+          const newPointsData = [...ordererPrevPoints, gotPointData]
+          const status = await addPoint(data.userId, ordererId, newPointsData)
+          if(status === 200) setIsVisible(false)
+        } }
       ],
       { cancelable: false }
     )

@@ -3,6 +3,7 @@ export const ROOMS = [
     name: '大練團室',
     alians: 'BIG',
     price: 400,
+    points: 10,
     uri: 'https://ysolife.com/wp-content/uploads/2017/11/05-%E5%A4%A7%E7%B7%B4-min-768x510.jpg',
     equipments: [
       {type: '基本' ,equipment: ['麥克風','麥克風接線','鼓組','mixer'] },
@@ -15,6 +16,7 @@ export const ROOMS = [
     name: '中練團室',
     alians: 'MEDIUM',
     price: 300,
+    points: 5,
     uri: 'http://www.irockmusic.com.tw/wp-content/uploads/2019/11/IMG_0761-1024x683.jpg',
     equipments: [
       {type: '基本' ,equipment: ['麥克風','麥克風接線','鼓組','mixer'] },
@@ -28,6 +30,7 @@ export const ROOMS = [
     name: '小練團室',
     alians: 'SMALL',
     price: 200,
+    points: 2,
     uri: 'http://www.irockmusic.com.tw/wp-content/uploads/2018/07/%E5%9C%98%E5%AE%A4%E5%87%BA%E7%A7%9F.jpg',
     equipments: [
       {type: '基本' ,equipment: ['麥克風','麥克風接線','鼓組','mixer'] },
@@ -41,6 +44,7 @@ export const ROOMS = [
     name: '鼓室',
     alians: 'DRUM',
     price: 50,
+    points: 1,
     uri:   'https://img.ruten.com.tw/s2/7/f7/f2/21729744938994_881.JPG',
     equipments: [
       {type: '基本' ,equipment: ['麥克風','麥克風接線','鼓組','mixer'] },

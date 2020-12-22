@@ -84,7 +84,7 @@ function Reserve(props) {
   }
 
   useEffect(()=>{
-    console.log(canChoose, tempArr)
+    // console.log(canChoose, tempArr)
   }, [canChoose, tempArr])
 
   useEffect(()=>{
