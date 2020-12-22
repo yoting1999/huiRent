@@ -1,18 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Text, Pressable,Platform } from 'react-native'
 import { Button } from 'native-base'
 import SwipeableFlatList from 'react-native-swipeable-list';
-import Colors from '../../styles/Colors';
 import dayjs from 'dayjs'
 import { ALIANS, TIME } from '../../constants/rooms'
 import { useNavigation } from '@react-navigation/native';
 import route from '../../constants/route';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const TODAY = new Date()
-function SwipeList(props) {
+function SwipeListManager(props) {
   const { reserveData, getReservesWithDate } = props
 
   const navigation = useNavigation()
+
+  const [date, setDate] = useState(TODAY)
+
+  useEffect(()=> {
+    const dateFormate = dayjs(date).format('YYYY-MM-DD')
+    getReservesWithDate(dateFormate)
+  }, [date])
 
   const QuickActions = (index, qaItem) => {
     return (
@@ -58,12 +65,22 @@ function SwipeList(props) {
 
   return (
      <View>
+      <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={'date'}
+          display={Platform.OS === 'ios' ? 'inline' : 'default'}
+          onChange={(e, date)=>setDate(date)}
+          style={{ marginHorizontal: 50 }}
+        />
       {
         reserveData && reserveData.length === 0 ?
         <View>
           <Text style={{ textAlign: 'center' }}>無預約資料</Text>
         </View>
         :(
+        <>
+          <View style={styles.split}/>
           <SwipeableFlatList
             keyExtractor={(item) => item.id}
             data={reserveData}
@@ -73,6 +90,7 @@ function SwipeList(props) {
             shouldBounceOnMount={true}
             ItemSeparatorComponent={()=> <View style={styles.itemSeparator}/>}
           />
+        </>
         )
       }
     </View>
@@ -80,6 +98,8 @@ function SwipeList(props) {
 }
 
 const styles = StyleSheet.create({
+
+  // list每一個item
   item: {
     backgroundColor:'#fff',
     height: 100,
@@ -88,14 +108,19 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection:'row',
     flex:1
+
+
   },
   item2: {
+
     height: 80,
     padding: 10,
     borderBottomColor: '#eee',
     flexDirection:'column',
     flex:2,
     alignItems:'center'
+
+
   },
 
   //item和item之間
@@ -130,7 +155,9 @@ const styles = StyleSheet.create({
     fontSize:30,
     color:'#6b6b6b',
     textAlign:'center',
-    fontWeight:'bold'
+    fontWeight:'bold',
+
+
   },
   rooms:{
     fontSize:25,
@@ -153,4 +180,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default SwipeList
+export default SwipeListManager
