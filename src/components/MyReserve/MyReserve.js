@@ -20,7 +20,7 @@ function MyReserve(props) {
         <Header title="我的預約"/>
         <Content >
           <ScrollView>
-            <Swiptlist reserveData={reserveData}/>
+            <Swiptlist reserveData={reserveData && reserveData.sort((a,b)=> new Date(b.date) - new Date(a.date))}/>
           </ScrollView>
         </Content>
       <Spinner visible={isLoading}/>
