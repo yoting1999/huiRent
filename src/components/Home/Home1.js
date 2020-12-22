@@ -25,8 +25,6 @@ function Home(props) {
     setCurrentIndex(index)
   }
 
-  console.log('userInfo', userInfo)
-
   return (
     <View style={styles.container}>
       {userInfo && isManager(userInfo) &&

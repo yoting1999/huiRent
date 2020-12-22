@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
 import { StatusBar, View, Text, Dimensions, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import Colors from '../../styles/Colors'
-import route from '../../constants/route'
-
 import Modal from '../Home/Modal'
 
 const { width, height } = Dimensions.get("window")
@@ -13,15 +9,7 @@ export const SLIDE_HEIGHT = 0.8 * height
 function Slide(props) {
 
   const { data, bgImg } = props
-  // const navigation = useNavigation()
-
   const [ isVisible, setIsVisible ] = useState(false)
-
-  // const transform = [
-  //   { translateY: (SLIDE_HEIGHT - 100) / 2 },
-  //   { translateX: right ? width / 2 - 50 : -width / 2 + 50},
-  //   { rotate: right ? "-90deg" : "90deg" }
-  // ]
 
   return(
     <ImageBackground

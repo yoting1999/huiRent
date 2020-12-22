@@ -6,7 +6,8 @@ import agent from '../../lib/agent'
 import dayjs from 'dayjs'
 const TODAY = dayjs().format('YYYY-MM-DD')
 
-function Reserve() {
+function Reserve(props) {
+  const { type } = props.route.params
   const { Reserve } = agent
 
   const userInfo = useSelector(state=>state.authReducer.userInfo)
@@ -29,7 +30,15 @@ function Reserve() {
     getReserves()
   }, [])
 
-  return <Layout userInfo={userInfo} getReserves={getReserves} reserveData={reserveData} isLoading={isLoading}/>
+  return (
+    <Layout
+      type={type}
+      userInfo={userInfo}
+      getReserves={getReserves}
+      reserveData={reserveData}
+      isLoading={isLoading}
+    />
+  )
 }
 
 export default Reserve

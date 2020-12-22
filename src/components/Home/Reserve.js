@@ -18,11 +18,11 @@ const UNDONE = 'UNDONE'
 
 function Reserve(props) {
   const navigation = useNavigation();
-  const { userInfo, getReserves, reserveData, isLoading } = props
+  const { userInfo, getReserves, reserveData, isLoading, type } = props
 
   const [date, setDate] = useState(TODAY)
   const [time, setTime] = useState([])
-  const [room, setRoom] = useState('BIG');
+  const [room, setRoom] = useState(type || 'BIG');
   const [isReservedTime, setIsReservedTime] = useState(null)
   const [status,setStatus] = useState(UNDONE)
 
@@ -123,7 +123,6 @@ function Reserve(props) {
       <Text style={styles.fontdate} >請選擇日期</Text>
       <Text >*如需預約不同天，請分次預約</Text>
       <Calendar
-      // Initially visible month. Default = Date()
         current={date}
         markedDates={{
           [date]: {selected: true, selectedColor: Colors.primary},
