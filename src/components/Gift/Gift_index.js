@@ -6,83 +6,63 @@ import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LotteryModal from './LotteryModal';
 import GiftModal from './GiftModal';
-
-const GiftOption = [
-    { name: 'pick', costpoint: '5',uri:require('../../../assets/Gift_pick.jpg') },
-    { name: 'Elixir 包膜弦', costpoint: '50',uri:require('../../../assets/Gift_elixir.jpg' )},
-    { name: '全館商品9折卷一張', costpoint: '20' ,uri:require('../../../assets/Gift_coupon1.jpg')},
-    { name: '小練團室1h使用卷1111111', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
-    { name: '小練團室1h使用卷', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
-    { name: '小練團室1h使用卷', costpoint: '60',uri:require('../../../assets/Gift_coupon2.jpg') },
-]
+import { GiftOption } from '../../constants/gift'
+// import console = require('console');
+// const GiftOption = [
+//     { name: 'pick', costpoint: '5',des:'可任選30元以下pick',uri:require('../../../assets/Gift_pick.jpg') },
+//     { name: 'Elixir 包膜弦', costpoint: '50',des:'可挑選任意粗細弦(.10/.11/.12)',uri:require('../../../assets/Gift_elixir.jpg' )},
+//     { name: '全館商品9折卷一張', costpoint: '20' ,des:'全館商品打9折',uri:require('../../../assets/Gift_coupon1.jpg')},
+//     { name: '小練團室1h使用卷', costpoint: '60',des:'可免費使用小練團室1h',uri:require('../../../assets/Gift_coupon2.jpg') }
+// ]
 
 const NUN_COLUMNS = 2
 
 
-
-// const renderGift = (data) =>(
-//     <View style={styles.flatlistItem}>
-
-//     <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(data.item.name,"先不要點拜託")}}>
-//     <Image  resizeMode={"stretch"} style={styles.center} source={{ uri: 'http://lorempixel.com/1920/1920/cats' }}/>
-
-//         <Text style={styles.title}>{data.item.name}</Text>
-//         <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
-
-//           <View style={styles.myButton_circle}>
-//             <Text>兌換</Text>
-
-//     </View>
-
-
-//     </TouchableOpacity>
-
-//     </View>
-// )
-
-
-
-
-function Gift_index() {
+function Gift_index(props) {
+    const [Giftmodaldata, setGiftmodaldata] = useState(GiftOption[0])
+    const { isLoading, userInfo } = props
     const [modalVisible, setModalVisible] = useState(false)
     const [GiftModalVisible, setGiftModalVisible] = useState(false)
+    console.log('使用點數', userInfo.UsedPoint)
+    console.log('總共點數', userInfo.GotPoint)
 
-    const renderGift = (data) => (  
+    function GiftModalchange(data) {
+        setGiftModalVisible(true)
+        setGiftmodaldata(data)
+    }
+    const renderGift = (data) => (
 
-    
-       
-    <View style={styles.flatlistItem}>
-            
-        <TouchableOpacity style={styles.itemButton} onPress={() => setGiftModalVisible(true)}>
-        <View style={{flex:4}}>
-            <ImageBackground resizeMode={'center'} style={styles.center} source={data.item.uri }>
-            </ImageBackground>
+
+
+        <View style={styles.flatlistItem}>
+
+            <TouchableOpacity style={styles.itemButton} onPress={() => GiftModalchange(data.item)}>
+                <View style={{ flex: 4 }}>
+                    <ImageBackground resizeMode={'center'} style={styles.center} source={data.item.uri}>
+                    </ImageBackground>
+                </View>
+                <View style={styles.flatlistBox}>
+                    <Text style={styles.title}>{data.item.name}</Text>
+
+                </View>
+                <View style={styles.flatlistBox}>
+                    <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
+                </View>
+            </TouchableOpacity>
+
         </View>
-        <View style={styles.flatlistBox}>
-            <Text style={styles.title}>{data.item.name}</Text>
-            
-        </View>
-        <View style={styles.flatlistBox}>
-        <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
-        </View>
-        </TouchableOpacity>
-        <GiftModal
-        GiftModalVisible={GiftModalVisible}
-        setGiftModalVisible={setGiftModalVisible}
-        data={data.item.name}></GiftModal>
-    </View>
-    
-)
+
+    )
 
     return (
-        
+
         <Container style={styles.container}>
             <Header title="點數兌換" />
-           
+
 
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <TouchableOpacity style={styles.topLiftItem} onPress={() => setModalVisible(true)} >
+                    <TouchableOpacity style={styles.topLiftItem} onPress={() => {setModalVisible(true)}} >
                         <Image resizeMode={"contain"} style={[styles.center]} source={require('../../../assets/Gift_circle.jpg')} />
                         <TouchableOpacity>
                             <Text style={styles.Content}>點圖進入幸運輪盤頁面</Text>
@@ -90,10 +70,16 @@ function Gift_index() {
                     </TouchableOpacity>
 
                     <View style={styles.topRightItem}>
-                        <Text style={styles.Content}>目前可用點數：20</Text>
+                        <Text style={styles.Content}>目前可用點數：{userInfo.GotPoint - userInfo.UsedPoint}</Text>
                         <LotteryModal
                             modalVisible={modalVisible}
                             setModalVisible={setModalVisible}></LotteryModal>
+                        <GiftModal
+                            GiftModalVisible={GiftModalVisible}
+                            setGiftModalVisible={setGiftModalVisible}
+                            data={Giftmodaldata}
+                            userInfo={userInfo}
+                        ></GiftModal>
                     </View>
                 </View>
                 <View style={{ flex: 6, flexDirection: 'row' }}>
@@ -101,6 +87,8 @@ function Gift_index() {
                         numColumns={NUN_COLUMNS}
                         data={GiftOption}
                         renderItem={renderGift}
+                        keyExtractor={(item, index) => index.toString()}
+
                     />
                 </View>
             </View>
@@ -129,12 +117,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         overflow: 'visible',
-        },
-    flatlistBox:{
-        flex:1,
-        overflow:'hidden',
-        alignItems:'center',
-        padding:10  ,
+    },
+    flatlistBox: {
+        flex: 1,
+        overflow: 'hidden',
+        alignItems: 'center',
+        padding: 10,
         // backgroundColor:'red'
     },
     topLiftItem: {
@@ -149,12 +137,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontSize: 15,
+        fontSize: 18,
     },
     Content: {
         // backgroundColor: 'red',
         textDecorationLine: 'underline',
-        fontSize: 12
+        fontSize: 15,
+        fontWeight: 'bold'
     },
     myButton_circle: {
         justifyContent: 'center',
