@@ -3,14 +3,14 @@ import { Animated, Easing, View, TouchableOpacity, Image, StyleSheet, Dimensions
 
 function circle(props) {
     const [drawData, setdrawData] = useState([
-        { id: 1, title: "", icon: require('./imgs/cry_coin.png') },
-        { id: 2, title: "手机1", icon: require('./imgs/phone1_coin.png') },
-        { id: 3, title: "+20金币", icon: require('./imgs/gold_coin.png') },
-        { id: 4, title: "手机2", icon: require('./imgs/phone2_coin.png') },
-        { id: 5, title: "手机50", icon: require('./imgs/gold_coin.png') },
-        { id: 6, title: "+100金币", icon: require('./imgs/gold_coin.png') },
-        { id: 7, title: "", icon: require('./imgs/cry_coin.png') },
-        { id: 8, title: "手机3", icon: require('./imgs/phone3_coin.png') }
+        { id: 1, title: "未中獎", icon: require('./imgs/cry_coin.png') },
+        { id: 2, title: "頭獎", icon: require('../../../assets/Gift_pick.jpg') },
+        { id: 3, title: "未中獎", icon: require('./imgs/cry_coin.png') },
+        { id: 4, title: "三獎", icon: require('../../../assets/Gift_pick.jpg') },
+        { id: 5, title: "未中獎", icon: require('./imgs/cry_coin.png') },
+        { id: 6, title: "二獎", icon: require('../../../assets/Gift_pick.jpg') },
+        { id: 7, title: "未中獎", icon: require('./imgs/cry_coin.png') },
+        { id: 8, title: "三獎", icon: require('../../../assets/Gift_pick.jpg') }
     ])
     const [offOn, setoffOn] = useState(true)
     const [rotateDeg, setrotateDeg] = useState(new Animated.Value(0))
@@ -52,7 +52,7 @@ function circle(props) {
         });
     };
     const changeValue = (postion) => {
-        alert("定位到了" + postion + "上了");
+        alert("定位到了" + drawData[postion].title + "上了");
     };
     return (
         <View style={styles.container}>

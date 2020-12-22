@@ -3,11 +3,12 @@ import Layout from '../../components/Gift/Gift_index'
 import { useSelector, useDispatch } from 'react-redux'
 import * as firebase from 'firebase'
 import agent from '../../lib/agent'
-function Gift() {
-    const { Rooms, People } = agent
+function ChangeGift(props) {
+    const {People } = agent
     const userInfo = useSelector(state => state.authReducer.userInfo)
     const [userData, setUserData] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    console.log('userInfo', userInfo)
     const getUser = async () => {
         setIsLoading(true)
         const uid = firebase.auth().currentUser.uid
