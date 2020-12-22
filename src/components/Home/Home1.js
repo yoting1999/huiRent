@@ -66,7 +66,6 @@ function Home(props) {
         <View style={styles.footer}>
           <View style={{...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0, .9)'}} />
           <View style={{ flex: 1,backgroundColor: '#fff', borderTopLeftRadius: 75}}>
-          <Text style={{ fontSize: 50, padding: 10 }}>TEST : {userInfo && userInfo.name}</Text>
           <Text style={styles.brand}>©2020 HUIRENT</Text>
         </View>
       </View>
