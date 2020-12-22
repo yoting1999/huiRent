@@ -2,7 +2,7 @@ import { Button, Container, Content, Header, Body, Title, Input, Icon } from 'na
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, Image } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 
 function SignUp(props) {
@@ -12,13 +12,13 @@ function SignUp(props) {
     const [password, setPassword] = useState(null);
     const [password2, setPassword2] = useState(null)
     const [number, setNumber] = useState(null)
-    const { signUp, database } = props
+    const { signUp, database, SelectImage, selectedImage, firebaseuri, message } = props
     const navigation = useNavigation();
 
     const [nameError, setNameError] = useState(false)
     const [emailError, setEmailError] = useState(false)
-    const [passError ,setPassError] = useState(false)
-    const [passError2 ,setPassError2] = useState(false)
+    const [passError, setPassError] = useState(false)
+    const [passError2, setPassError2] = useState(false)
     const [numberError, setNumberError] = useState(false)
     const [disable, setDisable] = useState(false)
     const press = async () => {
@@ -47,11 +47,11 @@ function SignUp(props) {
         }
     }
 
-    const EmailCheck = async(email) => {
+    const EmailCheck = async (email) => {
         var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
-        if(email.search(emailRule)!= -1){
+        if (email.search(emailRule) != -1) {
             await signUp(email, password),
-                await database(name, Date, email,number),
+                await database(name, Date, email, number, firebaseuri),
                 Alert.alert(
                     '註冊成功！',
                     '請到登入頁登入',
@@ -60,7 +60,7 @@ function SignUp(props) {
                     ],
                     { cancelable: false }
                 )
-        }else{
+        } else {
             Alert.alert(
                 '欄位輸入錯誤',
                 '電子信箱格式錯誤！',
@@ -78,25 +78,25 @@ function SignUp(props) {
         }
     }
 
-    const handleBlurInputEmail = () =>{
+    const handleBlurInputEmail = () => {
         if (!email) {
             setEmailError(true)
         }
     }
 
-    const handleBlurInputPass1 = () =>{
+    const handleBlurInputPass1 = () => {
         if (!password) {
             setPassError(true)
         }
     }
 
-    const handleBlurInputPass2 = () =>{
+    const handleBlurInputPass2 = () => {
         if (!password2) {
             setPassError2(true)
         }
     }
 
-    const handleBlurInputNum = () =>{
+    const handleBlurInputNum = () => {
         if (!number) {
             setNumberError(true)
         }
@@ -119,12 +119,12 @@ function SignUp(props) {
             setDisable(true)
             return
         }
-        if(!number){
+        if (!number) {
             setDisable(true)
             return
         }
         setDisable(false)
-    }, [name, email,password,password2,number])
+    }, [name, email, password, password2, number])
 
     return (
         <Container>
@@ -135,16 +135,22 @@ function SignUp(props) {
             </Header>
             <Content>
                 <View style={styles.form}>
-                    <TouchableOpacity style={styles.profile} onPress={() => console.log('上傳照片')}>
+                    {/* <TouchableOpacity style={styles.profile} onPress={() => UploadImage()}>
                         <Icon name="user" type="FontAwesome5" style={{ fontSize: 60, color: "gray" }} />
+                    </TouchableOpacity> */}
+                    <TouchableOpacity style={styles.profile} onPress={() => SelectImage()}>
+                        <Image source={{ uri: selectedImage.localUri }} style={styles.logo} />
                     </TouchableOpacity>
+                    <Text style={styles.text}>點按圖片可上傳個人照片
+                        <Text style={styles.photowarn}>{message}</Text>
+                    </Text>
                     <TextInput onBlur={handleBlurInputName} placeholder="姓名" style={styles.inputstyle} onChangeText={text => {
                         setName(text)
                         setNameError(false)
                     }} />
                     {nameError && <Text style={{ color: "#eb4034", marginLeft: -270 }}>請輸入姓名</Text>}
                     <DatePicker
-                        style={{ width: 345 ,borderBottomWidth:1,borderColor:"#D0D0D0",marginBottom:15}}
+                        style={{ width: 345, borderBottomWidth: 1, borderColor: "#D0D0D0", marginBottom: 15 }}
                         mode="date"
                         placeholder={Date}
                         format="YYYY-MM-DD"
@@ -174,21 +180,21 @@ function SignUp(props) {
                         setEmailError(false)
                     }} />
                     {emailError && <Text style={{ color: "#eb4034", marginLeft: -240, marginBottom: 10 }}>請輸入電子信箱</Text>}
-                    <TextInput onBlur={handleBlurInputNum} keyboardType='numeric' maxLength={10} placeholder="電話號碼" style={styles.inputstyle} onChangeText={text =>{
+                    <TextInput onBlur={handleBlurInputNum} keyboardType='numeric' maxLength={10} placeholder="電話號碼" style={styles.inputstyle} onChangeText={text => {
                         setNumber(text)
                         setNumberError(false)
-                    }}/>
-                    {numberError && <Text style={{ color: "#eb4034", marginLeft: -240,marginBottom: 10 }}>請輸入電話號碼</Text>}
+                    }} />
+                    {numberError && <Text style={{ color: "#eb4034", marginLeft: -240, marginBottom: 10 }}>請輸入電話號碼</Text>}
                     <TextInput textContentType={'newPassword'} secureTextEntry={true} onBlur={handleBlurInputPass1} placeholder="密碼(需至少六位)" style={styles.inputstyle} onChangeText={text => {
                         setPassword(text)
                         setPassError(false)
-                        }} />
-                    {passError && <Text style={{ color: "#eb4034", marginLeft: -270, marginBottom: 10  }}>請輸入密碼</Text>}
-                    <TextInput textContentType={'newPassword'} secureTextEntry={true} onBlur={handleBlurInputPass2} placeholder="再次輸入密碼" style={styles.inputstyle} onChangeText={text =>{
-                         setPassword2(text)
-                         setPassError2(false)
-                         }} />
-                    {passError2 && <Text style={{ color: "#eb4034", marginLeft: -240, marginBottom: 10  }}>請再次輸入密碼</Text>}
+                    }} />
+                    {passError && <Text style={{ color: "#eb4034", marginLeft: -270, marginBottom: 10 }}>請輸入密碼</Text>}
+                    <TextInput textContentType={'newPassword'} secureTextEntry={true} onBlur={handleBlurInputPass2} placeholder="再次輸入密碼" style={styles.inputstyle} onChangeText={text => {
+                        setPassword2(text)
+                        setPassError2(false)
+                    }} />
+                    {passError2 && <Text style={{ color: "#eb4034", marginLeft: -240, marginBottom: 10 }}>請再次輸入密碼</Text>}
                     <Button disabled={disable} block dark onPress={() => press()}><Text style={{ color: "white" }}>送出並註冊</Text></Button>
                 </View>
             </Content>
@@ -227,6 +233,20 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "gray"
     },
+    logo: {
+        width: 150,
+        height: 150,
+        borderRadius: 120,
+    },
+    text: {
+        marginTop: -40,
+        marginBottom: 30,
+        marginLeft: 15,
+        color: '#226387'
+    },
+    photowarn: {
+        color: '#eb4034',
+    }
 })
 
 export default SignUp
