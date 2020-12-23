@@ -6,13 +6,14 @@ import { ALIANS, TIME, } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {useNavigation} from '@react-navigation/native'
+import route from '../../constants/route'
 
 
 function ReserveConfirm(props) {
-  const navigation = useNavigation();
-  const { addReserve, reserveData } = props
+  // const navigation = useNavigation();
+  const { addReserve, reserveData, navigation } = props
   const { isLoading, userInfo } = props
-  
+
 
   const onpresstohome = async ()=>{
     await addReserve()
@@ -20,13 +21,14 @@ function ReserveConfirm(props) {
       '預約成功！',
       '請至calendar查看預約',
       [
-          { text: '確認', onPress: () => navigation.navigate('home') }
+        // push 可以重新刷新， but useNavigation 沒有 push 這個function
+          { text: '確認', onPress: () => navigation.push(route.myReserve) }
       ],
-      
+
   )
-    
+
   }
- 
+
   const tagToTime = (tag) => {
     const time = TIME.find((item)=>item.tag === tag).time
     return time
@@ -39,7 +41,7 @@ function ReserveConfirm(props) {
             style={{ fontSize: 30 }}
             type="FontAwesome5" name="clipboard-list" />  ~確認預約~ </Text>
       <Text></Text><Text></Text><Text></Text>
-     
+
         <View style={{borderWidth:30,
     borderColor:'#ffe4e1',paddingTop:10}}>
       <Text style={styles.rooms}> <Icon
@@ -49,7 +51,7 @@ function ReserveConfirm(props) {
           <Icon
             style={{ fontSize: 18 }}
             type="FontAwesome5" name="home" />   {ALIANS[reserveData.room]}</Text>
-        
+
         <Text style={styles.rooms}><Icon
             style={{ fontSize: 18 }}
             type="FontAwesome5" name="calendar-check" />   {reserveData.date}</Text>
@@ -62,15 +64,15 @@ function ReserveConfirm(props) {
           <Icon
             style={{ fontSize: 18 }}
             type="FontAwesome5" name="dollar-sign" />   {reserveData.price* reserveData.time.length}   元</Text>
-       
+
        </View>
        <TouchableOpacity onPress={()=> onpresstohome()} style={styles.submitBtn}>
        <Text>確認</Text>
        </TouchableOpacity>
-        
-       
+
+
         </Content>
-       
+
     </Container>
   )
 }
@@ -81,15 +83,15 @@ const styles = StyleSheet.create({
     fontSize:30,
     paddingLeft:100,
     paddingTop:30,
-    
+
   },
   rooms:{
     fontSize:20,
     alignItems:"center",
     paddingLeft:100,
     padding:20,
-    
-    
+
+
   },
   submitBtn: {
     margin: 12,

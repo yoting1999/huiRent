@@ -13,6 +13,8 @@ import Colors from '../../styles/Colors';
 import { ROOMS, TIME } from '../../constants/rooms'
 
 const TODAY = dayjs().format('YYYY-MM-DD')
+const ONE_MONTH_LATER = dayjs(TODAY).add(1, 'month').format('YYYY-MM-DD')
+const UNDONE = 'UNDONE'
 
 function Reserve(props) {
   const navigation = useNavigation();
@@ -22,15 +24,14 @@ function Reserve(props) {
   const [time, setTime] = useState([])
   const [room, setRoom] = useState('BIG');
   const [isReservedTime, setIsReservedTime] = useState(null)
-  const [status,setStatus] = useState('UNDONE')
+  const [status,setStatus] = useState(UNDONE)
 
+  const [canChoose, setCanChoose] = useState([])
+  const [tempArr, setTempArr] = useState([])
 
   const handleSubmit = () => {
-    // console.log('date', date, 'time', time, 'room', room)
-    // console.log('userInfo', userInfo)
     const price = ROOMS.find((r)=>r.alians === room).price
-    console.log('price', price* time.length)
-     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo })
+    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo })
   }
 
   const handleOnSetTimes = (tagTime) => {
@@ -43,6 +44,48 @@ function Reserve(props) {
     }
     setTime(temp)
   }
+
+  const sequence = (idx) => {
+    let time = TIME.map(t=>t.tag)
+    const firstIndex = 0
+    const lastIndex = time.length - 1
+    const num = 3 - tempArr.length
+
+    const findIndex = tempArr.indexOf(idx)
+    const isExisted = findIndex > -1
+
+    const tempChoose = [...canChoose]
+    const tempArr1 = [...tempArr]
+    if(isExisted) {
+      tempArr1.splice(findIndex, 1)
+    }else {
+      tempArr1.push(idx)
+    }
+    setTempArr(tempArr1)
+
+
+    if(tempArr.length === 1) {
+      const first = tempArr[0]
+      let left = first -  num
+      let right = first +  num
+
+      if(left < firstIndex) left = firstIndex
+      if(right > lastIndex) right = lastIndex
+
+      for(let i = left ; i <= right ; i++) {
+        tempChoose.push(i)
+      }
+      setCanChoose(tempChoose)
+    }
+
+    if(tempArr.length === 2) {
+
+    }
+  }
+
+  useEffect(()=>{
+    console.log(canChoose, tempArr)
+  }, [canChoose, tempArr])
 
   useEffect(()=>{
     getReserves(date, room)
@@ -85,14 +128,14 @@ function Reserve(props) {
         markedDates={{
           [date]: {selected: true, selectedColor: Colors.primary},
         }}
-        minDate={'2012-05-10'}
-        maxDate={'2021-05-30'}
+        minDate={TODAY}
+        maxDate={ONE_MONTH_LATER}
         onDayPress={(day) => setDate(day.dateString)}
         onDayLongPress={(day) => setDate(day.dateString)}
         monthFormat={'yyyy MM'}
         onMonthChange={(month) => {console.log('month changed', month)}}
         hideArrows={false}
-        renderArrow={(direction) => <Text>{direction}</Text>}
+        renderArrow={(direction) => <Text>{direction === 'left' ? '<' : '>'}</Text>}
         hideExtraDays={false}
         disableMonthChange={false}
         firstDay={1}
@@ -125,7 +168,10 @@ function Reserve(props) {
             bordered
             light
             style={{ margin: 6, padding: 4, backgroundColor: isReserved ? '#dcdcdc' : isChoosed ? Colors.primary : '#fff'}}
-            onPress={()=>handleOnSetTimes(item.tag)}>
+            onPress={()=>{
+              handleOnSetTimes(item.tag)
+              sequence(index)
+            }}>
             <Text style={styles.buttontext}>{item.time}</Text>
           </Button>
         )

@@ -55,12 +55,15 @@ function Gift_index() {
             
         <TouchableOpacity style={styles.itemButton} onPress={() => setGiftModalVisible(true)}>
         <View style={{flex:4}}>
-            <ImageBackground resizeMode={'stretch'} style={styles.center} source={data.item.uri }>
+            <ImageBackground resizeMode={'center'} style={styles.center} source={data.item.uri }>
             </ImageBackground>
         </View>
         <View style={styles.flatlistBox}>
-            <Text style={styles.title}>商品：{data.item.name}</Text>
-            <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
+            <Text style={styles.title}>{data.item.name}</Text>
+            
+        </View>
+        <View style={styles.flatlistBox}>
+        <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
         </View>
         </TouchableOpacity>
         <GiftModal
@@ -80,7 +83,7 @@ function Gift_index() {
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
                     <TouchableOpacity style={styles.topLiftItem} onPress={() => setModalVisible(true)} >
-                        <Image resizeMode={"center"} style={[styles.center]} source={{ uri: 'http://lorempixel.com/output/cats-q-c-640-480-9.jpg' }} />
+                        <Image resizeMode={"contain"} style={[styles.center]} source={require('../../../assets/Gift_circle.jpg')} />
                         <TouchableOpacity>
                             <Text style={styles.Content}>點圖進入幸運輪盤頁面</Text>
                         </TouchableOpacity>
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
         flex:1,
         overflow:'hidden',
         alignItems:'center',
-        padding:20  ,
+        padding:10  ,
         // backgroundColor:'red'
     },
     topLiftItem: {

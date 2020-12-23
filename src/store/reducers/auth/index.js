@@ -19,13 +19,19 @@ const reducer = (state = initState, action) => {
       }
     }
     case SET_AUTH_INFO: {
+      const { date, email, name, uid, position, GotPoint, UsedPoint, coupon,photo } = action.payload
       return {
         ...state,
         userInfo: {
-          date: action.payload.date,
-          email: action.payload.email,
-          name: action.payload.name,
-          uid: action.payload.uid
+          date,
+          email,
+          name,
+          uid,
+          position,
+          GotPoint,
+          UsedPoint,
+          coupon,
+          photo
         }
       }
     }

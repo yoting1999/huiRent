@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Dimensions,Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Dimensions,Text, TouchableOpacity, StatusBar } from 'react-native'
+import { Icon } from 'native-base'
 import {useNavigation} from '@react-navigation/native'
 import { ScrollView } from 'react-native-gesture-handler'
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -8,9 +9,11 @@ import Slide, { SLIDE_HEIGHT } from '../UI/Slide'
 import routeConfig from '../../constants/route'
 import { ROOMS } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
+import route from '../../constants/route'
+
+import { isManager } from '../../lib/auth'
 
 const { width } = Dimensions.get("window")
-
 
 function Home(props) {
   const navigation = useNavigation();
@@ -22,8 +25,18 @@ function Home(props) {
     setCurrentIndex(index)
   }
 
+  console.log('userInfo', userInfo)
+
   return (
     <View style={styles.container}>
+      {userInfo && isManager(userInfo) &&
+        <Icon
+          onPress={()=>navigation.navigate(route.scanner)}
+          type="FontAwesome"
+          name="qrcode"
+          style={styles.qrcode}
+        />
+      }
       <View
         style={styles.slider}
       >
@@ -65,7 +78,8 @@ function Home(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    position: 'relative'
   },
 
   slider: {
@@ -123,6 +137,12 @@ const styles = StyleSheet.create({
     color: '#ccc',
     textAlign: 'center'
   },
+  qrcode: {
+    position: 'absolute',
+    right: 10 ,
+    top: StatusBar.currentHeight || 50,
+    color: '#fff', zIndex: 99
+  }
 })
 
 export default Home

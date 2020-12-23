@@ -3,12 +3,15 @@ import { View, Text, ImageBackground, StyleSheet, TouchableOpacity  } from 'reac
 import { Container, Content, Button, Icon,Separator } from 'native-base'
 import Header from '../UI/Header'
 import UsedList from '../settings/UsedPointlist'
-
+import { useNavigation} from '@react-navigation/native';
+import {useSelector } from 'react-redux'
+//header arrow -> <Icon style={{ fontSize: 18 }}type="FontAwesome5" name="arrow-left" />
 function used(props) {
+  const userInfo = useSelector(state=>state.authReducer.userInfo)
+
     return (
       <Container>
         <Header/>
-         
          <View style={{backgroundColor:'#fff', margin: 16, borderRadius: 16, shadowColor: '#000000',borderWidth: 1,borderColor: '#eee',
          paddingVertical: 20,
    shadowOpacity: 0.2,
@@ -19,7 +22,7 @@ function used(props) {
    },}}>
      
            <Text style={styles.title}>可使用點數</Text>
-           <Text style={styles.in}>100</Text>
+           <Text style={styles.in}>{userInfo && userInfo.UsedPoint}</Text>
          </View>
      
          

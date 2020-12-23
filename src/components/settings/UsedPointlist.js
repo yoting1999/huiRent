@@ -23,9 +23,7 @@ const DATA = [
   },
 ];
 
-function point(props){
-  const[]
-}
+
 
 
 

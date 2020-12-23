@@ -50,6 +50,8 @@ const HomeStack = createStackNavigator()
         <HomeStack.Screen name="Reserve" component={Reserve}/>
         <HomeStack.Screen name="ReserveConfirm" component={ReserveConfirm}/>
         <HomeStack.Screen name="ReserveDate" component={ReserveDate}/>
+        <HomeStack.Screen name="myReserve" component={MyReserve}/>
+        <HomeStack.Screen name="scanner" component={Scanner}/>
       </HomeStack.Navigator>
 
   )
@@ -89,7 +91,7 @@ function ReserveStackScreen() {
         headerShown: false
       }}>
 
-      <ReserveStack.Screen name="MyReserve" component={MyReserve}/>
+      <ReserveStack.Screen name="myReserve" component={MyReserve}/>
       <ReserveStack.Screen name="qrcode" component={QrCode}/>
       <ReserveStack.Screen name="scanner" component={Scanner}/>
     </ReserveStack.Navigator>

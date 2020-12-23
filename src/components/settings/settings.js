@@ -1,8 +1,8 @@
 import React from 'react'
 import {View, Text, ImageBackground, StyleSheet, TouchableOpacity,Image } from 'react-native'
 import { List, ListItem, Left, Body, Right, Thumbnail,Separator,Icon,Container, Content} from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-
+import { useNavigation} from '@react-navigation/native';
+import {useSelector } from 'react-redux'
 import Header from '../UI/Header'
 import routeConfig from '../../constants/route'
 const uri1="https://facebook.github.io/react-native/docs/assets/favicon.png"
@@ -11,7 +11,8 @@ const RATING = 3
 function Settings(props) {
     const navigation = useNavigation()
     const {logout} = props
-    const { isLoading, userInfo } = props
+    const userInfo = useSelector(state=>state.authReducer.userInfo)
+    console.log(userInfo)
     return (
       <Container>
         <Header title='設定'>
@@ -19,16 +20,11 @@ function Settings(props) {
         <Content>
 
         <TouchableOpacity onPress={()=>console.log('press')} style={{flexDirection:'row',justifyContent:'center',marginTop:60}}>
-            <Image source={{uri:'https://www.facebook.com/images/fb_icon_325x325.png'}} style={{width:110,height:110,borderRadius:50,}}/>
+            <Image source={{uri:userInfo.photo}} style={{width:150,height:145,borderRadius:120,}}/>
         </TouchableOpacity>
 
             <View style={{flexDirection:'row',justifyContent:'center'}}>
-           <Text>星級:</Text>
-            {
-              [...Array(RATING)].map((e, i)=>{
-                return <Icon key={`star-${i + 1}`} style={{fontSize: 50, color: 'yellow'}} name="star"/>
-              })
-            }
+           
 
             </View>
             <View>

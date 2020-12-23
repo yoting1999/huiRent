@@ -1,8 +1,9 @@
 import { Body, Button, Container, Content, Header, Title } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, TextInput, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, Dimensions } from 'react-native';
 import route from '../../constants/route';
+import { Divider } from 'react-native-elements';
 
 function Login(props) {
     const { login, message } = props
@@ -50,7 +51,7 @@ function Login(props) {
                     >
                         <Text style={{ color: "#5ca4cc" }}>註冊</Text>
                     </Button>
-                    <Text style={{ color: "#D0D0D0", marginTop: -5, marginBottom: 10 }}>–––––––––––––––––––––––––––––––––––––––––––––––––</Text>
+                    <Divider style={{ backgroundColor: "#D0D0D0" ,height:1,width:(Dimensions.get('window').width-80),marginBottom:25,marginTop:10}}/>
                     <Button block style={styles.button} >
                         <Text style={{ color: "#fff" }}>使用Google帳號登入</Text>
                     </Button>
