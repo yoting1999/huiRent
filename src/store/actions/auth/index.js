@@ -31,6 +31,7 @@ export const setAuthInfo = (userData) => {
       GotPoint: userData.GotPoint,
       UsedPoint: userData.UsedPoint,
       cupon: userData.cupon,
+      photo:userData.photo
     }
   }
 }
