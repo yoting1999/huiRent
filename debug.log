@@ -7,3 +7,5 @@
 [1215/214723.488:ERROR:directory_reader_win.cc(43)] FindFirstFile: ï¿½tï¿½Î§ä¤£ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½C (0x3)
 [1216/104026.798:ERROR:directory_reader_win.cc(43)] FindFirstFile: ï¿½tï¿½Î§ä¤£ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½C (0x3)
 [1221/145651.251:ERROR:directory_reader_win.cc(43)] FindFirstFile: ï¿½tï¿½Î§ä¤£ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½|ï¿½C (0x3)
+[1223/094712.144:ERROR:directory_reader_win.cc(43)] FindFirstFile: ¨t²Î§ä¤£¨ì«ü©wªº¸ô®|¡C (0x3)
+[1223/100059.596:ERROR:directory_reader_win.cc(43)] FindFirstFile: ¨t²Î§ä¤£¨ì«ü©wªº¸ô®|¡C (0x3)

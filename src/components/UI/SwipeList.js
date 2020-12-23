@@ -10,7 +10,7 @@ import route from '../../constants/route';
 
 const TODAY = new Date()
 function SwipeList(props) {
-  const { reserveData, getReservesWithDate } = props
+  const { reserveData, getReservesWithDate,deleteReserve } = props
 
   const navigation = useNavigation()
 
@@ -23,7 +23,7 @@ function SwipeList(props) {
           </Pressable>
         </View>
         <View style={[styles.button,{backgroundColor:'red'}]}>
-          <Pressable onPress={() => console.log('hey')}>
+          <Pressable onPress={() => deleteReserve(qaItem.qrCodeKey)}>
             <Text style={styles.buttonText}>取消</Text>
           </Pressable>
         </View>

@@ -28,7 +28,6 @@ function MyReserve() {
       }
 
       const data = tempData.filter(item=>item.userId === userInfo.uid)
-
       setReserveDate(data)
       setIsLoading(false)
     } catch(err){
@@ -56,6 +55,17 @@ function MyReserve() {
     }
   }
 
+  const deleteReserve = async(id) => {
+    setIsLoading(true)
+    try{
+      const res = await Reserve.deleteReserve(id)
+      if(res.status === 200) await getReserves()
+      setIsLoading(false)
+    }catch(err){
+      cnosole.log('delete err',err)
+    }
+
+  }
 
   useEffect(()=>{
     if(isManager(userInfo)){
@@ -71,6 +81,7 @@ function MyReserve() {
       getReservesWithDate={getReservesWithDate}
       reserveData={reserveData}
       isLoading={isLoading}
+      deleteReserve={deleteReserve}
     />
   )
 }

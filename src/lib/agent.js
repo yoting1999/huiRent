@@ -16,6 +16,7 @@ const Reserve = {
   getReserves: () => axios.get('https://huirent-72fd3.firebaseio.com/reserves.json'),
   getReserve: (id) => axios.get(`https://huirent-72fd3.firebaseio.com/reserves/${id}.json`),
   changeReserve: (id, body) => axios.patch(`https://huirent-72fd3.firebaseio.com/reserves/${id}.json`, body),
+  deleteReserve:(id) => axios.delete(`https://huirent-72fd3.firebaseio.com/reserves/${id}.json`),
 }
 
 export default agent = {
