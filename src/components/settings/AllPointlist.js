@@ -3,6 +3,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 import { useNavigation} from '@react-navigation/native';
 import {useSelector } from 'react-redux'
 import { ALIANS } from '../../constants/rooms';
+import dayjs from 'dayjs';
 
 const App = () => {
   const userInfo = useSelector(state=>state.authReducer.userInfo)
@@ -16,7 +17,7 @@ const App = () => {
         <Text style={styles.inside}>{ item.points} </Text>
       </View>
       <View style={styles.item2}>
-        <Text style={styles.date}>{ item.time} </Text>
+        <Text style={styles.date}>{ dayjs(item.time).format('YYYY/MM/DD HH:MM')} </Text>
       </View>
     </React.Fragment>
   );
