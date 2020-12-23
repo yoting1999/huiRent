@@ -28,7 +28,7 @@ export const ROOMS = [
   },
   {
     name: '小練團室',
-    alians: 'SMALL',
+    alians: 'LITTLE',
     price: 200,
     points: 2,
     uri: 'http://www.irockmusic.com.tw/wp-content/uploads/2018/07/%E5%9C%98%E5%AE%A4%E5%87%BA%E7%A7%9F.jpg',
@@ -58,7 +58,7 @@ export const ROOMS = [
 export const ALIANS = {
   'BIG': '大練團室',
   'MEDIUM': '中練團室',
-  'SMALL': '小練團室',
+  'LITTLE': '小練團室',
   'DRUM': '鼓室',
 }
 

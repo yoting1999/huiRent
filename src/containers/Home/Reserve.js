@@ -7,8 +7,14 @@ import dayjs from 'dayjs'
 const TODAY = dayjs().format('YYYY-MM-DD')
 
 function Reserve(props) {
-  const { type } = props.route.params
+  const [type, setType] = useState(false)
   const { Reserve } = agent
+
+  useEffect(()=>{
+    if(!props.route.params) return
+    setType(props.route.params.type)
+
+  }, [props.route.params])
 
   const userInfo = useSelector(state=>state.authReducer.userInfo)
   const [reserveData, setReserveDate] = useState(null)
