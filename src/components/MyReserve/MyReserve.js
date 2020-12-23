@@ -10,7 +10,7 @@ import SwipeListManager from '../UI/SwipeListManager';
 import { isManager } from '../../lib/auth'
 
 function MyReserve(props) {
-    const { reserveData, isLoading, getReservesWithDate, userInfo } = props
+    const { reserveData, isLoading, getReservesWithDate, userInfo, deleteReserve } = props
     return (
       <Container>
         <Header title="我的預約"/>
@@ -18,7 +18,7 @@ function MyReserve(props) {
             {isManager(userInfo) ?
              <SwipeListManager getReservesWithDate={getReservesWithDate} reserveData={ reserveData && reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} />
              :
-             <Swiptlist reserveData={ reserveData && reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} />
+             <Swiptlist reserveData={ reserveData && reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} deleteReserve={deleteReserve} />
              }
           </ScrollView>
         <Spinner visible={isLoading}/>
