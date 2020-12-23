@@ -18,7 +18,7 @@ const UNDONE = 'UNDONE'
 
 function Reserve(props) {
   const navigation = useNavigation();
-  const { userInfo, getReserves, reserveData, isLoading } = props
+  const { userInfo, getReserves, reserveData, isLoading, type } = props
 
   const [date, setDate] = useState(TODAY)
   const [time, setTime] = useState([])
@@ -84,8 +84,14 @@ function Reserve(props) {
   }
 
   useEffect(()=>{
-    console.log(canChoose, tempArr)
+    // console.log(canChoose, tempArr)
   }, [canChoose, tempArr])
+
+  useEffect(()=>{
+    console.log('type',typeof type)
+    if(!type) return
+    setRoom(type)
+  }, [type])
 
   useEffect(()=>{
     getReserves(date, room)
@@ -104,26 +110,30 @@ function Reserve(props) {
       <Content>
       <View style={styles.container}>
       <Text style={styles.font} >請選擇團室</Text>
-      <Picker
-        placeholder={{
-          label: 'Select a room...',
-          value: null,
-        }}
-        mode="dropdown"
-        selectedValue={room}
-        style={{height: 60, width: 150, borderColor: 'black'}}
-        onValueChange={itemValue => setRoom(itemValue)}>
-          <Picker.Item label="大練團室" value="BIG" />
-          <Picker.Item label="中練團室" value="MEDIUM" />
-          <Picker.Item label="小練團室" value="LITTLE" />
-          <Picker.Item label="鼓室"     value="DRUM" />
-      </Picker>
+      {
+        !!room && (
+          <Picker
+          placeholder={{
+            label: 'Select a room...',
+            value: null,
+          }}
+          mode="dropdown"
+          selectedValue={room}
+          style={{height: 60, width: 150, borderColor: 'black'}}
+          onValueChange={itemValue => setRoom(itemValue)}>
+            <Picker.Item label="大練團室" value="BIG" />
+            <Picker.Item label="中練團室" value="MEDIUM" />
+            <Picker.Item label="小練團室" value="LITTLE" />
+            <Picker.Item label="鼓室"     value="DRUM" />
+        </Picker>
+        )
+      }
+   
       </View>
       <View style={styles.calendar}>
       <Text style={styles.fontdate} >請選擇日期</Text>
       <Text >*如需預約不同天，請分次預約</Text>
       <Calendar
-      // Initially visible month. Default = Date()
         current={date}
         markedDates={{
           [date]: {selected: true, selectedColor: Colors.primary},

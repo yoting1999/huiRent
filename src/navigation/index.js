@@ -11,7 +11,7 @@ import GeneralStyles from '../styles/GeneralStyles'
 import Colors from '../styles/Colors'
 
 import Home from '../containers/Home/Home'
-import Gift_index from '../components/Gift/Gift_index'
+import Gift_index from '../containers/Gift/Gift'
 import RoomDetail from '../components/Home/Detail'
 
 import SignUp from '../containers/Login/SignUp'

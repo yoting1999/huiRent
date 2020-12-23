@@ -7,12 +7,15 @@ import Colors from '../../styles/Colors';
 import Modal from './Modal'
 
 export default function Scanner(props) {
-  const { getReserve, getOrderer, isLoading } = props
+  const { getReserve, getOrderer, isLoading, finishTheReserve, addPoint } = props
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [scannedValue, setScannedValue] = useState(null)
   const [isVisible, setIsVisible] = useState(false)
   const [reserveData, setReserveData] = useState(null)
   const [ordererData, setOrdererData] = useState(null)
+  const [ordererId, setOrdererId] = useState(null)
+
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -20,16 +23,14 @@ export default function Scanner(props) {
     })();
   }, []);
 
-  // useEffect(()=>{
-  //   if(!reserveData) return
-  // }, [reserveData])
-
   const handleBarCodeScanned = async({ type, data }) => {
     setScanned(true);
+    setScannedValue(data)
     const reserveRes = await getReserve(data)
     if(reserveRes) {
       const ordererRes = await getOrderer(reserveRes.userId)
-      setOrdererData(ordererRes)
+      setOrdererId(Object.keys(ordererRes)[0])
+      setOrdererData(Object.values(ordererRes)[0])
     }
     setReserveData(reserveRes)
     setIsVisible(true)
@@ -56,11 +57,15 @@ export default function Scanner(props) {
         )}
       </View>
       <Modal
+        scannedValue={scannedValue}
+        finishTheReserve={finishTheReserve}
         isLoading={isLoading}
         data={reserveData}
+        ordererId={ordererId}
         ordererData={ordererData}
         isVisible={isVisible}
         setIsVisible={setIsVisible}
+        addPoint={addPoint}
       />
     </View>
   );

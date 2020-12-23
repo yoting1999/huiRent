@@ -1,12 +1,16 @@
 import React from 'react'
 import { View, Text, StyleSheet, FlatList, ImageBackground, ScrollView } from 'react-native'
 import { Button } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
 
 import Modal from 'react-native-modal';
+import route from '../../constants/route';
 
 
 function DetailModal(props) {
   const { isVisible, setIsVisible, roomData } = props
+
+  const navigation = useNavigation()
 
   const closeModal = () => {
     setIsVisible(false)
@@ -52,7 +56,10 @@ function DetailModal(props) {
             renderItem={renderEqu}
           />
           <View style={styles.footer}>
-            <Button  block rounded >
+            <Button  block rounded onPress={()=>{
+              setIsVisible(false)
+              navigation.navigate(route.Reserve, { type: roomData.alians })
+            }}>
               <Text style={styles.footerBtn}>我要預約</Text>
             </Button>
           </View>

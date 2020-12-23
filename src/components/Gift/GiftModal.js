@@ -9,13 +9,22 @@ import {
   Dimensions,
   Image
 } from "react-native";
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height*0.3;
 
 function GiftModal(props) {
-    const { GiftModalVisible, setGiftModalVisible,data} = props
-
+    const { GiftModalVisible, setGiftModalVisible,data,userInfo} = props
+    let leftpoint = userInfo.GotPoint-userInfo.UsedPoint
+    console.log('on GiftModal props:',props)
+    function Giftcostpoint(){
+      if(leftpoint > data.costpoint)
+      alert('兌換成功')
+      else
+      alert('點數不足!!')
+    }
   return (
       <Modal
         animationType="slide"
@@ -29,15 +38,31 @@ function GiftModal(props) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>{data}</Text>
-            <TouchableHighlight
+            <View style={{flex:3}}>
+            <Text style={styles.modalText}>已選擇商品：{data.name}</Text>
+            <Text>需要點數：{data.costpoint}</Text>
+            <Text>{data.des}</Text>
+            </View>
+            <View style={{flex:1,flexDirection:'row'}}>
+              <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
                 setGiftModalVisible(!GiftModalVisible);
               }}
             >
-              <Text style={styles.textStyle}>隱藏</Text>
+              <Text style={styles.textStyle}>取消</Text>
+      
             </TouchableHighlight>   
+            <TouchableHighlight
+              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+              onPress={() => {
+                Giftcostpoint()
+              }}
+            >
+              <Text style={styles.textStyle}>兌換</Text>
+      
+            </TouchableHighlight>
+            </View>
           </View>
         </View>
       </Modal>
@@ -52,6 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 200,
+    
   },
   modalView: {
     margin: 20,

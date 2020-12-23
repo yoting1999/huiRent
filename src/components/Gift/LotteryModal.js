@@ -18,7 +18,6 @@ let height = Dimensions.get("window").height;
 
 function GiftModal(props) {
   const { modalVisible, setModalVisible } = props
-
   return (
     <Modal
       animationType="slide"
