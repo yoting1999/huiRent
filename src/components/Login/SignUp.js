@@ -141,7 +141,7 @@ function SignUp(props) {
                     <TouchableOpacity style={styles.profile} onPress={() => SelectImage()}>
                         <Image source={{ uri: selectedImage.localUri }} style={styles.logo} />
                     </TouchableOpacity>
-                    <Text style={styles.text}>點按圖片可上傳個人照片
+                    <Text style={styles.text}>點按上方圓圈即可上傳個人照片
                         <Text style={styles.photowarn}>{message}</Text>
                     </Text>
                     <TextInput onBlur={handleBlurInputName} placeholder="姓名" style={styles.inputstyle} onChangeText={text => {

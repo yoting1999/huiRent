@@ -18,8 +18,8 @@ const UNDONE = 'UNDONE'
 
 function Reserve(props) {
   const navigation = useNavigation();
-  const { userInfo, getReserves, reserveData, isLoading, type } = props
-
+  const { userInfo, getReserves, reserveData, isLoading, type, reviseData } = props
+//reviseData加到欄位裡
   const [date, setDate] = useState(TODAY)
   const [time, setTime] = useState([])
   const [room, setRoom] = useState('BIG');

@@ -8,13 +8,22 @@ const TODAY = dayjs().format('YYYY-MM-DD')
 
 function Reserve(props) {
   const [type, setType] = useState(false)
+  const [reviseData, setReviseData] = useState(null)
   const { Reserve } = agent
 
   useEffect(()=>{
     if(!props.route.params) return
-    setType(props.route.params.type)
-
+    if(props.route.params.type) {
+      setType(props.route.params.type)
+    }
+    if(props.route.params.data) {
+      setReviseData(props.route.params.data)
+    }
   }, [props.route.params])
+
+  useEffect(()=>{
+    console.log('reviseData',reviseData)
+  }, [reviseData])
 
   const userInfo = useSelector(state=>state.authReducer.userInfo)
   const [reserveData, setReserveDate] = useState(null)
@@ -43,6 +52,7 @@ function Reserve(props) {
       getReserves={getReserves}
       reserveData={reserveData}
       isLoading={isLoading}
+      reviseData={reviseData}
     />
   )
 }
