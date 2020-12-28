@@ -22,8 +22,9 @@ function GiftModal(props) {
 
     function Giftcostpoint(Giftdata){
       if(leftpoint >= data.costpoint){
-      const useddata = {'name':Giftdata.name,'costpoint':Giftdata.costpoint,'couponid':Giftdata.couponid,'time':new Date().toISOString()}
-      updateCoupon(Giftdata,useddata)
+        // 危險
+      // const useddata = {'name':Giftdata.name,'costpoint':Giftdata.costpoint,'couponid':Giftdata.couponid,'time':new Date().toISOString()}
+      // updateCoupon(Giftdata,useddata)
       alert('兌換成功')
       }
       else

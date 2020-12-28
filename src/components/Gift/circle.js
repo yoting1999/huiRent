@@ -42,7 +42,8 @@ function circle(props) {
         Animated.timing(rotateDeg, {
             toValue: oneTimeRotate,
             duration: 5000,
-            easing: Easing.out(Easing.quad)
+            easing: Easing.out(Easing.quad),
+            useNativeDriver: true
         }).start(() => {
             // setoffOn(!offOn)
             //动画结束时，会把toValue值，回调给callback
@@ -52,7 +53,7 @@ function circle(props) {
         });
     };
     const changeValue = (postion) => {
-        alert("定位到了" + drawData[postion].title + "上了");
+        Alert.alert('獲得了'+drawData[postion].title);
     };
     return (
         <View style={styles.container}>
