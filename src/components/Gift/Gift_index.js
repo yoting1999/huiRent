@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, FlatList, StyleSheet, Alert, Image, ImageBackground, Button, } from 'react-native'
+import { View,Text, FlatList, StyleSheet, Alert, Image, ImageBackground, Button, } from 'react-native'
 import { Container, Right } from 'native-base'
 import Header from '../UI/Header'
 import Colors from '../../styles/Colors'
@@ -23,13 +23,12 @@ function Gift_index(props) {
     const { isLoading, userInfo,updateCoupon } = props
     const [modalVisible, setModalVisible] = useState(false)
     const [GiftModalVisible, setGiftModalVisible] = useState(false)
-    console.log('使用點數', userInfo.UsedPoint)
-    console.log('總共點數', userInfo.GotPoint)
+    // console.log('使用點數', userInfo.UsedPoint)
+    // console.log('總共點數', userInfo.GotPoint)
 
     function GiftModalchange(data) {
         setGiftModalVisible(true)
         setGiftmodaldata(data)
-        updateCoupon(data)
     }
     const renderGift = (data) => (
 
@@ -62,7 +61,7 @@ function Gift_index(props) {
 
 
             <View style={{ flex: 1, justifyContent: 'center' }}>
-                <View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'row',borderBottomColor:'red',borderBottomWidth:5 }}>
                     <TouchableOpacity style={styles.topLiftItem} onPress={() => {setModalVisible(true)}} >
                         <Image resizeMode={"contain"} style={[styles.center]} source={require('../../../assets/Gift_circle.jpg')} />
                         <TouchableOpacity>
@@ -80,6 +79,7 @@ function Gift_index(props) {
                             setGiftModalVisible={setGiftModalVisible}
                             data={Giftmodaldata}
                             userInfo={userInfo}
+                            updateCoupon={updateCoupon}
                         ></GiftModal>
                     </View>
                 </View>
