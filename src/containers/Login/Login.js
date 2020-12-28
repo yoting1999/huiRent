@@ -14,7 +14,6 @@ function Login() {
     const login = async(email, password) => {
         try{
             const result = await firebase.auth().signInWithEmailAndPassword(email, password);
-            console.log('res', result)
             if(result) {
                 dispatch(authLogin())
             }

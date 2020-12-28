@@ -14,13 +14,13 @@ function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch();
 
-  console.log('userInfo', userInfo)
+  console.log('home userInfo', userInfo)
   const getUser =async() => {
     setIsLoading(true)
     const uid = firebase.auth().currentUser.uid
     try {
       const res = await People.getPeople(uid)
-      console.log('res', Object.values(res.data)[0])
+      console.log('home res', Object.values(res.data)[0])
       setUserData(Object.values(res.data)[0])
       setIsLoading(false)
     } catch(err) {

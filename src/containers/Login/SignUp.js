@@ -10,7 +10,7 @@ import * as ImagePicker from 'expo-image-picker';
 function SignUp() {
     const { People } = agent
     const [selectedImage, setSelectedImage] = useState({ localUri: '' });
-    const [firebaseuri,setFirebaseuri] = useState('')
+    const [firebaseuri,setFirebaseuri] = useState('https://i.imgur.com/YcP0tik.jpeg')
     const [message, setMessage] = useState("")
     const database = async (name, date, email, number,uri) => {
         await People.addPeople(firebase.auth().currentUser.uid, {
@@ -23,7 +23,8 @@ function SignUp() {
             UsedPoint: '0',//已使用點數
             GotPoint: '0',//獲得點數
             cupon: '0',
-            photo:uri
+            photo:uri,
+            AllPoint: '0',//所有點數
         })
     }
 

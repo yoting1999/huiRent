@@ -12,7 +12,7 @@ function Settings(props) {
     const navigation = useNavigation()
     const {logout} = props
     const userInfo = useSelector(state=>state.authReducer.userInfo)
-    console.log(userInfo)
+    console.log('setting userInfo',userInfo)
     return (
       <Container>
         <Header title='設定'>
