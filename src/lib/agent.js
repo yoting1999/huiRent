@@ -18,9 +18,14 @@ const Reserve = {
   changeReserve: (id, body) => axios.patch(`https://huirent-72fd3.firebaseio.com/reserves/${id}.json`, body),
   deleteReserve:(id) => axios.delete(`https://huirent-72fd3.firebaseio.com/reserves/${id}.json`),
 }
-
+const Coupon = {
+  addCoupon: (uid, body) => axios.post(`https://huirent-72fd3.firebaseio.com/people/${uid}.json`, body),
+  getPoint: (uid) => axios.get(`https://huirent-72fd3.firebaseio.com/people/${uid}.json`),
+  updateCoupon: (uid,body) => axios.patch(`https://huirent-72fd3.firebaseio.com/people/${uid}/-MPbPigenKbnEhXGqz2q.json`,body),
+}
 export default agent = {
   Rooms,
   People,
-  Reserve
+  Reserve,
+  Coupon
 }

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Alert,
-  Modal,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -11,6 +10,8 @@ import {
 } from "react-native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import Modal from 'react-native-modal';
+
 
 let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height*0.3;
@@ -18,40 +19,38 @@ let height=Dimensions.get("window").height*0.3;
 function GiftModal(props) {
     const { GiftModalVisible, setGiftModalVisible,data,userInfo} = props
     let leftpoint = userInfo.GotPoint-userInfo.UsedPoint
-    console.log('on GiftModal props:',props)
+
     function Giftcostpoint(){
       if(leftpoint > data.costpoint)
       alert('兌換成功')
       else
       alert('點數不足!!')
     }
+
+    function closeModal() {
+      setGiftModalVisible(false)
+    }
   return (
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={GiftModalVisible}
-        onRequestClose={() => {
-          setGiftModalVisible(false)
-        }
-        
-    }
+        swipeDirection={['down']}
+        onBackdropPress={closeModal}
+        onSwipeComplete={closeModal}
+        isVisible={GiftModalVisible}
+        onRequestClose={closeModal}
+        style={styles.modalView}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View style={styles.container}>
             <View style={{flex:3}}>
-            <Text style={styles.modalText}>已選擇商品：{data.name}</Text>
-            <Text>需要點數：{data.costpoint}</Text>
-            <Text>{data.des}</Text>
+              <Text style={styles.modalText}>已選擇商品：{data.name}</Text>
+              <Text>需要點數：{data.costpoint}</Text>
+              <Text>{data.des}</Text>
             </View>
-            <View style={{flex:1,flexDirection:'row'}}>
+            <View style={{flex:1,flexDirection:'row',justifyContent:'space-around', alignItems:'center'}}>
               <TouchableHighlight
-              style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-              onPress={() => {
-                setGiftModalVisible(!GiftModalVisible);
-              }}
-            >
+                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                onPress={closeModal}
+              >
               <Text style={styles.textStyle}>取消</Text>
-      
             </TouchableHighlight>   
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -64,7 +63,6 @@ function GiftModal(props) {
             </TouchableHighlight>
             </View>
           </View>
-        </View>
       </Modal>
 
       
@@ -72,35 +70,21 @@ function GiftModal(props) {
 };
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 200,
-    
-  },
   modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    width:width,
-    height:height,
-    // padding: 100,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
+    margin: 0,
+    marginHorizontal: 20,
+    justifyContent: 'center'
+  },
+  container: {
+    backgroundColor: '#fff',
+    flex: 0.5,
   },
   openButton: {
-    backgroundColor: "black",
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
+    borderRadius: 6,
+    justifyContent: 'center',
+    paddingHorizontal: 28,
+    paddingVertical: 6,
+    elevation: 2,
   },
   textStyle: {
     color: "white",
