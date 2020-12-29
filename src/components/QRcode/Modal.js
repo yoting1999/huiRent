@@ -40,19 +40,19 @@ function ReserveModal(props) {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        // 改變訂單狀態
-        // 給租借者點數
         { text: "完成", onPress: async () => {
           await finishTheReserve(scannedValue)
           const findTheRoom = ROOMS.find(room=>room.alians === data.room)
           const ordererPrevPoints = ordererData.GotPoint
+          const ordererCurPoints = ordererData.points
           const gotPointData = {
             type: data.room,
             points: findTheRoom.points* data.time.length,
             time: new Date()
           }
           const newPointsData = [...ordererPrevPoints, gotPointData]
-          const status = await addPoint(data.userId, ordererId, newPointsData)
+          const newCurPoints = ordererCurPoints + (findTheRoom.points * data.time.length)
+          const status = await addPoint(data.userId, ordererId, newPointsData, newCurPoints)
           if(status === 200) setIsVisible(false)
         } }
       ],
