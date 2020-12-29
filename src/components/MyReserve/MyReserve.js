@@ -10,10 +10,10 @@ import SwipeListManager from '../UI/SwipeListManager';
 import { isManager } from '../../lib/auth'
 
 function MyReserve(props) {
-    const { reserveData, isLoading, getReservesWithDate, userInfo, deleteReserve } = props
+    const { reserveData, isLoading, getReservesWithDate, userInfo, deleteReserve, getReserves } = props
     return (
       <Container>
-        <Header title="我的預約"/>
+        <Header title="我的預約" isRefresh action={getReserves}/>
           <ScrollView>
             {isManager(userInfo) ?
              <SwipeListManager getReservesWithDate={getReservesWithDate} reserveData={ reserveData && reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} />

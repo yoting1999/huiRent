@@ -6,6 +6,8 @@ import Modal from 'react-native-modal';
 import { ALIANS, ROOMS, TIME } from '../../constants/rooms';
 import Colors from '../../styles/Colors'
 
+const UNDONE = 'UNDONE'
+
 function ReserveModal(props) {
   const {
     isVisible,
@@ -80,9 +82,18 @@ function ReserveModal(props) {
             <Text style={styles.text}>時段{ data && data.time.map(t=>tagToTime(t))}</Text>
           </View>
           <View style={styles.footer}>
-            <Button  block rounded onPress={handleSubmit} >
-              <Text style={styles.footerBtn}>完成</Text>
-            </Button>
+            {
+              data && data.status === UNDONE ? (
+              <Button  block rounded onPress={handleSubmit} >
+                <Text style={styles.footerBtn}>完成</Text>
+              </Button>
+              ) : (
+              <Button  block rounded onPress={()=>setIsVisible(false)} >
+                <Text style={styles.footerBtn}>已完成</Text>
+              </Button>
+              )
+            }
+
           </View>
         </View>
       </View>
