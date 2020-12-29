@@ -19,7 +19,7 @@ const reducer = (state = initState, action) => {
       }
     }
     case SET_AUTH_INFO: {
-      const { date, email, name, uid, position, GotPoint, UsedPoint, coupon,photo } = action.payload
+      const { date, email, name, uid, ordererid, position, GotPoint, UsedPoint, coupon, photo } = action.payload
       return {
         ...state,
         userInfo: {
@@ -27,6 +27,7 @@ const reducer = (state = initState, action) => {
           email,
           name,
           uid,
+          ordererid,
           position,
           GotPoint,
           UsedPoint,

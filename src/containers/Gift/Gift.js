@@ -6,6 +6,10 @@ import agent from '../../lib/agent'
 function Gift() {
     const { Rooms, People ,Coupon} = agent
     const userInfo = useSelector(state => state.authReducer.userInfo)
+
+    console.log('userInfo', userInfo)
+
+
     const [userData, setUserData] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [body,setbody] = useState([])
@@ -40,7 +44,7 @@ function Gift() {
         }
         catch(err){
             console.log('err',err)
-        }  
+        }
     }
 
     useEffect(() => {
