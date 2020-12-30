@@ -17,18 +17,26 @@ function MyReserve(props) {
     const [data, setData] = useState(null)
     
     const [status, setStatus] = useState('UNDONE')
+
+    useEffect(()=>{
+      if(!reserveData) return
+      const tempData = reserveData && reserveData.filter((item)=>item.status === status )
+      setData(tempData)
+    }, [reserveData])
+
     useEffect(()=>{
       if(!status) return
-      const tempData = reserveData.filter((item)=>item.status === status )
+      const tempData = reserveData && reserveData.filter((item)=>item.status === status )
       setData(tempData)
     },[status])
 
     return (
       <Container>
         <Header title="我的預約" isRefresh action={getReserves}/>
-        <View style={{flexDirection:'row',margin:10,alignSelf:'center'}}>
-        <Button info rounded style={{padding:20}} onPress={()=>setStatus('UNDONE') } disabled={false}><Text>未完成</Text></Button>
-        <Button info rounded style={{padding:20}}onPress={()=>setStatus('DONE')}disabled={false}><Text>已完成</Text></Button>
+        <View style={{flexDirection:'row',margin:20,alignSelf:'center'}}>
+        <Button info rounded style={{padding:20}} onPress={()=>setStatus('UNDONE') } disabled={status==='UNDONE'}><Text>未完成</Text></Button>
+        <View style={{paddingLeft:30}}></View>
+        <Button info rounded style={{padding:20}}onPress={()=>setStatus('DONE')}disabled={status==='DONE'}><Text>已完成</Text></Button>
         </View>
 
           <ScrollView>
