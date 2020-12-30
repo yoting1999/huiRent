@@ -5,7 +5,7 @@ import agent from '../../lib/agent'
 
 function ReserveConfirm(props) {
   const { navigation } = props
-  const { reserveData, userInfo } = props.route.params
+  const { reserveData, userInfo, reviseData } = props.route.params
   const { Reserve } = agent
   const addReserve = async() => {
     try {
@@ -19,9 +19,17 @@ function ReserveConfirm(props) {
     }
   }
 
+  const changeReserve = async(id,date,room,time,price) => {
+    try{
+      await Reserve.changeReserve(id,{date:date,room:room,time:time,price:price})
+    }catch(err){
+      console.log('change reserve err',err)
+    }
+  }
 
 
-  return <Layout addReserve={addReserve} reserveData={reserveData} navigation={navigation } userInfo={userInfo}/>
+
+  return <Layout addReserve={addReserve} changeReserve={changeReserve} reserveData={reserveData} navigation={navigation } userInfo={userInfo} reviseData={reviseData}/>
 }
 
 export default ReserveConfirm
