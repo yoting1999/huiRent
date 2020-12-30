@@ -4,11 +4,11 @@ import { Animated, Easing, View, TouchableOpacity, Image, StyleSheet, Dimensions
 function circle(props) {
     const [drawData, setdrawData] = useState([
         { id: 1, title: "未中獎", icon: require('./imgs/cry_coin.png') },
-        { id: 2, title: "頭獎", icon: require('../../../assets/Gift_pick.jpg') },
+        { id: 2, title: "頭獎", icon: require('../../../assets/Gift_elixir.jpg') },
         { id: 3, title: "未中獎", icon: require('./imgs/cry_coin.png') },
         { id: 4, title: "三獎", icon: require('../../../assets/Gift_pick.jpg') },
         { id: 5, title: "未中獎", icon: require('./imgs/cry_coin.png') },
-        { id: 6, title: "二獎", icon: require('../../../assets/Gift_pick.jpg') },
+        { id: 6, title: "二獎", icon: require('./imgs/gold_coin.png') },
         { id: 7, title: "未中獎", icon: require('./imgs/cry_coin.png') },
         { id: 8, title: "三獎", icon: require('../../../assets/Gift_pick.jpg') }
     ])
@@ -42,7 +42,8 @@ function circle(props) {
         Animated.timing(rotateDeg, {
             toValue: oneTimeRotate,
             duration: 5000,
-            easing: Easing.out(Easing.quad)
+            easing: Easing.out(Easing.quad),
+            useNativeDriver: true
         }).start(() => {
             // setoffOn(!offOn)
             //动画结束时，会把toValue值，回调给callback
@@ -52,7 +53,7 @@ function circle(props) {
         });
     };
     const changeValue = (postion) => {
-        alert("定位到了" + drawData[postion].title + "上了");
+        Alert.alert('獲得了'+drawData[postion].title);
     };
     return (
         <View style={styles.container}>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Alert,
-  Modal,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -12,6 +11,7 @@ import {
 
 import Lottery from './Lottery'
 import Circle from './circle'
+import Modal from 'react-native-modal';
 
 let width = Dimensions.get("window").width;
 let height = Dimensions.get("window").height;
@@ -37,7 +37,6 @@ function GiftModal(props) {
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>開發中請見諒！</Text>
           <TouchableHighlight
             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
             onPress={() => {
@@ -48,8 +47,10 @@ function GiftModal(props) {
 
           </TouchableHighlight>
           <Circle></Circle>
-
-
+            
+            <Text style={{color:'red'}}>頭獎：Elixar包膜弦兌換券</Text>
+            <Text style={{color:'red'}}>二獎：點數40點</Text>
+            <Text style={{color:'red'}}>三獎：pick兌換券</Text>
         </View>
       </View>
     </Modal>

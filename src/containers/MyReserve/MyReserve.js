@@ -78,6 +78,7 @@ function MyReserve() {
   return (
     <Layout
       userInfo={userInfo}
+      getReserves={getReserves}
       getReservesWithDate={getReservesWithDate}
       reserveData={reserveData}
       isLoading={isLoading}

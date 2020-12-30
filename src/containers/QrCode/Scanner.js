@@ -31,6 +31,7 @@ function Scanner() {
   const finishTheReserve = async(id) => {
     setIsLoading(false)
     try {
+
       await Reserve.changeReserve(id, { status: 'DONE' })
       setIsLoading(true)
     }catch(err) {
@@ -39,10 +40,10 @@ function Scanner() {
   }
 
   // id外面那層 ; ordererId:裡面那層
-  const addPoint = async(id, ordererId, gotPointData) => {
+  const addPoint = async(id, ordererId, gotPointData, newCurPoints) => {
     setIsLoading(false)
     try {
-      const res = await People.changePeople(id, ordererId, { GotPoint: [...gotPointData] })
+      const res = await People.changePeople(id, ordererId, { GotPoint: [...gotPointData], AllPoint: newCurPoints })
       setIsLoading(true)
       return res.status
     }catch(err) {

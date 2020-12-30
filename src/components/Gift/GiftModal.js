@@ -17,12 +17,16 @@ let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height*0.3;
 
 function GiftModal(props) {
-    const { GiftModalVisible, setGiftModalVisible,data,userInfo} = props
+    const { GiftModalVisible, setGiftModalVisible,data,userInfo,updateCoupon} = props
     let leftpoint = userInfo.GotPoint-userInfo.UsedPoint
 
-    function Giftcostpoint(){
-      if(leftpoint > data.costpoint)
+    function Giftcostpoint(Giftdata){
+      if(leftpoint >= data.costpoint){
+        // 危險
+      // const useddata = {'name':Giftdata.name,'costpoint':Giftdata.costpoint,'couponid':Giftdata.couponid,'time':new Date().toISOString()}
+      // updateCoupon(Giftdata,useddata)
       alert('兌換成功')
+      }
       else
       alert('點數不足!!')
     }
@@ -37,10 +41,10 @@ function GiftModal(props) {
         onSwipeComplete={closeModal}
         isVisible={GiftModalVisible}
         onRequestClose={closeModal}
-        style={styles.modalView}
+        // style={styles.modalView}
       >
           <View style={styles.container}>
-            <View style={{flex:3}}>
+            <View style={styles.modalView}>
               <Text style={styles.modalText}>已選擇商品：{data.name}</Text>
               <Text>需要點數：{data.costpoint}</Text>
               <Text>{data.des}</Text>
@@ -55,7 +59,7 @@ function GiftModal(props) {
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
-                Giftcostpoint()
+                Giftcostpoint(data)
               }}
             >
               <Text style={styles.textStyle}>兌換</Text>
@@ -72,10 +76,14 @@ function GiftModal(props) {
 const styles = StyleSheet.create({
   modalView: {
     margin: 0,
-    marginHorizontal: 20,
-    justifyContent: 'center'
+    flex:3,
+    marginHorizontal: 50,
+    height:100,
+    // width:0.5,
+    // justifyContent: 'center'
   },
   container: {
+    borderRadius:10,
     backgroundColor: '#fff',
     flex: 0.5,
   },

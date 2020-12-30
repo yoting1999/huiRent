@@ -6,6 +6,8 @@ import Modal from 'react-native-modal';
 import { ALIANS, ROOMS, TIME } from '../../constants/rooms';
 import Colors from '../../styles/Colors'
 
+const UNDONE = 'UNDONE'
+
 function ReserveModal(props) {
   const {
     isVisible,
@@ -38,19 +40,19 @@ function ReserveModal(props) {
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
-        // 改變訂單狀態
-        // 給租借者點數
         { text: "完成", onPress: async () => {
           await finishTheReserve(scannedValue)
           const findTheRoom = ROOMS.find(room=>room.alians === data.room)
           const ordererPrevPoints = ordererData.GotPoint
+          const ordererCurPoints = ordererData.points
           const gotPointData = {
             type: data.room,
             points: findTheRoom.points* data.time.length,
             time: new Date()
           }
           const newPointsData = [...ordererPrevPoints, gotPointData]
-          const status = await addPoint(data.userId, ordererId, newPointsData)
+          const newCurPoints = ordererCurPoints + (findTheRoom.points * data.time.length)
+          const status = await addPoint(data.userId, ordererId, newPointsData, newCurPoints)
           if(status === 200) setIsVisible(false)
         } }
       ],
@@ -80,9 +82,18 @@ function ReserveModal(props) {
             <Text style={styles.text}>時段{ data && data.time.map(t=>tagToTime(t))}</Text>
           </View>
           <View style={styles.footer}>
-            <Button  block rounded onPress={handleSubmit} >
-              <Text style={styles.footerBtn}>完成</Text>
-            </Button>
+            {
+              data && data.status === UNDONE ? (
+              <Button  block rounded onPress={handleSubmit} >
+                <Text style={styles.footerBtn}>完成</Text>
+              </Button>
+              ) : (
+              <Button  block rounded onPress={()=>setIsVisible(false)} >
+                <Text style={styles.footerBtn}>已完成</Text>
+              </Button>
+              )
+            }
+
           </View>
         </View>
       </View>
