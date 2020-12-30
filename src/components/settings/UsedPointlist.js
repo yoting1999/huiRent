@@ -1,41 +1,19 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-
-const DATA = [
-  {
-    id: '1',
-    title: '大練團室累積點數',
-    point:'+200',
-    date:'2020/10/31'
-
-  },
-  {
-    id: '2',
-    title: '中練團室累積點數',
-    point:'+100',
-    date:'2020/10/31'
-  },
-  {
-    id: '3',
-    title: '兌換優惠券',
-    point:'-100',
-    date:'2020/10/31'
-  },
-];
-
-
-
-
+import {useSelector } from 'react-redux'
+import { ALIANS } from '../../constants/rooms';
+import dayjs from 'dayjs'
 
 const App = () => {
+  const userInfo = useSelector(state=>state.authReducer.userInfo)
   const renderItem = ({ item }) => (
     <React.Fragment>
   <View style={styles.item}>
-    <Text style={styles.title}>{item.title}</Text>
-  <Text style={styles.inside}>{item.point}</Text>
+    <Text style={styles.title}>{ ALIANS[item.type]}</Text>
+  <Text style={styles.inside}>{"-"}{item.points}</Text>
   </View>
   <View style={styles.item2}>
-  <Text  style={styles.date}>{item.date}</Text>
+  <Text  style={styles.date}>{dayjs(item.time).format('YYYY/MM/DD HH:MM')}</Text>
   </View> 
   </React.Fragment>
     
@@ -44,7 +22,7 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={!!userInfo.UsedPoint && userInfo.UsedPoint}
         renderItem={renderItem}
         keyExtractor={item => item.id}
         ItemSeparatorComponent={()=> <View style={styles.itemSeparator}/>}

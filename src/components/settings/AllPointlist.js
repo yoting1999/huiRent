@@ -14,7 +14,7 @@ const App = () => {
     <React.Fragment>
       <View style={styles.item}>
         <Text style={styles.title}>{ ALIANS[item.type]} </Text>
-        <Text style={styles.inside}>{ item.points} </Text>
+        <Text style={styles.inside}>{"+"}{item.points} </Text>
       </View>
       <View style={styles.item2}>
         <Text style={styles.date}>{ dayjs(item.time).format('YYYY/MM/DD HH:MM')} </Text>
