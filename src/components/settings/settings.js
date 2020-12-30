@@ -10,16 +10,18 @@ const RATING = 3
 
 function Settings(props) {
     const navigation = useNavigation()
-    const {logout} = props
+    const {logout,changePhoto, firebaseuri} = props
     const userInfo = useSelector(state=>state.authReducer.userInfo)
     console.log('setting userInfo',userInfo)
+
+
     return (
       <Container>
         <Header title='設定'>
           </Header>
         <Content>
 
-        <TouchableOpacity onPress={()=>console.log('press')} style={{flexDirection:'row',justifyContent:'center',marginTop:60}}>
+        <TouchableOpacity onPress={changePhoto} style={{flexDirection:'row',justifyContent:'center',marginTop:60}}>
             <Image source={{uri:userInfo.photo}} style={{width:150,height:145,borderRadius:120,}}/>
         </TouchableOpacity>
 
@@ -34,11 +36,7 @@ function Settings(props) {
                 <Text style={{fontSize:25,fontWeight:'bold',marginBottom:5}}>Hi,</Text>
                 <Text note>{userInfo && userInfo.name}</Text>
               </Body>
-              <Right>
-                <TouchableOpacity>
-                  <Text style={{backgroundColor:'rgb(215, 195, 217)',fontSize:20,color:'#fff', padding: 10}}>編輯</Text>
-                </TouchableOpacity>
-              </Right>
+              
 
             </ListItem>
             </List>
@@ -47,7 +45,7 @@ function Settings(props) {
 
           <ListItem onPress={() => navigation.navigate(routeConfig.used)} >
           <Left>
-          <Text>可使用點數</Text>
+          <Text>使用紀錄</Text>
            </Left>
             <Right>
              <Icon name="arrow-forward" />
