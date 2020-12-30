@@ -19,7 +19,6 @@ const UNDONE = 'UNDONE'
 function Reserve(props) {
   const navigation = useNavigation();
   const { userInfo, getReserves, reserveData, isLoading, type, reviseData } = props
-//reviseData加到欄位裡
   const [date, setDate] = useState(TODAY)
   const [time, setTime] = useState([])
   const [room, setRoom] = useState('BIG');
@@ -28,6 +27,15 @@ function Reserve(props) {
 
   const [canChoose, setCanChoose] = useState([])
   const [tempArr, setTempArr] = useState([])
+
+  useEffect(()=>{
+    if(!reviseData) return
+    if(reviseData) {
+      setDate(reviseData.date)
+      setTime(reviseData.time)
+      setRoom(reviseData.room)
+    }
+  }, [reviseData])
 
   const handleSubmit = () => {
     const price = ROOMS.find((r)=>r.alians === room).price

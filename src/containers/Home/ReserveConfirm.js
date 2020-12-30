@@ -19,6 +19,14 @@ function ReserveConfirm(props) {
     }
   }
 
+  const changeReserve = async(id) => {
+    try{
+      await Reserve.changeReserve(id,{})
+    }catch(err){
+      console.log('change reserve err',err)
+    }
+  }
+
 
 
   return <Layout addReserve={addReserve} reserveData={reserveData} navigation={navigation } userInfo={userInfo}/>
