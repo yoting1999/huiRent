@@ -19,19 +19,36 @@ const UNDONE = 'UNDONE'
 function Reserve(props) {
   const navigation = useNavigation();
   const { userInfo, getReserves, reserveData, isLoading, type, reviseData } = props
-//reviseData加到欄位裡
   const [date, setDate] = useState(TODAY)
   const [time, setTime] = useState([])
   const [room, setRoom] = useState('BIG');
+
+  const [prevTime, setPrevTime] = useState([])
   const [isReservedTime, setIsReservedTime] = useState(null)
   const [status,setStatus] = useState(UNDONE)
+
 
   const [canChoose, setCanChoose] = useState([])
   const [tempArr, setTempArr] = useState([])
 
+  useEffect(()=>{
+    if(!reviseData) return 
+    setTime(date === reviseData.date ? reviseData.time : [])
+  }, [date])
+
+  useEffect(()=>{
+    if(!reviseData) return
+    if(reviseData) {
+      setDate(reviseData.date)
+      setTime(reviseData.time)
+      setPrevTime(reviseData.time)
+      setRoom(reviseData.room)
+    }
+  }, [reviseData])
+
   const handleSubmit = () => {
     const price = ROOMS.find((r)=>r.alians === room).price
-    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo })
+    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo, reviseData })
   }
 
   const handleOnSetTimes = (tagTime) => {
@@ -151,7 +168,7 @@ function Reserve(props) {
     <View style={styles.button}>
       {TIME.map((item, index)=>{
         const isChoosed = time.includes(item.tag)
-        const isReserved = isReservedTime && isReservedTime.includes(item.tag)
+        const isReserved = isReservedTime && isReservedTime.includes(item.tag) && !prevTime.includes(item.tag)
         return (
           <Button
             disabled={isReserved}
