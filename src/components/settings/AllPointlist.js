@@ -12,7 +12,7 @@ const App = () => {
     return (
       <React.Fragment>
         <View style={styles.item}>
-          <Text style={styles.title}>{ ALIANS[item.type]} </Text>
+          <Text style={styles.title}>{ item.type === 'Lottery' ? '轉盤' : ALIANS[item.type]} </Text>
           <Text style={styles.inside}>{"+"}{item.points} </Text>
         </View>
         <View style={styles.item2}>
