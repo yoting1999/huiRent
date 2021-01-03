@@ -1,6 +1,5 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-import { useNavigation} from '@react-navigation/native';
 import {useSelector } from 'react-redux'
 import { ALIANS } from '../../constants/rooms';
 import dayjs from 'dayjs';
@@ -8,8 +7,6 @@ import dayjs from 'dayjs';
 const App = () => {
   const userInfo = useSelector(state=>state.authReducer.userInfo)
 
-
-  
   const renderItem = ({ item }) => (
     <React.Fragment>
       <View style={styles.item}>
@@ -46,8 +43,6 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent: 'space-between',
     alignItems:'center'
-    
-
   },
   item2:{
     marginBottom:10,
