@@ -10,6 +10,7 @@ import AllList from '../settings/AllPointlist'
     const userInfo = useSelector(state=>state.authReducer.userInfo)
 
     const countPoints = () => {
+      if(typeof userInfo.GotPoint === 'string') return 0
       return userInfo.GotPoint.map(item=>item.points).reduce((a, b)=> a + b)
     }
 

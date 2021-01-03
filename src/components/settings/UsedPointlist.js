@@ -8,6 +8,7 @@ const App = () => {
   const userInfo = useSelector(state=>state.authReducer.userInfo)
 
   const renderItem = ({ item }) => {
+    if (typeof item !== 'object') return <Text style={{ textAlign: 'center' }}>無紀錄</Text>
     const gift = GiftOption.find(gift=>gift.name === item.name)
     return (
       <>
