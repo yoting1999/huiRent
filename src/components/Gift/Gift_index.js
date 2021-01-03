@@ -20,7 +20,7 @@ const NUN_COLUMNS = 2
 
 function Gift_index(props) {
     const [Giftmodaldata, setGiftmodaldata] = useState(GiftOption[0])
-    const { isLoading, userInfo,updateCoupon } = props
+    const { isLoading, userInfo,updateCoupon, changePeople } = props
     const [modalVisible, setModalVisible] = useState(false)
     const [GiftModalVisible, setGiftModalVisible] = useState(false)
     // console.log('使用點數', userInfo.UsedPoint)
@@ -71,6 +71,7 @@ function Gift_index(props) {
                     <View style={styles.topRightItem}>
                         <Text style={styles.Content}>目前可用點數：{userInfo.AllPoint}</Text>
                         <LotteryModal
+                            changePeople={changePeople}
                             modalVisible={modalVisible}
                             setModalVisible={setModalVisible}></LotteryModal>
                         <GiftModal

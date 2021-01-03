@@ -17,7 +17,7 @@ let width = Dimensions.get("window").width;
 let height = Dimensions.get("window").height;
 
 function GiftModal(props) {
-  const { modalVisible, setModalVisible } = props
+  const { modalVisible, setModalVisible, changePeople } = props
   return (
     <Modal
       animationType="slide"
@@ -46,7 +46,7 @@ function GiftModal(props) {
             <Text style={styles.textStyle}>隱藏</Text>
 
           </TouchableHighlight>
-          <Circle></Circle>
+          <Circle changePeople={changePeople}/>
             
             <Text style={{color:'red'}}>頭獎：Elixar包膜弦兌換券</Text>
             <Text style={{color:'red'}}>二獎：點數40點</Text>

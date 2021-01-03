@@ -1,7 +1,14 @@
-import React, { useState } from "react"
-import { Animated, Easing, View, TouchableOpacity, Image, StyleSheet, Dimensions, Text ,Alert} from "react-native"
-
+import { Animated, Easing, View, TouchableOpacity, Image, StyleSheet, Dimensions, Text, Alert } from "react-native"
+import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import * as firebase from 'firebase'
+import agent from '../../lib/agent'
+import { setAuthInfo } from '../../store/actions/auth'
+import { GiftOption } from "../../constants/gift";
 function circle(props) {
+
+    const { changePeople } = props
+
     const [drawData, setdrawData] = useState([
         { id: 1, title: "未中獎", icon: require('./imgs/cry_coin.png') },
         { id: 2, title: "頭獎", icon: require('../../../assets/Gift_elixir.jpg') },
@@ -12,21 +19,41 @@ function circle(props) {
         { id: 7, title: "未中獎", icon: require('./imgs/cry_coin.png') },
         { id: 8, title: "三獎", icon: require('../../../assets/Gift_pick.jpg') }
     ])
+    const { People } = agent
+    const userInfo = useSelector(state => state.authReducer.userInfo)
+
+    const dispatch = useDispatch()
+
+    const [isLoading, setIsLoading] = useState(false)
     const [offOn, setoffOn] = useState(true)
     const [rotateDeg, setrotateDeg] = useState(new Animated.Value(0))
     const confirm = () => {
-        if(offOn){
-        Alert.alert('花費點數抽獎','你確定要花費30點數抽獎嗎？',[
-            {text:'取消'},
-            {text:'確認',onPress:rotateImg},
-        
-        
-        ])}else{Alert.alert('不要亂點啦拜託了')}
+        const allPoint = userInfo.AllPoint
+        if (allPoint < 30) {
+            Alert.alert(
+                '點數不足',
+                '請返回',
+                [
+                    { text: '確認', onPress: () => console.log('ok') }
+                ],
+                { cancelable: false }
+            )
+        }
+        else if (offOn) {
+            Alert.alert('花費點數抽獎', '你確定要花費30點數抽獎嗎？', [
+                { text: '取消' },
+                { text: '確認', onPress: rotateImg },
+
+
+            ])
+        } else { Alert.alert('不要亂點啦拜託了') }
 
     }
     const rotateImg = () => {
 
         if (offOn) {
+            const allpoint = userInfo.AllPoint -30
+            changePeople({AllPoint:allpoint})
             rotateImg1();
         }
     };
@@ -48,13 +75,63 @@ function circle(props) {
             // setoffOn(!offOn)
             //动画结束时，会把toValue值，回调给callback
             rotateDeg.stopAnimation(() => {
-                changeValue(number);
+                circle1(number)
             })
         });
     };
-    const changeValue = (postion) => {
-        Alert.alert('獲得了'+ drawData[postion].title);
-    };
+
+  
+    const circle1 = (postion) => {
+        const gift = drawData[postion]
+        const id = gift.id
+        const title = gift.title
+  
+        
+        Alert.alert(id+'', title)
+        const cupon = userInfo.cupon
+        const gotPoint = userInfo.GotPoint
+        let allPoint = userInfo.AllPoint
+
+        let tempCuponData;
+        if (id === 2) {//頭獎
+            let data = GiftOption.find(item=>item.couponid === 'Elixir')
+            if ((Array.isArray(cupon))){
+                tempCuponData ={cupon: [...cupon, data]}
+            }else {
+                tempCuponData = {cupon : [data]}
+            }
+    
+        } else if (id === 4 || id === 8) { //三獎
+            let data = GiftOption.find(item=>item.couponid === 'pick')
+            if ((Array.isArray(cupon))){
+                tempCuponData ={cupon: [...cupon, data]}
+            }else {
+                tempCuponData = {cupon : [data]}
+            }
+        } else if (id === 6) { //二獎
+            const afterGottingThePoint = allPoint + 40
+            if ((Array.isArray(gotPoint))){
+                tempCuponData = {
+                    AllPoint: afterGottingThePoint,
+                    GotPoint: [...gotPoint, {
+                    points: 40,
+                    type: 'Lottery',
+                    time: new Date()
+                }]}
+            }else {
+                tempCuponData = {
+                    AllPoint: afterGottingThePoint,
+                    GotPoint : [{
+                    points: 40,
+                    type: 'Lottery',
+                    time: new Date()
+                }]}
+            }
+        } else {
+            return
+        }
+        changePeople(tempCuponData)
+    }
 
     return (
         <View style={styles.container}>
@@ -113,8 +190,8 @@ function circle(props) {
                         }
                         return (
                             <View key={one.id} style={{ justifyContent: "center", alignItems: "center", position: "absolute", zIndex: 99, height: 70, width: 60, top: 145, transform: [{ translateX: translateX }, { translateY: translateY }, { rotateZ: `${rotateTemp}deg` }] }}>
-                                <Text style={{fontSize:12, color:"#74340A",marginBottom:10}}>{one.title}</Text>
-                                <Image style={{width: 50, height: 50, resizeMode: "contain" }} source={one.icon} />
+                                <Text style={{ fontSize: 12, color: "#74340A", marginBottom: 10 }}>{one.title}</Text>
+                                <Image style={{ width: 50, height: 50, resizeMode: "contain" }} source={one.icon} />
                             </View>
                         )
                     })}
