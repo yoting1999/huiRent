@@ -15,11 +15,12 @@ function MyReserve(props) {
     const { reserveData, isLoading, getReservesWithDate, userInfo, deleteReserve, getReserves } = props
 
     const [data, setData] = useState(null)
-    
+
     const [status, setStatus] = useState('UNDONE')
 
     useEffect(()=>{
       if(!reserveData) return
+      console.log('reserveData', reserveData)
       const tempData = reserveData && reserveData.filter((item)=>item.status === status )
       setData(tempData)
     }, [reserveData])
@@ -40,7 +41,7 @@ function MyReserve(props) {
         </View>
 
           <ScrollView>
-            
+
             {isManager(userInfo) ?
              <SwipeListManager getReservesWithDate={getReservesWithDate} reserveData={ reserveData && reserveData.sort((a, b)=>new Date(a.date) - new Date(b.date))} />
              :

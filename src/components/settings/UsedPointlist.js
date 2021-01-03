@@ -1,23 +1,26 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import {useSelector } from 'react-redux'
-import { ALIANS } from '../../constants/rooms';
+import { GiftOption } from '../../constants/gift';
 import dayjs from 'dayjs'
 
 const App = () => {
   const userInfo = useSelector(state=>state.authReducer.userInfo)
-  const renderItem = ({ item }) => (
-    <React.Fragment>
-  <View style={styles.item}>
-    <Text style={styles.title}>{ ALIANS[item.type]}</Text>
-  <Text style={styles.inside}>{"-"}{item.points}</Text>
-  </View>
-  <View style={styles.item2}>
-  <Text  style={styles.date}>{dayjs(item.time).format('YYYY/MM/DD HH:MM')}</Text>
-  </View> 
-  </React.Fragment>
-    
-  );
+
+  const renderItem = ({ item }) => {
+    const gift = GiftOption.find(gift=>gift.name === item.name)
+    return (
+      <>
+        <View style={styles.item}>
+          <Text style={styles.title}>{ gift.name}</Text>
+          <Text style={styles.inside}>{"-"} {item.costpoint}</Text>
+        </View>
+        <View style={styles.item2}>
+          <Text  style={styles.date}>{dayjs(item.time).format('YYYY/MM/DD HH:MM')}</Text>
+        </View>
+      </>
+    )
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent: 'space-between',
     alignItems:'center'
-    
+
 
   },
   item2:{
