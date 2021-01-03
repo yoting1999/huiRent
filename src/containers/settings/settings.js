@@ -36,6 +36,14 @@ function settings() {
     })()
   }, [])
 
+  const changePhoto = async () => {
+    const uri = await selectImage()
+    const res = await People.changePeople(userInfo.uid, userInfo.ordererid, { photo: uri })
+    if(res.status = 200) {
+      dispatch(setAuthInfo())
+    }
+  }
+
   const selectImage = async () => {
     const pickerResult = await ImagePicker.launchImageLibraryAsync();
     if (!pickerResult.cancelled) {
@@ -51,7 +59,7 @@ function settings() {
       const blob = await response.blob();
       // Create a reference
       const ref = firebase.storage().ref().child(filename);
-      // Upload file  
+      // Upload file
       const snapshot = await ref.put(blob);
       // getDownloadURL
       const url = await snapshot.ref.getDownloadURL();
@@ -62,15 +70,6 @@ function settings() {
     }
   }
 
-
-
-  const changePhoto = async () => {
-    const uri = await selectImage()
-    // console.log('res', res)
-
-    const res = await People.changePeople(userInfo.uid, userInfo.ordererid, { photo: uri })
-    //    if(res.status = 200) setAuthInfo()
-  }
 
   return <Layout logout={logout} changePhoto={changePhoto} message={message}/>
 }

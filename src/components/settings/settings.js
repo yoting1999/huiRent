@@ -12,24 +12,17 @@ function Settings(props) {
   const navigation = useNavigation()
   const { logout, changePhoto, message } = props
   const userInfo = useSelector(state => state.authReducer.userInfo)
-  console.log('setting userInfo', userInfo)
-
 
   return (
     <Container>
       <Header title='設定'>
       </Header>
       <Content>
-
         <TouchableOpacity onPress={changePhoto} style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 60 }}>
-          <Image source={{ uri: userInfo.photo }} style={{ width: 150, height: 145, borderRadius: 120, }} />
+          <Image source={{ uri: userInfo && userInfo.photo }} style={{ width: 150, height: 145, borderRadius: 120, }} />
         </TouchableOpacity>
         <Text style={styles.photowarn}>{message}</Text>
-
-
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-
-
         </View>
         <View>
           <List style={{ paddingVertical: 15 }}>
@@ -38,8 +31,6 @@ function Settings(props) {
                 <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 5 }}>Hi,</Text>
                 <Text note>{userInfo && userInfo.name}</Text>
               </Body>
-
-
             </ListItem>
           </List>
           <List>
