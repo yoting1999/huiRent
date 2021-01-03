@@ -12,7 +12,6 @@ function settings() {
   const [message, setMessage] = useState("")
   const dispatch = useDispatch()
   const { People } = agent
-  const [selectedImage, setSelectedImage] = useState({ localUri: '' });
 
 
   const logout = async () => {
