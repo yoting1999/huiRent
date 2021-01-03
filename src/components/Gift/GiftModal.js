@@ -13,19 +13,22 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Modal from 'react-native-modal';
 
 
+
 let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height*0.3;
 
 function GiftModal(props) {
     const { GiftModalVisible, setGiftModalVisible,data,userInfo,updateCoupon} = props
-    let leftpoint = userInfo.GotPoint-userInfo.UsedPoint
+    let leftpoint = userInfo.AllPoint
 
     function Giftcostpoint(Giftdata){
+
       if(leftpoint >= data.costpoint){
         // 危險
-      // const useddata = {'name':Giftdata.name,'costpoint':Giftdata.costpoint,'couponid':Giftdata.couponid,'time':new Date().toISOString()}
-      // updateCoupon(Giftdata,useddata)
-      alert('兌換成功')
+        const useddata = {'name':Giftdata.name,'costpoint':Giftdata.costpoint,'couponid':Giftdata.couponid,'time':new Date().toISOString()}
+        updateCoupon(Giftdata,useddata,Giftdata.costpoint)
+        alert('兌換成功')
+        console.log('123')
       }
       else
       alert('點數不足!!')
@@ -45,9 +48,11 @@ function GiftModal(props) {
       >
           <View style={styles.container}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>已選擇商品：{data.name}</Text>
-              <Text>需要點數：{data.costpoint}</Text>
+              <View style={{ paddingTop: 20 }}>
+              <Text style={styles.modalText}>{data.name}</Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold' }}>需要點數： {data.costpoint}</Text>
               <Text>{data.des}</Text>
+              </View>
             </View>
             <View style={{flex:1,flexDirection:'row',justifyContent:'space-around', alignItems:'center'}}>
               <TouchableHighlight
@@ -79,13 +84,13 @@ const styles = StyleSheet.create({
     flex:3,
     marginHorizontal: 50,
     height:100,
-    // width:0.5,
-    // justifyContent: 'center'
   },
   container: {
     borderRadius:10,
     backgroundColor: '#fff',
-    flex: 0.5,
+    flex: 0.25,
+    padding: 10,
+    borderRadius: 6,
   },
   openButton: {
     borderRadius: 6,
@@ -101,7 +106,12 @@ const styles = StyleSheet.create({
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: "center",
+    borderBottomColor: '#eee',
+    borderBottomWidth: 2,
+    paddingBottom: 8
   }
 });
 

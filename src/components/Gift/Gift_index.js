@@ -25,7 +25,6 @@ function Gift_index(props) {
     const [GiftModalVisible, setGiftModalVisible] = useState(false)
     // console.log('使用點數', userInfo.UsedPoint)
     // console.log('總共點數', userInfo.GotPoint)
-
     function GiftModalchange(data) {
         setGiftModalVisible(true)
         setGiftmodaldata(data)
@@ -61,7 +60,7 @@ function Gift_index(props) {
 
 
             <View style={{ flex: 1, justifyContent: 'center' }}>
-                <View style={{ flex: 1, flexDirection: 'row',borderBottomColor:'red',borderBottomWidth:5 }}>
+                <View style={{ flex: 1, flexDirection: 'row',borderBottomColor:'skyblue',borderBottomWidth:1,paddingBottom:6 }}>
                     <TouchableOpacity style={styles.topLiftItem} onPress={() => {setModalVisible(true)}} >
                         <Image resizeMode={"contain"} style={[styles.center]} source={require('../../../assets/Gift_circle.jpg')} />
                         <TouchableOpacity>
@@ -70,7 +69,7 @@ function Gift_index(props) {
                     </TouchableOpacity>
 
                     <View style={styles.topRightItem}>
-                        <Text style={styles.Content}>目前可用點數：{userInfo.GotPoint - userInfo.UsedPoint}</Text>
+                        <Text style={styles.Content}>目前可用點數：{userInfo.AllPoint}</Text>
                         <LotteryModal
                             modalVisible={modalVisible}
                             setModalVisible={setModalVisible}></LotteryModal>
