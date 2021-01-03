@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text,StyleSheet,TouchableOpacity,Image, } from 'react-native'
-//import {Picker} from '@react-native-community/picker';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { Container,Icon, Button, Content,Picker} from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import dayjs from 'dayjs'
@@ -15,6 +14,8 @@ import { ROOMS, TIME } from '../../constants/rooms'
 const TODAY = dayjs().format('YYYY-MM-DD')
 const ONE_MONTH_LATER = dayjs(TODAY).add(1, 'month').format('YYYY-MM-DD')
 const UNDONE = 'UNDONE'
+const DEFAULT_CAN_CHOOSE = [...Array(12).keys()]
+const TIME_MAP = ['A','B','C','D','E','F','G','H','I','J','K','L']
 
 function Reserve(props) {
   const navigation = useNavigation();
@@ -28,11 +29,16 @@ function Reserve(props) {
   const [status,setStatus] = useState(UNDONE)
 
 
-  const [canChoose, setCanChoose] = useState([])
+  const [canChoose, setCanChoose] = useState(DEFAULT_CAN_CHOOSE)
   const [tempArr, setTempArr] = useState([])
 
   useEffect(()=>{
-    if(!reviseData) return 
+    const timeTagArr = [...tempArr].map(item => TIME_MAP[item])
+    setTime(timeTagArr)
+  }, [tempArr])
+
+  useEffect(()=>{
+    if(!reviseData) return
     setTime(date === reviseData.date ? reviseData.time : [])
   }, [date])
 
@@ -48,40 +54,70 @@ function Reserve(props) {
 
   const handleSubmit = () => {
     const price = ROOMS.find((r)=>r.alians === room).price
+    if(tempArr.length === 2 && tempArr[1] - tempArr[0] > 1) {
+      Alert.alert(
+        '選擇錯誤',
+        '請選擇多個連續的時段',
+        [
+            { text: '返回', onPress: () => console.log('ok') }
+        ],
+        { cancelable: false }
+      )
+      return
+    }
     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo, reviseData })
   }
 
-  const handleOnSetTimes = (tagTime) => {
-    const temp = [...time]
-    const tagIndex = temp.indexOf(tagTime)
-    if(tagIndex > -1) {
-      temp.splice(tagIndex, 1)
-    } else {
-      temp.push(tagTime)
-    }
-    setTime(temp)
-  }
+  // const handleOnSetTimes = (tagTime) => {
+  //   const temp = [...time]
+  //   const tagIndex = temp.indexOf(tagTime)
+  //   if(tagIndex > -1) {
+  //     temp.splice(tagIndex, 1)
+  //   } else {
+  //     temp.push(tagTime)
+  //   }
+  //   setTime(temp)
+  // }
 
   const sequence = (index) => {
-    let temp;
-    const arr = [...tempArr, index]
-    arr.sort()
-    setTempArr(tempArr)
-    console.log('arr', arr)
-    const size = arr.length
-    console.log('size', size)
-   if(size === 1 ) {
-     temp = [ index - 2, index - 1 , index , index + 1 , index + 2]
-   }
+    let temp
+    let arr
+    const isNotInCanChoose = canChoose.indexOf(index) < 0
 
-   else if(size === 2) {
-    if(arr[1] - arr[0] > 1) temp = [ arr[0], index -1  , index]
-    else temp = [ arr[0] - 1 , arr[0], index, index + 1 ]
-  }
+    if(isNotInCanChoose) {
+      arr = [index]
+    } else {
+      arr = [...tempArr]
+      const argIndex = arr.indexOf(index)
+      const isExisted = argIndex > -1
+      if (isExisted) {
+        arr.splice(argIndex, 1)
+      }else {
+        arr.push(index)
+      }
+      arr.sort()
+    }
+
+    const size = arr.length
+    if(size === 1 ) {
+      temp = [ arr[0] - 2, arr[0] - 1 , arr[0] , arr[0] + 1 , arr[0] + 2]
+    }
+
+    else if(size === 2) {
+      if(arr[1] - arr[0] === 1) temp = [ arr[0] - 1 , arr[0], arr[1], arr[1] + 1 ]
+      else temp = [ arr[0], arr[0] + 1, arr[1] ]
+    }
 
     else if(size === 3) {
-      temp = []
+      temp = [...arr]
     }
+
+    else if(size === 0) {
+      temp = DEFAULT_CAN_CHOOSE
+    }
+
+    // console.log('arr', arr , 'temp', temp)
+    setTempArr(arr)
     setCanChoose(temp)
   }
 
@@ -154,7 +190,9 @@ function Reserve(props) {
         enableSwipeMonths={true}
       />
   </View>
-  <Text style={{borderWidth: 2,
+  <Text
+    style={{
+      borderWidth: 2,
       borderColor: '#eee',
       alignContent: "center",
       fontSize:16,
@@ -163,23 +201,40 @@ function Reserve(props) {
     >
       可預約時段
   </Text>
-  <Text style={{padding:20}}>*灰色表示該時段已被預訂，可點選檢視其他可預約日期</Text>
-  {/* <Text>{date}</Text> */}
+  <Text style={{ paddingHorizontal: 20, paddingTop: 16 }}>*可選擇<Text style={{ color: 'red' }}>「連續」</Text>的三個時段</Text>
+
+  <View style={{ paddingHorizontal: 20, marginTop: 12 }}>
+    <View style={styles.infoRow}>
+      <View style={[styles.infoBox, { backgroundColor: '#595959' }]}></View>
+      <Text style={{ marginRight: 6 }}>表示該時段已被預訂</Text>
+      <View style={[styles.infoBox, { backgroundColor: '#eee' }]}></View>
+      <Text>目前可選擇的連續時段</Text>
+    </View>
+    <View style={styles.infoRow}>
+      <View style={[styles.infoBox, { backgroundColor: Colors.primary }]}></View>
+      <Text>目前已選擇時段</Text>
+    </View>
+  </View>
     <View style={styles.button}>
       {TIME.map((item, index)=>{
-        const isChoosed = time.includes(item.tag)
+        const isChoosed = tempArr.includes(index)
+        const isCanNotChoose = canChoose.indexOf(index) < 0
         const isReserved = isReservedTime && isReservedTime.includes(item.tag) && !prevTime.includes(item.tag)
         return (
           <Button
             disabled={isReserved}
             bordered
             light
-            style={{ margin: 6, padding: 4, backgroundColor: isReserved ? '#dcdcdc' : isChoosed ? Colors.primary : '#fff'}}
+            style={{
+                margin: 6,
+                padding: 4,
+                backgroundColor: isReserved ? '#595959' : isCanNotChoose ? '#eee'  : isChoosed ? Colors.primary : '#fff'
+              }}
             onPress={()=>{
-              handleOnSetTimes(item.tag)
+              // handleOnSetTimes(item.tag)
               sequence(index)
             }}>
-            <Text style={styles.buttontext}>{item.time}</Text>
+            <Text style={[styles.buttontext, {  color: isReserved ? '#fff' : '#000' }]}>{item.time}</Text>
           </Button>
         )
       })}
@@ -233,10 +288,15 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
     flexWrap: 'wrap'
   },
-  buttontext:{
-    // color: '#fff',
-    // justifyContent:'space-around',
-
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 6
+  },
+  infoBox: {
+    width: 10,
+    height: 10,
+    marginRight: 10
   },
   border:{
     borderWidth: 2,
