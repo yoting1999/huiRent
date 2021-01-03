@@ -53,8 +53,9 @@ function circle(props) {
         });
     };
     const changeValue = (postion) => {
-        Alert.alert('獲得了'+drawData[postion].title);
+        Alert.alert('獲得了'+ drawData[postion].title);
     };
+
     return (
         <View style={styles.container}>
             <Animated.View style={[styles.mainImg, {

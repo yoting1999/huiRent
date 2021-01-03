@@ -40,6 +40,7 @@ export const setAuthInfo = () => {
         uid: userData.uid,
         ordererid: userData.ordererid,
         position: userData.position,
+        AllPoint: userData.AllPoint,
         GotPoint: userData.GotPoint,
         UsedPoint: userData.UsedPoint,
         cupon: userData.cupon,
