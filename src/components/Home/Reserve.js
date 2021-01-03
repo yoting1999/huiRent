@@ -45,50 +45,30 @@ function Reserve(props) {
     setTime(temp)
   }
 
-  const sequence = (idx) => {
-    let time = TIME.map(t=>t.tag)
-    const firstIndex = 0
-    const lastIndex = time.length - 1
-    const num = 3 - tempArr.length
+  const sequence = (index) => {
+    let temp;
+    const arr = [...tempArr, index]
+    arr.sort()
+    setTempArr(tempArr)
+    console.log('arr', arr)
+    const size = arr.length
+    console.log('size', size)
+   if(size === 1 ) {
+     temp = [ index - 2, index - 1 , index , index + 1 , index + 2]
+   }
 
-    const findIndex = tempArr.indexOf(idx)
-    const isExisted = findIndex > -1
+   else if(size === 2) {
+    if(arr[1] - arr[0] > 1) temp = [ arr[0], index -1  , index]
+    else temp = [ arr[0] - 1 , arr[0], index, index + 1 ]
+  }
 
-    const tempChoose = [...canChoose]
-    const tempArr1 = [...tempArr]
-    if(isExisted) {
-      tempArr1.splice(findIndex, 1)
-    }else {
-      tempArr1.push(idx)
+    else if(size === 3) {
+      temp = []
     }
-    setTempArr(tempArr1)
-
-
-    if(tempArr.length === 1) {
-      const first = tempArr[0]
-      let left = first -  num
-      let right = first +  num
-
-      if(left < firstIndex) left = firstIndex
-      if(right > lastIndex) right = lastIndex
-
-      for(let i = left ; i <= right ; i++) {
-        tempChoose.push(i)
-      }
-      setCanChoose(tempChoose)
-    }
-
-    if(tempArr.length === 2) {
-
-    }
+    setCanChoose(temp)
   }
 
   useEffect(()=>{
-    // console.log(canChoose, tempArr)
-  }, [canChoose, tempArr])
-
-  useEffect(()=>{
-    console.log('type',typeof type)
     if(!type) return
     setRoom(type)
   }, [type])
@@ -128,7 +108,7 @@ function Reserve(props) {
         </Picker>
         )
       }
-   
+
       </View>
       <View style={styles.calendar}>
       <Text style={styles.fontdate} >請選擇日期</Text>
@@ -197,7 +177,7 @@ function Reserve(props) {
             type="FontAwesome5" name="arrow-right" />
       </TouchableOpacity>
       </Content>
-      {/* <Spinner visible={isLoading}/> */}
+      <Spinner visible={isLoading}/>
     </Container>
   );
 

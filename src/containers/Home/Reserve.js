@@ -21,9 +21,6 @@ function Reserve(props) {
     }
   }, [props.route.params])
 
-  useEffect(()=>{
-    console.log('reviseData',reviseData)
-  }, [reviseData])
 
   const userInfo = useSelector(state=>state.authReducer.userInfo)
   const [reserveData, setReserveDate] = useState(null)
