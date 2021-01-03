@@ -9,7 +9,8 @@ function used(props) {
   const userInfo = useSelector(state=>state.authReducer.userInfo)
 
   const countPoints = () => {
-    return userInfo.UsedPoint.map(item=>item.costpoint).reduce((a, b)=> a.costpoint + b)
+    if(typeof userInfo.UsedPoint === 'string') return 0
+    return userInfo.UsedPoint.map(item=>item.costpoint).reduce((a, b)=> a + b)
   }
 
     return (

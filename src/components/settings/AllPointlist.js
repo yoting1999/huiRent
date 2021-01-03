@@ -7,17 +7,20 @@ import dayjs from 'dayjs';
 const App = () => {
   const userInfo = useSelector(state=>state.authReducer.userInfo)
 
-  const renderItem = ({ item }) => (
-    <React.Fragment>
-      <View style={styles.item}>
-        <Text style={styles.title}>{ ALIANS[item.type]} </Text>
-        <Text style={styles.inside}>{"+"}{item.points} </Text>
-      </View>
-      <View style={styles.item2}>
-        <Text style={styles.date}>{ dayjs(item.time).format('YYYY/MM/DD HH:MM')} </Text>
-      </View>
-    </React.Fragment>
-  );
+  const renderItem = ({ item }) => {
+    if (typeof item !== 'object') return <Text style={{ textAlign: 'center' }}>無紀錄</Text>
+    return (
+      <React.Fragment>
+        <View style={styles.item}>
+          <Text style={styles.title}>{ ALIANS[item.type]} </Text>
+          <Text style={styles.inside}>{"+"}{item.points} </Text>
+        </View>
+        <View style={styles.item2}>
+          <Text style={styles.date}>{ dayjs(item.time).format('YYYY/MM/DD HH:MM')} </Text>
+        </View>
+      </React.Fragment>
+    )
+  };
 
   return (
     <SafeAreaView style={styles.container}>
