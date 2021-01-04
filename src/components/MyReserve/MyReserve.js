@@ -20,7 +20,6 @@ function MyReserve(props) {
 
     useEffect(()=>{
       if(!reserveData) return
-      console.log('reserveData', reserveData)
       const tempData = reserveData && reserveData.filter((item)=>item.status === status )
       setData(tempData)
     }, [reserveData])

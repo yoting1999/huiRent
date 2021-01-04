@@ -52,7 +52,7 @@ function Gift_index(props) {
         <Container style={styles.container}>
             <Header title="點數兌換" />
             <View style={{ flex: 1, justifyContent: 'center' }}>
-                <View style={{ flex: 1, flexDirection: 'row',borderBottomColor:'skyblue',borderBottomWidth:1,paddingBottom:6 }}>
+                <View style={{ flex: 1, flexDirection: 'row',borderBottomColor: Colors.primary , borderBottomWidth: 2,paddingBottom:6 }}>
                     <TouchableOpacity style={styles.topLiftItem} onPress={() => {setModalVisible(true)}} >
                         <Image resizeMode={"contain"} style={[styles.center]} source={require('../../../assets/Gift_circle.jpg')} />
                         <TouchableOpacity>

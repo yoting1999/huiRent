@@ -39,18 +39,49 @@ function Reserve(props) {
 
   useEffect(()=>{
     if(!reviseData) return
-    setTime(date === reviseData.date ? reviseData.time : [])
+    const temp = reviseData.time.map((tag, index)=> TIME_MAP.indexOf(tag))
+    if (date === reviseData.date) {
+      const temparr = sequeceRevise(temp)
+      setTempArr(temp)
+      setCanChoose(temparr)
+    }else {
+      setTempArr([])
+      setCanChoose(DEFAULT_CAN_CHOOSE)
+    }
   }, [date])
 
   useEffect(()=>{
     if(!reviseData) return
-    if(reviseData) {
-      setDate(reviseData.date)
-      setTime(reviseData.time)
-      setPrevTime(reviseData.time)
-      setRoom(reviseData.room)
-    }
+    const temp = reviseData.time.map((tag, index)=> TIME_MAP.indexOf(tag))
+    const temparr = sequeceRevise(temp)
+    setDate(reviseData.date)
+    setCanChoose(temparr)
+    setTempArr(temp)
+    setPrevTime(reviseData.time)
+    setRoom(reviseData.room)
   }, [reviseData])
+
+  const sequeceRevise = (temp) => {
+    const size = temp.length
+    let temparr
+    if(size === 1 ) {
+      temparr = [ temp[0] - 2, temp[0] - 1 , temp[0] , temp[0] + 1 , temp[0] + 2]
+    }
+
+    else if(size === 2) {
+      if(temp[1] - temp[0] === 1) temparr = [ temp[0] - 1 , temp[0], temp[1], temp[1] + 1 ]
+      else temparr = [ temp[0], temp[0] + 1, temp[1] ]
+    }
+
+    else if(size === 3) {
+      temparr = [...temp]
+    }
+
+    else if(size === 0) {
+      temparr = DEFAULT_CAN_CHOOSE
+    }
+    return temparr
+}
 
   const handleSubmit = () => {
     const price = ROOMS.find((r)=>r.alians === room).price
@@ -67,17 +98,6 @@ function Reserve(props) {
     }
     navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo, reviseData })
   }
-
-  // const handleOnSetTimes = (tagTime) => {
-  //   const temp = [...time]
-  //   const tagIndex = temp.indexOf(tagTime)
-  //   if(tagIndex > -1) {
-  //     temp.splice(tagIndex, 1)
-  //   } else {
-  //     temp.push(tagTime)
-  //   }
-  //   setTime(temp)
-  // }
 
   const sequence = (index) => {
     let temp
@@ -116,7 +136,6 @@ function Reserve(props) {
       temp = DEFAULT_CAN_CHOOSE
     }
 
-    // console.log('arr', arr , 'temp', temp)
     setTempArr(arr)
     setCanChoose(temp)
   }
@@ -207,7 +226,7 @@ function Reserve(props) {
     <View style={styles.infoRow}>
       <View style={[styles.infoBox, { backgroundColor: '#595959' }]}></View>
       <Text style={{ marginRight: 6 }}>表示該時段已被預訂</Text>
-      <View style={[styles.infoBox, { backgroundColor: '#eee' }]}></View>
+      <View style={[styles.infoBox, { borderColor: '#000', borderWidth: .5 }]}></View>
       <Text>目前可選擇的連續時段</Text>
     </View>
     <View style={styles.infoRow}>
