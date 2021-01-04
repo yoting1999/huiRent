@@ -5,63 +5,57 @@ import Header from '../UI/Header'
 import Colors from '../../styles/Colors'
 import {useSelector } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import {GiftOption} from '../../constants/gift'
+import {GIFT_IMG} from '../../constants/gift'
+
 const NUN_COLUMNS = 2
 
 const Coupon1 = () =>{
   const userInfo = useSelector(state=>state.authReducer.userInfo)
-  console.log(GiftOption)
-  const urii =() =>{
-  GiftOption.uri
+  const renderGift = (data) => {
+      return (
+        <View style={styles.flatlistItem}>
+          <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(data.item.name,"確定使用")}}>
+            <Text>{data.item.uri}</Text>
+            <Image  resizeMode={"stretch"} style={styles.center} source={GIFT_IMG[data.item.uri]}/>
+            <Text style={styles.title}>{data.item.name}</Text>
+            <View style={styles.myButton_circle}>
+              <Text>使用</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )
   }
-  
-const renderGift = (data) =>(
-    <View style={styles.flatlistItem}>
 
-    <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(data.item.name,"確定使用")}}>
-    <Image  resizeMode={"stretch"} style={styles.center} source={{ }}/>
-
-        <Text style={styles.title}>{data.item.name}</Text>
-          
-          <View style={styles.myButton_circle}>
-            <Text>使用</Text>
-         
-    </View>
-
-    
-    </TouchableOpacity>
-    
-    </View>
-)
-
-    return(
-        <Container>
-        <Header>
+  return(
+    <Container>
+      <Header>
         <Icon name="arrow-forward" />
-        </Header>
-        <View style={{flex : 6, flexDirection:'row'}}>
+      </Header>
+      <View style={{flex : 6, flexDirection:'row'}}>
         <FlatList
-            numColumns={NUN_COLUMNS}
-            data = {!!userInfo.cupon && userInfo.cupon}
-            renderItem = {renderGift}
+          numColumns={NUN_COLUMNS}
+          data = {!!userInfo.cupon && userInfo.cupon}
+          renderItem = {renderGift}
         />
-    </View>
+      </View>
     </Container>
-    )
+  )
 }
+
+
 const styles = StyleSheet.create({
 
     container: {
       backgroundColor:Colors.secondary,
       flex: 1,
-    },  
-    flatlistItem: { 
-        flex:1, 
+    },
+    flatlistItem: {
+        flex:1,
         height: 220,
         padding:0,
-        margin:8, 
-        borderRadius: 20, 
-        borderColor: '#ccc', 
+        margin:8,
+        borderRadius: 20,
+        borderColor: '#ccc',
         borderWidth: 1,
         justifyContent:'flex-end',
         alignItems:'center',
@@ -75,7 +69,7 @@ const styles = StyleSheet.create({
     topRightItem:{
         flex:2 ,
         // backgroundColor:'skyblue',
-         justifyContent: 'center', 
+         justifyContent: 'center',
          alignItems: 'center'
     },
     title: {
@@ -94,21 +88,21 @@ const styles = StyleSheet.create({
         padding: 1,
         height: 30,
         width: 50,  //The Width must be the same as the height
-        borderRadius:10, //Then Make the Border Radius twice the size of width or Height   
+        borderRadius:10, //Then Make the Border Radius twice the size of width or Height
         backgroundColor:'rgb(215, 195, 217)',
         marginBottom:2
-     
+
       },
-      itemButton: { 
-        flex: 1, 
+      itemButton: {
+        flex: 1,
         // height: 500,
         // width: 175,
-        // margin: 4, 
-        // borderRadius: 12, 
-        borderColor: '#ccc', 
+        // margin: 4,
+        // borderRadius: 12,
+        borderColor: '#ccc',
         borderWidth: 0,
         justifyContent:'center',
-        alignItems:'center', 
+        alignItems:'center',
         overflow:'hidden'
     },
     center: {
@@ -123,8 +117,8 @@ const styles = StyleSheet.create({
         margin: 0,
         justifyContent: 'flex-end'
       },
-        
-        
+
+
 
   });
 

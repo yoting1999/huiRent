@@ -60,7 +60,7 @@ function GiftModal(props) {
                 onPress={closeModal}
               >
               <Text style={styles.textStyle}>取消</Text>
-            </TouchableHighlight>   
+            </TouchableHighlight>
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
               onPress={() => {
@@ -68,13 +68,13 @@ function GiftModal(props) {
               }}
             >
               <Text style={styles.textStyle}>兌換</Text>
-      
+
             </TouchableHighlight>
             </View>
           </View>
       </Modal>
 
-      
+
   );
 };
 
