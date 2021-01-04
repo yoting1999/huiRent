@@ -12,9 +12,17 @@ import {GIFT_IMG} from '../../constants/gift'
 const Coupon1 = () =>{
   const NUN_COLUMNS = 2
   const userInfo = useSelector(state=>state.authReducer.userInfo)
-  const renderGift = (data) => {
+  const renderGift = ({item}) => {
+    if (typeof item !== 'object') return (
+      <View style={[styles.flatlistItem, { height: 100 }]}>
+          <View style={styles.itemButton}>
+            <Text>無任何COUPON</Text>
+          </View>
+        </View>
+    )
       return (
         <View style={styles.flatlistItem}>
+
           <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(data.item.name,"確定使用")}}>
             <Image  resizeMode={"stretch"} style={styles.center} source={GIFT_IMG[data.item.uri]}/>
             <Text style={styles.title}>{data.item.name}</Text>

@@ -9,7 +9,6 @@ import {
   Image
 } from "react-native";
 
-import Lottery from './Lottery'
 import Circle from './circle'
 import Modal from 'react-native-modal';
 
@@ -47,10 +46,11 @@ function GiftModal(props) {
 
           </TouchableHighlight>
           <Circle changePeople={changePeople}/>
-            
-            <Text style={{color:'red'}}>頭獎：Elixar包膜弦兌換券</Text>
-            <Text style={{color:'red'}}>二獎：點數40點</Text>
-            <Text style={{color:'red'}}>三獎：pick兌換券</Text>
+          <View style={{ paddingVertical: 10 }}>
+            <Text style={{color:'red',fontWeight: 'bold', marginBottom: 6}}>頭獎：Elixar包膜弦兌換券</Text>
+            <Text style={{color:'red',fontWeight: 'bold', marginBottom: 6}}>二獎：點數40點</Text>
+            <Text style={{color:'red',fontWeight: 'bold', marginBottom: 6}}>三獎：pick兌換券</Text>
+          </View>
         </View>
       </View>
     </Modal>
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
+    marginVertical: 10
   },
   textStyle: {
     color: "white",

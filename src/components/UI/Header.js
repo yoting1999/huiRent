@@ -19,6 +19,11 @@ export default function HeaderLayout(props) {
       <Body />
       <Right>
         {
+            isRefresh  && (
+              <Icon onPress={()=>action()} type="FontAwesome" name="refresh" style={{ color: '#fff' }}/>
+            )
+        }
+        {/* {
           isRefresh ? (
             <Icon onPress={()=>action()} type="FontAwesome" name="refresh" style={{ color: '#fff' }}/>
           ) : (
@@ -27,7 +32,7 @@ export default function HeaderLayout(props) {
               <Thumbnail small source={{uri: uri}} />
             </Button>
           )
-        }
+        } */}
       </Right>
     </Header>
 

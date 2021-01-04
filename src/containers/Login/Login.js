@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import Layout from '../../components/Login/Login';
 import * as firebase from 'firebase'
 
-import { authLogin } from '../../store/actions/auth'
+import { authLogin, setAuthInfo } from '../../store/actions/auth'
 import agent from '../../lib/agent';
 
 
@@ -16,11 +16,12 @@ function Login() {
             const result = await firebase.auth().signInWithEmailAndPassword(email, password);
             if(result) {
                 dispatch(authLogin())
+                dispatch(setAuthInfo())
             }
         }
         catch(err){
             setMessage(err)
-            console.log('err', err)   
+            console.log('err', err)
         }
     }
 
