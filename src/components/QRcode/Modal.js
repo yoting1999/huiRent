@@ -44,7 +44,7 @@ function ReserveModal(props) {
           await finishTheReserve(scannedValue)
           const findTheRoom = ROOMS.find(room=>room.alians === data.room)
           const ordererPrevPoints = ordererData.GotPoint
-          const ordererCurPoints = ordererData.points
+          const ordererCurPoints = ordererData.AllPoint
           const gotPointData = {
             type: data.room,
             points: findTheRoom.points* data.time.length,
