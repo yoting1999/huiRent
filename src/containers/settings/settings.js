@@ -69,8 +69,13 @@ function settings() {
     }
   }
 
+  const refresh = ()=>{
+    dispatch(setAuthInfo())
+    console.log('hey',userInfo)
+  }
 
-  return <Layout logout={logout} changePhoto={changePhoto} message={message}/>
+
+  return <Layout logout={logout} changePhoto={changePhoto} message={message} refresh={refresh}/>
 }
 
 export default settings
