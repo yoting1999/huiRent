@@ -3,23 +3,23 @@ import {View,Text,FlatList,StyleSheet,Alert,Image,ImageBackground,Button, } from
 import { Container,Right, Icon} from 'native-base'
 import Header from '../UI/Header'
 import Colors from '../../styles/Colors'
+import {useSelector } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
-const GiftOption = [
-    {name:'pick',costpoint:'5'},
-    {name:'Elixir 包膜弦',costpoint:'50'},
-    {name:'全館商品9折卷一張',costpoint:'20'},
-    {name:'小練團室1h使用卷',costpoint:'60'},
-    {name:'小練團室1h使用卷',costpoint:'60'},
-    {name:'小練團室1h使用卷',costpoint:'60'},
-]
+import {GiftOption} from '../../constants/gift'
 const NUN_COLUMNS = 2
 
+const Coupon1 = () =>{
+  const userInfo = useSelector(state=>state.authReducer.userInfo)
+  console.log(GiftOption)
+  const urii =() =>{
+  GiftOption.uri
+  }
+  
 const renderGift = (data) =>(
     <View style={styles.flatlistItem}>
 
     <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(data.item.name,"確定使用")}}>
-    <Image  resizeMode={"stretch"} style={styles.center} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj-MO4DLBBz-qCWVf2A0k-QPzKCcHvBwmoUzampZf6hOjQwq0rEsC3cfK8w8cvXJffTDAz1KM&usqp=CAc' }}/>
+    <Image  resizeMode={"stretch"} style={styles.center} source={{ }}/>
 
         <Text style={styles.title}>{data.item.name}</Text>
           
@@ -34,7 +34,6 @@ const renderGift = (data) =>(
     </View>
 )
 
-function Coupon (props){
     return(
         <Container>
         <Header>
@@ -43,7 +42,7 @@ function Coupon (props){
         <View style={{flex : 6, flexDirection:'row'}}>
         <FlatList
             numColumns={NUN_COLUMNS}
-            data = {GiftOption}
+            data = {!!userInfo.cupon && userInfo.cupon}
             renderItem = {renderGift}
         />
     </View>
@@ -129,4 +128,4 @@ const styles = StyleSheet.create({
 
   });
 
-export default Coupon
+export default Coupon1
