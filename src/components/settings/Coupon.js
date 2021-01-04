@@ -10,7 +10,9 @@ import {GIFT_IMG} from '../../constants/gift'
 const NUN_COLUMNS = 2
 
 const Coupon1 = () =>{
+  const [status, setStatus] = useState('UNDONE')
   const userInfo = useSelector(state=>state.authReducer.userInfo)
+
   const renderGift = ({item}) => {
     if (typeof item !== 'object') return (
       <View style={[styles.flatlistItem, { height: 100 }]}>
@@ -38,13 +40,17 @@ const Coupon1 = () =>{
       <Header>
         <Icon name="arrow-forward" />
       </Header>
-      <View style={{flex : 6, flexDirection:'row'}}>
+      <View style={{flexDirection:'row',margin:20,alignSelf:'center'}}>
+        <Button  title='未兌換'  style={{padding:20}} onPress={()=>setStatus('UNDONE') } disabled={status==='UNDONE'}></Button>
+        <View style={{paddingLeft:30}}></View>
+        <Button title='已兌換' info rounded style={{padding:20}}onPress={()=>setStatus('DONE')}disabled={status==='DONE'}></Button>
+        </View>
         <FlatList
           numColumns={NUN_COLUMNS}
           data = {!!userInfo.cupon && userInfo.cupon}
           renderItem = {renderGift}
         />
-      </View>
+      
     </Container>
   )
 }
