@@ -50,7 +50,12 @@ function ReserveModal(props) {
             points: findTheRoom.points* data.time.length,
             time: new Date()
           }
-          const newPointsData = [...ordererPrevPoints, gotPointData]
+          let newPointsData
+          if ((Array.isArray(ordererPrevPoints))){
+              newPointsData = [...ordererPrevPoints, gotPointData]
+          }else {
+              newPointsData = [gotPointData]
+          }
           const newCurPoints = ordererCurPoints + (findTheRoom.points * data.time.length)
           const status = await addPoint(data.userId, ordererId, newPointsData, newCurPoints)
           if(status === 200) setIsVisible(false)

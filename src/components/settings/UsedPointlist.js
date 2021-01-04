@@ -1,7 +1,6 @@
 import React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import {useSelector } from 'react-redux'
-import { GiftOption } from '../../constants/gift';
 import dayjs from 'dayjs'
 
 const App = () => {
@@ -9,11 +8,10 @@ const App = () => {
 
   const renderItem = ({ item }) => {
     if (typeof item !== 'object') return <Text style={{ textAlign: 'center' }}>無紀錄</Text>
-    const gift = GiftOption.find(gift=>gift.name === item.name)
     return (
       <>
         <View style={styles.item}>
-          <Text style={styles.title}>{ gift.name}</Text>
+          <Text style={styles.title}>{ item.name}</Text>
           <Text style={styles.inside}>{"-"} {item.costpoint}</Text>
         </View>
         <View style={styles.item2}>
