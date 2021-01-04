@@ -13,6 +13,18 @@ const Coupon1 = () =>{
   const [status, setStatus] = useState('UNDONE')
   const userInfo = useSelector(state=>state.authReducer.userInfo)
 
+  const [data, setData] = useState(null)
+
+  useEffect(()=>{
+    if(!userInfo) return
+    if(! Array.isArray(userInfo.cupon)) return
+    console.log('userInfo', userInfo)
+    // const filterData = userInfo.cupon.filter(item=>item.status === status)
+    // setData(filterData)
+  }, [userInfo])
+
+
+
   const renderGift = ({item}) => {
     if (typeof item !== 'object') return (
       <View style={[styles.flatlistItem, { height: 100 }]}>
@@ -24,7 +36,7 @@ const Coupon1 = () =>{
       return (
         <View style={styles.flatlistItem}>
           <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(item.name,"確定使用")}}>
-           
+
             <Image  resizeMode={"stretch"} style={styles.center} source={GIFT_IMG[item.uri]}/>
             <Text style={styles.title}>{item.name}</Text>
             <View style={styles.myButton_circle}>
@@ -47,10 +59,11 @@ const Coupon1 = () =>{
         </View>
         <FlatList
           numColumns={NUN_COLUMNS}
-          data = {!!userInfo.cupon && userInfo.cupon}
+          keyExtractor={(item, index) => index.toString()}
+          data = {!!data && data}
           renderItem = {renderGift}
         />
-      
+
     </Container>
   )
 }

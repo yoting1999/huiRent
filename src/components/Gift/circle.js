@@ -53,7 +53,7 @@ function circle(props) {
 
         if (offOn) {
             const allpoint = userInfo.AllPoint -30
-            let usedpointdata 
+            let usedpointdata
             const Usedpointdata = userInfo.UsedPoint
             if(Array.isArray(Usedpointdata)){
             usedpointdata = [...Usedpointdata,{costpoint:30,couponid:'lottery',name:'幸運轉盤',time:new Date()}]
@@ -87,14 +87,14 @@ function circle(props) {
         });
     };
 
-  
+
     const circle1 = (postion) => {
         const gift = drawData[postion]
         const id = gift.id
         const title = gift.title
-  
-        
- 
+
+
+
         const cupon = userInfo.cupon
         const gotPoint = userInfo.GotPoint
         let allPoint = userInfo.AllPoint
@@ -102,17 +102,17 @@ function circle(props) {
         let tempCuponData;
         if (id === 2) {//頭獎
             let data = GiftOption.find(item=>item.couponid === 'Elixir')
-            data = {...data,status:'undone'}
+            data = {...data,status: 'UNDONE'}
             if ((Array.isArray(cupon))){
                 tempCuponData ={cupon: [...cupon, data]}
             }else {
                 tempCuponData = {cupon : [data]}
             }
             Alert.alert('恭喜！！你抽中了'+ title)
-    
+
         } else if (id === 4 || id === 8) { //三獎
             let data = GiftOption.find(item=>item.couponid === 'pick')
-            data = {...data,status:'undone'}
+            data = {...data,status: 'UNDONE'}
             if ((Array.isArray(cupon))){
                 tempCuponData ={cupon: [...cupon, data]}
             }else {
