@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+ import React,{useEffect,useState} from 'react'
 import {View,Text,FlatList,StyleSheet,Alert,Image,ImageBackground,Button, } from 'react-native'
 import { Container,Right, Icon} from 'native-base'
 import Header from '../UI/Header'
@@ -20,7 +20,14 @@ const Coupon1 = (props) =>{
     if(!userInfo) return
     if(! Array.isArray(userInfo.cupon)) return
     console.log('userInfo', userInfo)
+<<<<<<< HEAD
     const filterData = userInfo.cupon.filter(item=>item.status === status)
+=======
+    const filterData = userInfo.cupon.filter(item=>{
+      if(item === null) return // why null ??
+      return item.status === status
+    })
+>>>>>>> 4eb9a79cc906808b4d049667072633e0febdd74b
     setData(filterData)
   }, [userInfo])
 

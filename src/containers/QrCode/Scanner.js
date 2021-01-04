@@ -41,6 +41,7 @@ function Scanner() {
 
   // id外面那層 ; ordererId:裡面那層
   const addPoint = async(id, ordererId, gotPointData, newCurPoints) => {
+    console.log('res', id, ordererId, { GotPoint: [...gotPointData], AllPoint: newCurPoints })
     setIsLoading(false)
     try {
       const res = await People.changePeople(id, ordererId, { GotPoint: [...gotPointData], AllPoint: newCurPoints })
