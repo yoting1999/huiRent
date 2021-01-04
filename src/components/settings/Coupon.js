@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+ import React,{useEffect,useState} from 'react'
 import {View,Text,FlatList,StyleSheet,Alert,Image,ImageBackground,Button, } from 'react-native'
 import { Container,Right, Icon} from 'native-base'
 import Header from '../UI/Header'
@@ -19,8 +19,11 @@ const Coupon1 = () =>{
     if(!userInfo) return
     if(! Array.isArray(userInfo.cupon)) return
     console.log('userInfo', userInfo)
-    // const filterData = userInfo.cupon.filter(item=>item.status === status)
-    // setData(filterData)
+    const filterData = userInfo.cupon.filter(item=>{
+      if(item === null) return // why null ??
+      return item.status === status
+    })
+    setData(filterData)
   }, [userInfo])
 
 
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     flatlistItem: {
-        flex:1,
+        flex:0.5,
         height: 220,
         padding:0,
         margin:8,
