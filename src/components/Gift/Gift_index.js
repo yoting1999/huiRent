@@ -6,7 +6,7 @@ import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LotteryModal from './LotteryModal';
 import GiftModal from './GiftModal';
-import { GiftOption } from '../../constants/gift'
+import { GiftOption, GIFT_IMG } from '../../constants/gift'
 // import console = require('console');
 // const GiftOption = [
 //     { name: 'pick', costpoint: '5',des:'可任選30元以下pick',uri:require('../../../assets/Gift_pick.jpg') },
@@ -30,25 +30,19 @@ function Gift_index(props) {
         setGiftmodaldata(data)
     }
     const renderGift = (data) => (
-
-
-
         <View style={styles.flatlistItem}>
-
             <TouchableOpacity style={styles.itemButton} onPress={() => GiftModalchange(data.item)}>
                 <View style={{ flex: 4 }}>
-                    <ImageBackground resizeMode={'center'} style={styles.center} source={data.item.uri}>
+                    <ImageBackground resizeMode={'center'} style={styles.center} source={GIFT_IMG[data.item.uri]}>
                     </ImageBackground>
                 </View>
                 <View style={styles.flatlistBox}>
                     <Text style={styles.title}>{data.item.name}</Text>
-
                 </View>
                 <View style={styles.flatlistBox}>
                     <Text style={styles.Content}> 需要點數：{data.item.costpoint}</Text>
                 </View>
             </TouchableOpacity>
-
         </View>
 
     )
@@ -57,8 +51,6 @@ function Gift_index(props) {
 
         <Container style={styles.container}>
             <Header title="點數兌換" />
-
-
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 <View style={{ flex: 1, flexDirection: 'row',borderBottomColor:'skyblue',borderBottomWidth:1,paddingBottom:6 }}>
                     <TouchableOpacity style={styles.topLiftItem} onPress={() => {setModalVisible(true)}} >
@@ -89,7 +81,6 @@ function Gift_index(props) {
                         data={GiftOption}
                         renderItem={renderGift}
                         keyExtractor={(item, index) => index.toString()}
-
                     />
                 </View>
             </View>
@@ -113,7 +104,7 @@ const styles = StyleSheet.create({
         margin: 4,
         // backgroundColor: 'red',
         borderRadius: 12,
-        // borderColor: '#ccc', 
+        // borderColor: '#ccc',
         // borderWidth: 3,
         justifyContent: 'flex-end',
         alignItems: 'center',
@@ -152,7 +143,7 @@ const styles = StyleSheet.create({
         padding: 1,
         height: 50,
         width: 50,  //The Width must be the same as the height
-        borderRadius: 100, //Then Make the Border Radius twice the size of width or Height   
+        borderRadius: 100, //Then Make the Border Radius twice the size of width or Height
         backgroundColor: 'rgb(195, 125, 198)',
 
     },
@@ -160,8 +151,8 @@ const styles = StyleSheet.create({
         flex: 1,
         // height: 500,
         // width: 175,
-        // margin: 4, 
-        // borderRadius: 12, 
+        // margin: 4,
+        // borderRadius: 12,
         borderColor: '#ccc',
         borderWidth: 0,
         // justifyContent: 'center',
