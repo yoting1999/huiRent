@@ -44,25 +44,44 @@ function SwipeList(props) {
     return time
   }
 
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
+  const renderItem = ({ item }) => {
+    const tiemSize = item.time.length
+    return (
+      <View style={styles.item}>
       <View style={{ flexDirection: 'column', flex: 1 }}>
         <Text style={styles.date}>{dayjs(item.date).month() + 1}月</Text>
         <Text style={styles.date2}>{dayjs(item.date).date()}</Text>
         <Text style={styles.date}>{dayjs(item.date).year()}</Text>
       </View>
+      <View style={{alignItems: 'center'}}>
+      {tiemSize > 1 ? (
+          <>
+            <Text style={styles.times}>{tagToTime(item.time[0])}</Text>
+            <Text style={{fontSize: 8}}>|</Text>
+            <Text style={styles.times}>{tagToTime(item.time[tiemSize - 1])}</Text>
+          </>
+        ) : <Text style={styles.times}>{tagToTime(item.time[0])}</Text>      }
+      </View>
       <View style={styles.item2}>
-        {item.time.map(t => <Text style={styles.times}>{tagToTime(t)}</Text>)}
+
         <Text style={styles.rooms}>{ALIANS[item.room]}</Text>
       </View>
-      <View style={{ justifyContent: 'center' }}>
-        <Button style={styles.QRcode} onPress={() => navigation.navigate(route.qrcode, { value: item.qrCodeKey })}>
-          <Text styles={{}}>租借</Text>
+      {item.status === 'UNDONE' ? (
+        <View style={{ justifyContent: 'center' }}>
+         <Button style={styles.QRcode} onPress={() => navigation.navigate(route.qrcode, { value: item.qrCodeKey })}>
+           <Text>租借</Text>
+         </Button>
+        </View>
+      ) : (
+        <View style={{ justifyContent: 'center' }}>
+        <Button style={[styles.QRcode, { backgroundColor: '#eee'}]} disabled>
+          <Text>已完成</Text>
         </Button>
       </View>
+      )}
     </View>
-
-  );
+    )
+  };
 
   return (
     <View>
@@ -77,7 +96,10 @@ function SwipeList(props) {
               data={reserveData}
               renderItem={renderItem}
               maxSwipeDistance={240}
-              renderQuickActions={({ index, item }) => QuickActions(index, item)}
+              renderQuickActions={({ index, item }) =>{
+                if(item.status === 'DONE') return
+                return  QuickActions(index, item)
+              }}
               shouldBounceOnMount={true}
               ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
             />
@@ -90,15 +112,15 @@ function SwipeList(props) {
 const styles = StyleSheet.create({
   item: {
     backgroundColor: '#fff',
-    height: 100,
+    height: 110,
     padding: 10,
     borderBottomColor: '#eee',
     borderBottomWidth: 1,
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    alignItems: 'center',
   },
   item2: {
-    height: 80,
     padding: 10,
     borderBottomColor: '#eee',
     flexDirection: 'column',

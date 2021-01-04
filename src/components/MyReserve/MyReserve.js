@@ -44,7 +44,6 @@ function MyReserve(props) {
             {isManager(userInfo) ?
              <SwipeListManager getReservesWithDate={getReservesWithDate} reserveData={ data && data.sort((a, b)=>new Date(a.date) - new Date(b.date))} />
              :
-
              <Swiptlist reserveData={ data && data.sort((a, b)=>new Date(a.date) - new Date(b.date))} deleteReserve={deleteReserve} />
 
              }

@@ -152,7 +152,7 @@ function Reserve(props) {
   useEffect(()=>{
     if(!reserveData) return
     let data = []
-    const isReservedArray = reserveData.map((item)=>item.time.map(t=>data.push(t)))
+    const isReservedArray = reserveData.forEach((item)=>item.time.map(t=>data.push(t)))
     setIsReservedTime(data)
   }, [reserveData])
 

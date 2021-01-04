@@ -13,6 +13,7 @@ function Reserve(props) {
 
   useEffect(()=>{
     if(!props.route.params) return
+    getReserves()
     if(props.route.params.type) {
       setType(props.route.params.type)
     }
@@ -20,8 +21,6 @@ function Reserve(props) {
       setReviseData(props.route.params.data)
     }
   }, [props.route.params])
-
-
 
   const userInfo = useSelector(state=>state.authReducer.userInfo)
   const [reserveData, setReserveDate] = useState(null)
