@@ -9,7 +9,8 @@ import {GIFT_IMG} from '../../constants/gift'
 
 const NUN_COLUMNS = 2
 
-const Coupon1 = () =>{
+const Coupon1 = (props) =>{
+  const {changeState} = props
   const [status, setStatus] = useState('UNDONE')
   const userInfo = useSelector(state=>state.authReducer.userInfo)
 
@@ -19,9 +20,16 @@ const Coupon1 = () =>{
     if(!userInfo) return
     if(! Array.isArray(userInfo.cupon)) return
     console.log('userInfo', userInfo)
-    // const filterData = userInfo.cupon.filter(item=>item.status === status)
-    // setData(filterData)
+    const filterData = userInfo.cupon.filter(item=>item.status === status)
+    setData(filterData)
   }, [userInfo])
+
+  useEffect(()=>{
+    if(!userInfo) return
+    if(! Array.isArray(userInfo.cupon)) return
+    const filterData = userInfo.cupon.filter(item=>item.status === status)
+    setData(filterData)
+  }, [status])
 
 
 
@@ -35,7 +43,16 @@ const Coupon1 = () =>{
     )
       return (
         <View style={styles.flatlistItem}>
-          <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(item.name,"確定使用")}}>
+          <TouchableOpacity style={styles.itemButton} onPress={() => {
+            Alert.alert(
+                item.name,
+                '確定使用？',
+                [
+                    { text: '確認', onPress: () => console.log('changeState()') },
+                    { text: '取消', onPress: () => console.log('cancel')}
+                ],
+                { cancelable: false }
+            )}}>
 
             <Image  resizeMode={"stretch"} style={styles.center} source={GIFT_IMG[item.uri]}/>
             <Text style={styles.title}>{item.name}</Text>
@@ -76,7 +93,7 @@ const styles = StyleSheet.create({
       flex: 1,
     },
     flatlistItem: {
-        flex:1,
+        flex:0.5,
         height: 220,
         padding:0,
         margin:8,

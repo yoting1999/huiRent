@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux'
 import Header from '../UI/Header'
 import routeConfig from '../../constants/route'
+import Coupon from '../../containers/settings/Coupon'
 const uri1 = "https://facebook.github.io/react-native/docs/assets/favicon.png"
 const RATING = 3
 
