@@ -53,13 +53,21 @@ function circle(props) {
 
         if (offOn) {
             const allpoint = userInfo.AllPoint -30
-            changePeople({AllPoint:allpoint})
+            let usedpointdata 
+            const Usedpointdata = userInfo.UsedPoint
+            if(Array.isArray(Usedpointdata)){
+            usedpointdata = [...Usedpointdata,{costpoint:30,couponid:'lottery',name:'幸運轉盤',time:new Date()}]
+        }
+        else{
+            usedpointdata = [{costpoint:30,couponid:'lottery',name:'幸運轉盤',time:new Date() }]
+        }
+            changePeople({AllPoint:allpoint,UsedPoint:usedpointdata})
             rotateImg1();
         }
     };
 
     const rotateImg1 = () => {
-        //获取抽奖位置
+        //獲取抽獎位置
         setoffOn(!offOn)
         let number = Math.floor(Math.random() * 8);
         if ((number / 8) == 0.875) {
@@ -73,7 +81,6 @@ function circle(props) {
             useNativeDriver: true
         }).start(() => {
             // setoffOn(!offOn)
-            //动画结束时，会把toValue值，回调给callback
             rotateDeg.stopAnimation(() => {
                 circle1(number)
             })
@@ -87,7 +94,7 @@ function circle(props) {
         const title = gift.title
   
         
-        Alert.alert(id+'', title)
+ 
         const cupon = userInfo.cupon
         const gotPoint = userInfo.GotPoint
         let allPoint = userInfo.AllPoint
@@ -95,19 +102,23 @@ function circle(props) {
         let tempCuponData;
         if (id === 2) {//頭獎
             let data = GiftOption.find(item=>item.couponid === 'Elixir')
+            data = {...data,status:'undone'}
             if ((Array.isArray(cupon))){
                 tempCuponData ={cupon: [...cupon, data]}
             }else {
                 tempCuponData = {cupon : [data]}
             }
+            Alert.alert('恭喜！！你抽中了'+ title)
     
         } else if (id === 4 || id === 8) { //三獎
             let data = GiftOption.find(item=>item.couponid === 'pick')
+            data = {...data,status:'undone'}
             if ((Array.isArray(cupon))){
                 tempCuponData ={cupon: [...cupon, data]}
             }else {
                 tempCuponData = {cupon : [data]}
             }
+            Alert.alert('恭喜！！你抽中了'+ title)
         } else if (id === 6) { //二獎
             const afterGottingThePoint = allPoint + 40
             if ((Array.isArray(gotPoint))){
@@ -128,6 +139,7 @@ function circle(props) {
                 }]}
             }
         } else {
+            Alert.alert('未中獎')
             return
         }
         changePeople(tempCuponData)

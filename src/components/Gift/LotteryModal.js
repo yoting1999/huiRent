@@ -9,7 +9,6 @@ import {
   Image
 } from "react-native";
 
-import Lottery from './Lottery'
 import Circle from './circle'
 import Modal from 'react-native-modal';
 
