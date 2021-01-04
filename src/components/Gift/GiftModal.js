@@ -23,16 +23,14 @@ function GiftModal(props) {
 
     function Giftcostpoint(Giftdata){
 
-      if(leftpoint >= data.costpoint){
-        // 危險
+      if(leftpoint >= data.costpoint){ // 確認點數足夠
         const useddata = {'name':Giftdata.name,'costpoint':Giftdata.costpoint,'couponid':Giftdata.couponid,'time':new Date().toISOString()}
         Giftdata = {...Giftdata,status: 'UNDONE'}
         updateCoupon(Giftdata,useddata,Giftdata.costpoint)
-        alert('兌換成功')
-        console.log('123')
+        Alert.alert('兌換成功','請至MyCoupon查看')
       }
       else
-      alert('點數不足!!')
+      Alert.alert('點數不足!!')
     }
 
     function closeModal() {
