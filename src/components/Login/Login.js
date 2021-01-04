@@ -51,10 +51,6 @@ function Login(props) {
                     >
                         <Text style={{ color: "#5ca4cc" }}>註冊</Text>
                     </Button>
-                    <Divider style={{ backgroundColor: "#D0D0D0" ,height:1,width:(Dimensions.get('window').width-80),marginBottom:25,marginTop:10}}/>
-                    <Button block style={styles.button} >
-                        <Text style={{ color: "#fff" }}>使用Google帳號登入</Text>
-                    </Button>
                 </View>
             </Content>
         </Container>
