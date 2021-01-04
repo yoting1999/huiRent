@@ -61,7 +61,7 @@ function circle(props) {
         else{
             usedpointdata = [{costpoint:30,couponid:'lottery',name:'幸運轉盤',time:new Date() }]
         }
-            changePeople({AllPoint:allpoint,UsedPoint:usedpointdata})
+            changePeople({AllPoint:allpoint,UsedPoint:usedpointdata})  // 抽獎結果出來前就更新點數
             rotateImg1();
         }
     };
@@ -80,8 +80,7 @@ function circle(props) {
             easing: Easing.out(Easing.quad),
             useNativeDriver: true
         }).start(() => {
-            // setoffOn(!offOn)
-            rotateDeg.stopAnimation(() => {
+            rotateDeg.stopAnimation(() => { // 動畫結束時的function
                 circle1(number)
             })
         });
