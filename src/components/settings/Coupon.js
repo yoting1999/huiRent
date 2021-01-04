@@ -7,10 +7,9 @@ import {useSelector } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {GIFT_IMG} from '../../constants/gift'
 
-
+const NUN_COLUMNS = 2
 
 const Coupon1 = () =>{
-  const NUN_COLUMNS = 2
   const userInfo = useSelector(state=>state.authReducer.userInfo)
   const renderGift = ({item}) => {
     if (typeof item !== 'object') return (
@@ -22,10 +21,10 @@ const Coupon1 = () =>{
     )
       return (
         <View style={styles.flatlistItem}>
-
-          <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(data.item.name,"確定使用")}}>
-            <Image  resizeMode={"stretch"} style={styles.center} source={GIFT_IMG[data.item.uri]}/>
-            <Text style={styles.title}>{data.item.name}</Text>
+          <TouchableOpacity style={styles.itemButton} onPress={() => {Alert.alert(item.name,"確定使用")}}>
+           
+            <Image  resizeMode={"stretch"} style={styles.center} source={GIFT_IMG[item.uri]}/>
+            <Text style={styles.title}>{item.name}</Text>
             <View style={styles.myButton_circle}>
               <Text>使用</Text>
             </View>
