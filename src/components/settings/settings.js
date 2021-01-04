@@ -10,12 +10,12 @@ const RATING = 3
 
 function Settings(props) {
   const navigation = useNavigation()
-  const { logout, changePhoto, message } = props
+  const { logout, changePhoto, message, refresh } = props
   const userInfo = useSelector(state => state.authReducer.userInfo)
 
   return (
     <Container>
-      <Header title='設定'>
+      <Header title='設定' isRefresh action={refresh}>
       </Header>
       <Content>
         <TouchableOpacity onPress={changePhoto} style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 60 }}>
