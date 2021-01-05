@@ -21,7 +21,7 @@ function ReserveConfirm(props) {
 
   const changeReserve = async(id,date,room,time,price) => {
     try{
-      await Reserve.changeReserve(id,{date:date,room:room,time:time,price:price})
+      await Reserve.changeReserve(id, {date,room,time,price})
     }catch(err){
       console.log('change reserve err',err)
     }

@@ -5,12 +5,10 @@ import Header from '../UI/Header'
 import { ALIANS, TIME, } from '../../constants/rooms'
 import Colors from '../../styles/Colors'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native'
 import route from '../../constants/route'
 
 
 function ReserveConfirm(props) {
-  // const navigation = useNavigation();
   const { addReserve, changeReserve, reserveData, navigation, reviseData } = props
   const { isLoading, userInfo } = props
 
@@ -30,7 +28,6 @@ function ReserveConfirm(props) {
       ],
 
     )
-
   }
 
   const tagToTime = (tag) => {
@@ -69,7 +66,7 @@ function ReserveConfirm(props) {
           <Text style={styles.rooms}>
             <Icon
               style={{ fontSize: 18 }}
-              type="FontAwesome5" name="dollar-sign" />   {reserveData.price * reserveData.time.length}   元</Text>
+              type="FontAwesome5" name="dollar-sign" />   {reserveData.price}   元</Text>
 
         </View>
         <TouchableOpacity onPress={() => onpresstohome()} style={styles.submitBtn}>

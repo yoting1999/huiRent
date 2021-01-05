@@ -84,19 +84,21 @@ function Reserve(props) {
 }
 
   const handleSubmit = () => {
-    const price = ROOMS.find((r)=>r.alians === room).price
+    const roomPrice = ROOMS.find((r)=>r.alians === room).price
     if(tempArr.length === 2 && tempArr[1] - tempArr[0] > 1) {
       Alert.alert(
         '選擇錯誤',
         '請選擇多個連續的時段',
         [
-            { text: '返回', onPress: () => console.log('ok') }
+          { text: '返回', onPress: () => console.log('ok') }
         ],
         { cancelable: false }
       )
       return
     }
-    navigation.navigate(routeConfig.ReserveConfirm, { reserveData: { date, time, room,price,status }, userInfo, reviseData })
+    const total = roomPrice*tempArr.length
+    navigation.navigate(routeConfig.ReserveConfirm,
+      { reserveData: { date, time, room ,price: total, status }, userInfo, reviseData })
   }
 
   const sequence = (index) => {
