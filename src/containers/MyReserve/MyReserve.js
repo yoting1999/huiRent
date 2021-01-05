@@ -10,7 +10,7 @@ import { isManager } from '../../lib/auth'
 const TODAY = dayjs().format('YYYY-MM-DD')
 
 function MyReserve() {
-  const { Reserve } = agent
+  const { Reserve, People } = agent
   const userInfo = useSelector(state=>state.authReducer.userInfo)
   const [reserveData, setReserveDate ] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -67,6 +67,36 @@ function MyReserve() {
 
   }
 
+  const getOrderer = async(uid) => {
+    setIsLoading(true)
+    try {
+      const res = await People.getPeople(uid)
+      return res.data
+    }catch(err) {
+      console.log('err', err)
+    }
+  }
+
+  const finishTheReserve = async(id) => {
+    try {
+      await Reserve.changeReserve(id, { status: 'DONE' })
+    }catch(err) {
+      console.log('err', err)
+    }
+  }
+
+  const addPoint = async(id, ordererId, gotPointData, newCurPoints) => {
+    try {
+      const res = await People.changePeople(id, ordererId, { GotPoint: [...gotPointData], AllPoint: newCurPoints })
+      return res.status
+    }catch(err) {
+      console.log('err', err)
+    }
+  }
+
+
+
+
   useEffect(()=>{
     if(isManager(userInfo)){
       getReservesWithDate()
@@ -83,6 +113,10 @@ function MyReserve() {
       reserveData={reserveData}
       isLoading={isLoading}
       deleteReserve={deleteReserve}
+
+      getOrderer={getOrderer}
+      finishTheReserve={finishTheReserve}
+      addPoint={addPoint}
     />
   )
 }

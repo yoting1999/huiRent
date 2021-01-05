@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, Pressable,Platform } from 'react-native'
+import { View, StyleSheet, Text, Pressable,Platform, Alert } from 'react-native'
 import { Button } from 'native-base'
 import SwipeableFlatList from 'react-native-swipeable-list';
 import dayjs from 'dayjs'
-import { ALIANS, TIME } from '../../constants/rooms'
+import { ALIANS, TIME, ROOMS } from '../../constants/rooms'
 import { useNavigation } from '@react-navigation/native';
-import route from '../../constants/route';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const TODAY = new Date()
 function SwipeListManager(props) {
-  const { reserveData, getReservesWithDate } = props
-
-  const navigation = useNavigation()
-
-  const [date, setDate] = useState(TODAY)
+  const {
+    reserveData,
+    getReservesWithDate,
+    getOrderer,
+    finishTheReserve,
+    addPoint,
+    date,
+    setDate
+  } = props
 
   useEffect(()=> {
     const dateFormate = dayjs(date).format('YYYY-MM-DD')
@@ -43,6 +45,40 @@ function SwipeListManager(props) {
     return time
   }
 
+
+  const handleOnFinish = async(reversation) => {
+    const key = reversation.qrCodeKey
+    const uid = reversation.userId
+    const ordererRes = await getOrderer(uid)
+    console.log('ordererRes', ordererRes)
+
+    const ordererId = Object.keys(ordererRes)[0]
+    const ordererData = Object.values(ordererRes)[0]
+    const ordererPrevPoints = ordererData.GotPoint
+    const ordererCurPoints = ordererData.AllPoint
+
+    await finishTheReserve(key)
+    const findTheRoom = ROOMS.find(room=>room.alians === reversation.room)
+
+    const gotPointData = {
+      type: reversation.room,
+      points: findTheRoom.points* reversation.time.length,
+      time: new Date()
+    }
+    let newPointsData
+    if ((Array.isArray(ordererPrevPoints))){
+        newPointsData = [...ordererPrevPoints, gotPointData]
+    }else {
+        newPointsData = [gotPointData]
+    }
+    const newCurPoints = ordererCurPoints + (findTheRoom.points * reversation.time.length)
+    const status = await addPoint(uid, ordererId, newPointsData, newCurPoints)
+    if(status === 200) {
+      const dateFormate = dayjs(date).format('YYYY-MM-DD')
+      getReservesWithDate(dateFormate)
+    }
+  }
+
   const renderItem = ({ item }) => {
     const tiemSize = item.time.length
     return (
@@ -67,8 +103,22 @@ function SwipeListManager(props) {
       </View>
       {item.status === 'UNDONE' ? (
         <View style={{ justifyContent: 'center' }}>
-         <Button style={styles.QRcode} onPress={() => navigation.navigate(route.qrcode, { value: item.qrCodeKey })}>
-           <Text>租借</Text>
+         <Button style={styles.QRcode} onPress={() => (
+            Alert.alert(
+              '完成租借',
+              '請確認是否確實完成',
+              [
+                { text: '確認', onPress: () => handleOnFinish(item) },
+                {
+                  text: '取消',
+                  onPress: () => console.log('Cancel Pressed'),
+                  style: 'cancel'
+                }
+              ],
+              { cancelable: false }
+          )
+         )}>
+           <Text>完成</Text>
          </Button>
         </View>
       ) : (
