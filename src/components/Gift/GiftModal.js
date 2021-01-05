@@ -17,6 +17,13 @@ import Modal from 'react-native-modal';
 let width=Dimensions.get("window").width;
 let height=Dimensions.get("window").height*0.3;
 
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
 function GiftModal(props) {
     const { GiftModalVisible, setGiftModalVisible,data,userInfo,updateCoupon} = props
     let leftpoint = userInfo.AllPoint
@@ -25,7 +32,7 @@ function GiftModal(props) {
 
       if(leftpoint >= data.costpoint){ // 確認點數足夠
         const useddata = {'name':Giftdata.name,'costpoint':Giftdata.costpoint,'couponid':Giftdata.couponid,'time':new Date().toISOString()}
-        Giftdata = {...Giftdata,status: 'UNDONE'}
+        Giftdata = {...Giftdata, status: 'UNDONE', cid: uuidv4()}
         updateCoupon(Giftdata,useddata,Giftdata.costpoint)
         Alert.alert('兌換成功','請至MyCoupon查看')
       }

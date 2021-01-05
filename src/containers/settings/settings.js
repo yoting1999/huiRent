@@ -71,7 +71,6 @@ function settings() {
 
   const refresh = ()=>{
     dispatch(setAuthInfo())
-    console.log('hey',userInfo)
   }
 
 

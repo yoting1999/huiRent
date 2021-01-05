@@ -7,26 +7,16 @@ import {useSelector } from 'react-redux'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {GIFT_IMG} from '../../constants/gift'
 
+import Spinner from 'react-native-loading-spinner-overlay'
+
 const NUN_COLUMNS = 2
 
 const Coupon1 = (props) =>{
-  const {changeState} = props
+  const { changeState, isLoading } = props
   const [status, setStatus] = useState('UNDONE')
   const userInfo = useSelector(state=>state.authReducer.userInfo)
 
   const [data, setData] = useState(null)
-
-  // useEffect(()=>{
-  //   if(!userInfo) return
-  //   if(! Array.isArray(userInfo.cupon)) return
-  //   console.log('userInfo', userInfo)
-  //   const filterData = userInfo.cupon.filter(item=>item.status === status)
-  //   const filterData = userInfo.cupon.filter(item=>{
-  //     if(item === null) return // why null ??
-  //     return item.status === status
-  //   })
-  //   setData(filterData)
-  // }, [userInfo])
 
   useEffect(()=>{
     if(!userInfo) return
@@ -36,8 +26,28 @@ const Coupon1 = (props) =>{
   }, [status,userInfo])
 
 
+  const renderDoneGift  = ({item, index}) => {
+    if (typeof item !== 'object') return (
+      <View style={[styles.flatlistItem, { height: 100 }]}>
+          <View style={styles.itemButton}>
+            <Text>無任何COUPON</Text>
+          </View>
+        </View>
+    )
+      return (
+        <View style={styles.flatlistItem}>
+          <View style={styles.itemButton}>
+            <Image  resizeMode={"stretch"} style={styles.center} source={GIFT_IMG[item.uri]}/>
+            <Text style={styles.title}>{item.name}</Text>
+            <View style={[styles.myButton_circle, { backgroundColor: '#eee' }]}>
+              <Text>已使用</Text>
+            </View>
+          </View>
+        </View>
+      )
+  }
 
-  const renderGift = ({item}) => {
+  const renderGift = ({item, index}) => {
     if (typeof item !== 'object') return (
       <View style={[styles.flatlistItem, { height: 100 }]}>
           <View style={styles.itemButton}>
@@ -52,7 +62,7 @@ const Coupon1 = (props) =>{
                 item.name,
                 '確定使用？',
                 [
-                    { text: '確認', onPress: () => console.log('changeState()') },
+                    { text: '確認', onPress: () => changeState(item.cid) },
                     { text: '取消', onPress: () => console.log('cancel')}
                 ],
                 { cancelable: false }
@@ -78,13 +88,19 @@ const Coupon1 = (props) =>{
         <View style={{paddingLeft:30}}></View>
         <Button title='已兌換' info rounded style={{padding:20}}onPress={()=>setStatus('DONE')}disabled={status==='DONE'}></Button>
         </View>
-        <FlatList
-          numColumns={NUN_COLUMNS}
-          keyExtractor={(item, index) => index.toString()}
-          data = {!!data && data}
-          renderItem = {renderGift}
-        />
-
+        {
+          !!data && Array.isArray(data) && data.length === 0 ? (
+            <Text style={{textAlign: 'center'}}>無任何COUPON</Text>
+          ) : (
+            <FlatList
+              numColumns={NUN_COLUMNS}
+              keyExtractor={(item, index) => index.toString()}
+              data = {!!data && data}
+              renderItem = {status === 'UNDONE' ? renderGift : renderDoneGift}
+          />
+          )
+        }
+        <Spinner visible={isLoading}/>
     </Container>
   )
 }
@@ -98,7 +114,7 @@ const styles = StyleSheet.create({
     },
     flatlistItem: {
         flex:0.5,
-        height: 220,
+        height: 230,
         padding:0,
         margin:8,
         borderRadius: 20,
@@ -134,8 +150,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         padding: 1,
         height: 30,
-        width: 50,  //The Width must be the same as the height
-        borderRadius:10, //Then Make the Border Radius twice the size of width or Height
+        width: 50,
+        borderRadius: 10,
         backgroundColor:'rgb(215, 195, 217)',
         marginBottom:2
 
@@ -156,17 +172,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        width:200,
-        height:300,
+        width: 200,
+        // height: 300,
         backgroundColor:'transparent'
     },
     modalView: {
         margin: 0,
         justifyContent: 'flex-end'
       },
-
-
-
   });
 
 export default Coupon1

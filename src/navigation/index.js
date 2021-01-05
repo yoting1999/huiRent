@@ -27,7 +27,7 @@ import Reserve from '../containers/Home/Reserve'
 import ReserveConfirm from '../containers/Home/ReserveConfirm'
 
 import ReserveDate from '../components/Home/ReserveDate'
-import Coupon from '../components/settings/Coupon'
+import Coupon from '../containers/settings/Coupon'
 
 
 // QrCode

@@ -5,6 +5,14 @@ import * as firebase from 'firebase'
 import agent from '../../lib/agent'
 import { setAuthInfo } from '../../store/actions/auth'
 import { GiftOption } from "../../constants/gift";
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+}
+
 function circle(props) {
 
     const { changePeople } = props
@@ -101,7 +109,7 @@ function circle(props) {
         let tempCuponData;
         if (id === 2) {//頭獎
             let data = GiftOption.find(item=>item.couponid === 'Elixir')
-            data = {...data,status: 'UNDONE'}
+            data = {...data, status: 'UNDONE', cid: uuidv4()}
             if ((Array.isArray(cupon))){
                 tempCuponData ={cupon: [...cupon, data]}
             }else {
@@ -111,7 +119,7 @@ function circle(props) {
 
         } else if (id === 4 || id === 8) { //三獎
             let data = GiftOption.find(item=>item.couponid === 'pick')
-            data = {...data,status: 'UNDONE'}
+            data = {...data, status: 'UNDONE', cid: uuidv4()}
             if ((Array.isArray(cupon))){
                 tempCuponData ={cupon: [...cupon, data]}
             }else {
