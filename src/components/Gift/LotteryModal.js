@@ -8,9 +8,10 @@ import {
   Dimensions,
   Image
 } from "react-native";
-
 import Circle from './circle'
 import Modal from 'react-native-modal';
+import Colors from "../../styles/Colors";
+import { ColorPropType } from "react-native";
 
 let width = Dimensions.get("window").width;
 let height = Dimensions.get("window").height;
@@ -37,7 +38,7 @@ function GiftModal(props) {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+            style={{ ...styles.openButton}}
             onPress={() => {
               setModalVisible(!modalVisible);
             }}
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "skyblue",
+    backgroundColor: Colors.primary,
     borderRadius: 20,
     width: width,
     height: height*0.8,
@@ -88,7 +89,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginVertical: 10
+    marginVertical: 10,
+    borderWidth:1,
+    borderColor:'red'
   },
   textStyle: {
     color: "white",
